@@ -1,0 +1,43 @@
+package com.biit.drools 
+
+import java.lang.Math 
+import java.util.Date 
+import java.util.List 
+import java.util.ArrayList 
+import com.biit.form.submitted.* 
+import com.biit.drools.form.* 
+import com.biit.orbeon.form.* 
+import com.biit.drools.utils.* 
+import com.biit.drools.plugins.PluginController 
+import net.xeoh.plugins.base.Plugin 
+import com.biit.plugins.interfaces.IPlugin 
+import java.lang.reflect.Method 
+import com.biit.drools.logger.DroolsEngineLogger 
+
+declare FiredRule
+	ruleName : String
+end
+
+//******************************************************************************
+//*                              GLOBAL VARIABLES                              *
+//******************************************************************************
+global java.lang.Number IVA
+global java.lang.String TestPC
+global java.util.Date TestDate
+
+//******************************************************************************
+//*                           DEFAULT VALUE VARIABLES                          *
+//******************************************************************************
+//******************************************************************************
+//*                                FORM RULES                                  *
+//******************************************************************************
+rule "helloWorldExpression_262adf2b2189463692f00e0b0b4ecfff"
+when
+	$droolsForm: DroolsForm()
+	$formform : DroolsSubmittedForm() from $droolsForm.getDroolsSubmittedForm() 
+then
+	Object callResult = PluginController.getInstance().executePluginMethod('com.biit.plugins.interfaces.IPlugin', 'HelloWorld', 'methodHelloWorld');
+	$formform.setVariableValue('customVariableResult', callResult);
+	DroolsEngineLogger.debug("DroolsRule", "Variable set (form, customVariableResult, callResult)");
+end
+

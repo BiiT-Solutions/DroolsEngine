@@ -65,9 +65,10 @@ public class KieManager {
 		KieRepository kr = ks.getRepository();
 		KieContainer kContainer = ks.newKieContainer(kr.getDefaultReleaseId());
 		KieSession kSession = kContainer.newKieSession();
-		this.setGlobalVariables(kSession, globalVars);
+		this.setEngineGlobalVariables(kSession, globalVars);
 		this.insertFacts(kSession, facts);
 		kSession.fireAllRules();
+		kSession.dispose();
 	}
 
 	private void createRules(KieFileSystem kfs, String rules) {
@@ -86,7 +87,7 @@ public class KieManager {
 	}
 
 	// Insert global variables in the drools session
-	private void setGlobalVariables(KieSession kSession, List<DroolsGlobalVariable> globalVars) {
+	private void setEngineGlobalVariables(KieSession kSession, List<DroolsGlobalVariable> globalVars) {
 		for (DroolsGlobalVariable dgb : globalVars) {
 			kSession.setGlobal(dgb.getName(), dgb.getValue());
 		}

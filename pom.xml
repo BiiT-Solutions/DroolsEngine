@@ -27,22 +27,24 @@
 	</scm>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- Version 6.2 of drools is not accepting special characters like 'ë', 
-			do not update -->
-		<drools.version>6.1.0.CR2</drools.version>
+			do not update <drools.version>6.1.0.CR2</drools.version> <drools.version>6.2.0.Final</drools.version> -->
+		<drools.version>6.1.0.Final</drools.version>
 		<org.testng.version>6.8.7</org.testng.version>
-		<common-utils.version>0.2.19-SNAPSHOT</common-utils.version>
 		<slf4j-log4j12.version>1.7.7</slf4j-log4j12.version>
-		<form-structure.version>0.2.14-SNAPSHOT</form-structure.version>
-		<form-structure-submitted.version>0.0.5-SNAPSHOT</form-structure-submitted.version>
-		<form-structure-drools.version>0.0.6-SNAPSHOT</form-structure-drools.version>
-		<form-structure-orbeon.version>0.1.4-SNAPSHOT</form-structure-orbeon.version>
 		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
 		<maven-surefire.version>2.17</maven-surefire.version>
 		<maven-resources-plugin.version>2.7</maven-resources-plugin.version>
 		<maven-release-plugin.version>2.5.1</maven-release-plugin.version>
 		<maven-scm-provider-gitexe.version>1.9.2</maven-scm-provider-gitexe.version>
 		<project.scm.id>git</project.scm.id>
+		<!-- BiiT dependencies -->
+		<form-structure.version>0.2.20-SNAPSHOT</form-structure.version>
+		<form-structure-submitted.version>0.0.5-SNAPSHOT</form-structure-submitted.version>
+		<form-structure-drools.version>0.0.6-SNAPSHOT</form-structure-drools.version>
+		<form-structure-orbeon.version>0.1.4-SNAPSHOT</form-structure-orbeon.version>
+		<plugin-manager.version>0.0.4-SNAPSHOT</plugin-manager.version>
 	</properties>
 
 	<!-- JBOSS repository -->
@@ -61,11 +63,6 @@
 
 	<dependencies>
 		<!-- Logger -->
-		<dependency>
-			<groupId>com.biit</groupId>
-			<artifactId>common-utils</artifactId>
-			<version>${common-utils.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
@@ -112,6 +109,12 @@
 			<artifactId>testng</artifactId>
 			<version>${org.testng.version}</version>
 			<scope>test</scope>
+		</dependency>
+		<!-- Plugin Manager -->
+		<dependency>
+			<groupId>com.biit.plugins</groupId>
+			<artifactId>plugin-manager</artifactId>
+			<version>${plugin-manager.version}</version>
 		</dependency>
 	</dependencies>
 

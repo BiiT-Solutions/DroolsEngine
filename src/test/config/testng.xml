@@ -5,11 +5,13 @@
 			<run>
 				<include name="droolsEngineRules" />
 				<include name="gson" />
+				<include name="pluginsTest" />
 			</run>
 		</groups>
 		<classes>
 			<class name="com.biit.drools.test.DroolsEngineRulesTest" />
 			<class name="com.biit.drools.test.GlobalVariablesSerializerTest" />
+			<class name="com.biit.drools.test.PluginsTest" />
 		</classes>
 	</test>
 </suite>
