@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.biit</groupId>
 	<artifactId>drools-engine</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 	<name>BiiT Drools Engine</name>
 
 	<distributionManagement>
@@ -29,7 +29,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- Version 6.2 of drools is not accepting special characters like 'ë', 
-			do not update <drools.version>6.1.0.CR2</drools.version> <drools.version>6.2.0.Final</drools.version> -->
+			do not update -->
 		<drools.version>6.1.0.Final</drools.version>
 		<org.testng.version>6.8.7</org.testng.version>
 		<slf4j-log4j12.version>1.7.7</slf4j-log4j12.version>
@@ -40,11 +40,11 @@
 		<maven-scm-provider-gitexe.version>1.9.2</maven-scm-provider-gitexe.version>
 		<project.scm.id>git</project.scm.id>
 		<!-- BiiT dependencies -->
-		<form-structure.version>0.2.20-SNAPSHOT</form-structure.version>
-		<form-structure-submitted.version>0.0.5-SNAPSHOT</form-structure-submitted.version>
-		<form-structure-drools.version>0.0.6-SNAPSHOT</form-structure-drools.version>
-		<form-structure-orbeon.version>0.1.4-SNAPSHOT</form-structure-orbeon.version>
-		<plugin-manager.version>0.0.4-SNAPSHOT</plugin-manager.version>
+		<form-structure.version>[0.2,0.3)</form-structure.version>
+		<form-structure-submitted.version>[0.1,0.2)</form-structure-submitted.version>
+		<form-structure-drools.version>[0.1,0.2)</form-structure-drools.version>
+		<form-structure-orbeon.version>[0.2,0.3)</form-structure-orbeon.version>
+		<plugin-manager.version>[0.1,0.2)</plugin-manager.version>
 	</properties>
 
 	<!-- JBOSS repository -->
