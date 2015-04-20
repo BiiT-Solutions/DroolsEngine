@@ -39,7 +39,7 @@
 		<maven-scm-provider-gitexe.version>1.9.2</maven-scm-provider-gitexe.version>
 		<project.scm.id>git</project.scm.id>
 		<!-- BiiT dependencies -->
-		<form-structure.version>[0.2,0.3)</form-structure.version>
+		<form-structure.version>[0.3,0.4)</form-structure.version>
 		<form-structure-submitted.version>[0.1,0.2)</form-structure-submitted.version>
 		<form-structure-drools.version>[0.1,0.2)</form-structure-drools.version>
 		<form-structure-orbeon.version>[0.2,0.3)</form-structure-orbeon.version>

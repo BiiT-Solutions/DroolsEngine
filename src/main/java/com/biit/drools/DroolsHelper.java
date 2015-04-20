@@ -1,6 +1,7 @@
 package com.biit.drools;
 
-import com.biit.form.BaseForm;
+import com.biit.form.entity.BaseForm;
+
 
 public class DroolsHelper {
 
