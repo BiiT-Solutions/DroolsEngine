@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.biit.drools.global.variables.DroolsGlobalVariable;
-import com.biit.drools.global.variables.DroolsGlobalVariableFormat;
 import com.biit.drools.global.variables.DroolsVariableData;
+import com.biit.drools.global.variables.type.DroolsGlobalVariableFormat;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;

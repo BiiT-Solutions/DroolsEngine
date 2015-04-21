@@ -2,8 +2,7 @@ package com.biit.drools.global.variables.interfaces;
 
 import java.util.List;
 
-import com.biit.drools.global.variables.DroolsGlobalVariableFormat;
-
+import com.biit.drools.global.variables.type.DroolsGlobalVariableFormat;
 
 public interface IGlobalVariable {
 

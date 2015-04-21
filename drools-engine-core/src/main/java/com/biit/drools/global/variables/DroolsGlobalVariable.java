@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.biit.drools.global.variables.interfaces.IGlobalVariable;
 import com.biit.drools.global.variables.interfaces.IVariableData;
+import com.biit.drools.global.variables.type.DroolsGlobalVariableFormat;
 
 
 public class DroolsGlobalVariable implements IGlobalVariable {

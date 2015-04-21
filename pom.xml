@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.biit</groupId>
@@ -46,74 +47,13 @@
 		<plugin-manager.version>[0.1,0.2)</plugin-manager.version>
 	</properties>
 
-	<!-- JBOSS repository -->
-	<repositories>
-		<repository>
-			<id>jboss-public-repository-group</id>
-			<name>JBoss Public Repository Group</name>
-			<url>http://repository.jboss.org/nexus/content/groups/public/</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</releases>
-		</repository>
-	</repositories>
-
 	<dependencies>
-		<!-- Logger -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${slf4j-log4j12.version}</version>
-		</dependency>
-		<!-- Drools -->
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-core</artifactId>
-			<version>${drools.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-compiler</artifactId>
-			<version>${drools.version}</version>
-		</dependency>
-		<!-- Basic From Structure -->
-		<dependency>
-			<groupId>com.biit</groupId>
-			<artifactId>form-structure</artifactId>
-			<version>${form-structure.version}</version>
-		</dependency>
-		<!-- Submitted Form -->
-		<dependency>
-			<groupId>com.biit</groupId>
-			<artifactId>form-structure-submitted</artifactId>
-			<version>${form-structure-submitted.version}</version>
-		</dependency>
-		<!-- Drools Form -->
-		<dependency>
-			<groupId>com.biit</groupId>
-			<artifactId>form-structure-drools</artifactId>
-			<version>${form-structure-drools.version}</version>
-		</dependency>
-		<!-- Orbeon form -->
-		<dependency>
-			<groupId>com.biit</groupId>
-			<artifactId>form-structure-orbeon</artifactId>
-			<version>${form-structure-orbeon.version}</version>
-		</dependency>
 		<!-- Testing -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>${org.testng.version}</version>
 			<scope>test</scope>
-		</dependency>
-		<!-- Plugin Manager -->
-		<dependency>
-			<groupId>com.biit.plugins</groupId>
-			<artifactId>plugin-manager</artifactId>
-			<version>${plugin-manager.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -165,4 +105,9 @@
 		</plugins>
 	</build>
 
+	<packaging>pom</packaging>
+	<modules>
+		<module>drools-engine-core</module>
+		<module>drools-engine-interfaces</module>
+	</modules>
 </project>

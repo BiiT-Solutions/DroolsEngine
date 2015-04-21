@@ -1,4 +1,4 @@
-package com.biit.drools.global.variables;
+package com.biit.drools.global.variables.type;
 
 public enum DroolsGlobalVariableFormat {
 

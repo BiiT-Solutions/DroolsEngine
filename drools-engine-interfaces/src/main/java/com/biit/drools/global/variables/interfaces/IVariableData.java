@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import com.biit.drools.global.variables.exceptions.NotValidTypeInVariableData;
 
+
 public interface IVariableData {
 
 	public Object getValue();
