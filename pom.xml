@@ -38,6 +38,7 @@
 		<maven-release-plugin.version>2.5.1</maven-release-plugin.version>
 		<maven-scm-provider-gitexe.version>1.9.2</maven-scm-provider-gitexe.version>
 		<project.scm.id>git</project.scm.id>
+		<graph-maven-plugin.version>1.2.3</graph-maven-plugin.version>
 		<!-- BiiT dependencies -->
 		<form-structure.version>[0.3,0.4)</form-structure.version>
 		<form-structure-submitted.version>[0.1,0.2)</form-structure-submitted.version>
@@ -58,6 +59,11 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.kuali.maven.plugins</groupId>
+				<artifactId>graph-maven-plugin</artifactId>
+				<version>${graph-maven-plugin.version}</version>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
