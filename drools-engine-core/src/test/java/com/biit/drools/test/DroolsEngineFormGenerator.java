@@ -17,7 +17,6 @@ public class DroolsEngineFormGenerator {
 	
 	private final static String APP = "Application1";
 	private final static String FORM_NAME = "Form1";
-	private final static String FORM_VERSION = "1";
 	private final static String INPUT_XML_PATH = "kidScreen.xml";
 
 	private ISubmittedForm submittedForm;
@@ -25,7 +24,7 @@ public class DroolsEngineFormGenerator {
 
 	private void createSubmittedForm() {
 		try {
-			setSubmittedForm(new DroolsSubmittedForm(APP, FORM_NAME, FORM_VERSION));
+			setSubmittedForm(new DroolsSubmittedForm(APP, FORM_NAME));
 			String xmlFile = FileReader.getResource(INPUT_XML_PATH, StandardCharsets.UTF_8);
 			getOrbeonImporter().readXml(xmlFile, getSubmittedForm());
 		} catch (Exception e) {
