@@ -6,6 +6,6 @@
 	<parent>
 		<groupId>com.biit</groupId>
 		<artifactId>drools-engine</artifactId>
-		<version>0.1.10-SNAPSHOT</version>
+		<version>0.1.10</version>
 	</parent>
 </project>
