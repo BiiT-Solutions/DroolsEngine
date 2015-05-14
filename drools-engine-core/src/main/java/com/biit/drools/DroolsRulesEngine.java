@@ -27,6 +27,7 @@ public class DroolsRulesEngine {
 		DroolsForm droolsForm = null;
 		try {
 			if (droolsRules != null && droolsRules.length() > 0) {
+				DroolsEngineLogger.debug(this.getClass().getName(), droolsRules);
 				// Launch kie
 				KieManager km = new KieManager();
 				// Load the rules in memory
