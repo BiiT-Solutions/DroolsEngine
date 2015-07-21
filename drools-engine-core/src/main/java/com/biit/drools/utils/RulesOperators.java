@@ -100,4 +100,30 @@ public class RulesOperators {
 		}
 		return pmtValue;
 	}
+
+	/**
+	 * Calculates the logarithm of any base.<br>
+	 * First variable of the array is the number.<br>
+	 * Second variable of the array is the base.
+	 * 
+	 * @param variables
+	 * @return
+	 */
+	public static Double calculateLogarithmFunction(List<Double> variables) {
+		if (variables != null) {
+			double number;
+			double base;
+			if (variables.size() == 1) {
+				number = variables.get(0);
+				base = 10;
+			}else if(variables.size() == 2){
+				number = variables.get(0);
+				base = variables.get(1);
+			}else{
+				return null;
+			}
+			return Math.log(number) / Math.log(base);
+		}
+		return null;
+	}
 }
