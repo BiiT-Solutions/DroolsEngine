@@ -17,16 +17,18 @@ public class DroolsEngineFormGenerator {
 	
 	private final static String APP = "Application1";
 	private final static String FORM_NAME = "Form1";
-	private final static String FORM_VERSION = "1";
 	private final static String INPUT_XML_PATH = "kidScreen.xml";
+	private final static String INPUT_STRUCTURE_XML_PATH = "kidScreen.xhtml";
 
 	private ISubmittedForm submittedForm;
 	private OrbeonSubmittedAnswerImporter orbeonImporter = new OrbeonSubmittedAnswerImporter();
 
 	private void createSubmittedForm() {
 		try {
-			setSubmittedForm(new DroolsSubmittedForm(APP, FORM_NAME, FORM_VERSION));
+			setSubmittedForm(new DroolsSubmittedForm(APP, FORM_NAME));
 			String xmlFile = FileReader.getResource(INPUT_XML_PATH, StandardCharsets.UTF_8);
+			String orbeonStructureFile = FileReader.getResource(INPUT_STRUCTURE_XML_PATH, StandardCharsets.UTF_8);
+			getOrbeonImporter().setOrbeonStructure(orbeonStructureFile);
 			getOrbeonImporter().readXml(xmlFile, getSubmittedForm());
 		} catch (Exception e) {
 			DroolsEngineLogger.errorMessage(this.getClass().getName(), e);

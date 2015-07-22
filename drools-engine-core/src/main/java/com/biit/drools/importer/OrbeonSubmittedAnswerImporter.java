@@ -25,8 +25,8 @@ public class OrbeonSubmittedAnswerImporter extends OrbeonImporter {
 	}
 
 	@Override
-	public ISubmittedForm createForm(String applicationName, String formName, String formVersion) {
-		return new DroolsSubmittedForm(applicationName, formName, formVersion);
+	public ISubmittedForm createForm(String applicationName, String formName) {
+		return new DroolsSubmittedForm(applicationName, formName);
 	}
 
 	@Override
