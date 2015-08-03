@@ -9,13 +9,12 @@ import com.biit.drools.global.variables.interfaces.IGlobalVariable;
 import com.biit.drools.global.variables.interfaces.IVariableData;
 import com.biit.drools.global.variables.type.DroolsGlobalVariableFormat;
 
-
 public class DroolsGlobalVariable implements IGlobalVariable {
 
 	private String name;
 	private DroolsGlobalVariableFormat format;
 	private List<IVariableData> droolsVariableData;
-	
+
 	public DroolsGlobalVariable(String name) {
 		this.name = name;
 	}
@@ -30,7 +29,7 @@ public class DroolsGlobalVariable implements IGlobalVariable {
 		this.format = format;
 		this.droolsVariableData = droolsVariableData;
 	}
-	
+
 	@Override
 	public String getName() {
 		return this.name;
@@ -46,14 +45,16 @@ public class DroolsGlobalVariable implements IGlobalVariable {
 		List<IVariableData> varDataList = getGenericVariableData();
 		if ((varDataList != null) && !varDataList.isEmpty()) {
 			for (IVariableData variableData : varDataList) {
-				Timestamp currentTime = new Timestamp(new Date().getTime());
-				Timestamp initTime = variableData.getValidFrom();
-				Timestamp endTime = variableData.getValidTo();
-				// Sometimes endtime can be null, meaning that the
-				// variable data has no ending time
-				if ((currentTime.after(initTime) && (endTime == null))
-						|| (currentTime.after(initTime) && currentTime.before(endTime))) {
-					return variableData.getValue();
+				if (variableData != null) {
+					Timestamp currentTime = new Timestamp(new Date().getTime());
+					Timestamp initTime = variableData.getValidFrom();
+					Timestamp endTime = variableData.getValidTo();
+					// Sometimes endtime can be null, meaning that the
+					// variable data has no ending time
+					if ((currentTime.after(initTime) && (endTime == null))
+							|| (currentTime.after(initTime) && currentTime.before(endTime))) {
+						return variableData.getValue();
+					}
 				}
 			}
 		}
@@ -68,7 +69,7 @@ public class DroolsGlobalVariable implements IGlobalVariable {
 	public void setFormat(DroolsGlobalVariableFormat format) {
 		this.format = format;
 	}
-	
+
 	@Override
 	public String toString() {
 		return name + " (" + format + ") " + getValue();
@@ -76,10 +77,10 @@ public class DroolsGlobalVariable implements IGlobalVariable {
 
 	@Override
 	public List<IVariableData> getGenericVariableData() {
-		if(droolsVariableData == null){
+		if (droolsVariableData == null) {
 			droolsVariableData = new ArrayList<IVariableData>();
 		}
 		return droolsVariableData;
 	}
-	
+
 }

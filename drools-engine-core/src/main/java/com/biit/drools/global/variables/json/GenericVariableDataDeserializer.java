@@ -63,7 +63,7 @@ public class GenericVariableDataDeserializer<T extends IVariableData> implements
 		final JsonObject jsonObject = json.getAsJsonObject();
 		Class<?> classType;
 		try {
-			classType = Class.forName(jsonObject.get("class").getAsString());
+			classType = Class.forName(jsonObject.get("type").getAsString());
 			return context.deserialize(json, classType);
 		} catch (ClassNotFoundException e) {
 			DroolsEngineLogger.errorMessage(this.getClass().getName(), e);
