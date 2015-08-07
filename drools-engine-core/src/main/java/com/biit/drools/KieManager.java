@@ -12,6 +12,7 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
 import com.biit.drools.global.variables.DroolsGlobalVariable;
+import com.biit.drools.logger.DroolsEngineLogger;
 import com.biit.form.submitted.ISubmittedForm;
 
 public class KieManager {
@@ -55,7 +56,8 @@ public class KieManager {
 	}
 
 	/**
-	 * Method in charge of initializing the kie session, set the rules, variables and facts and fire the rules
+	 * Method in charge of initializing the kie session, set the rules,
+	 * variables and facts and fire the rules
 	 * 
 	 * @param rules
 	 * @param globalVars
@@ -80,7 +82,8 @@ public class KieManager {
 	private void build(KieServices ks, KieFileSystem kfs) {
 		// Build and deploy the new information
 		KieBuilder kb = ks.newKieBuilder(kfs);
-		kb.buildAll(); // kieModule is automatically deployed to KieRepository if successfully built.
+		kb.buildAll(); // kieModule is automatically deployed to KieRepository
+						// if successfully built.
 		if (kb.getResults().hasMessages(Level.ERROR)) {
 			throw new RuntimeException("Build Errors:\n" + kb.getResults().toString());
 		}
@@ -89,6 +92,8 @@ public class KieManager {
 	// Insert global variables in the drools session
 	private void setEngineGlobalVariables(KieSession kSession, List<DroolsGlobalVariable> globalVars) {
 		for (DroolsGlobalVariable dgb : globalVars) {
+			DroolsEngineLogger.debug(this.getClass().getName(), "Adding global variable '" + dgb.getName()
+					+ "' with value '" + dgb.getValue() + "'.");
 			kSession.setGlobal(dgb.getName(), dgb.getValue());
 		}
 	}
