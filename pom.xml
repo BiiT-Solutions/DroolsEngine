@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.biit</groupId>
 	<artifactId>drools-engine</artifactId>
-	<version>0.2.7</version>
+	<version>0.2.8-SNAPSHOT</version>
 	<name>BiiT Drools Engine</name>
 
 	<distributionManagement>
@@ -22,7 +22,7 @@
 	<scm>
 		<connection>scm:git:dev.biit-solutions.com:DroolsEngine.git</connection>
 		<developerConnection>scm:git:dev.biit-solutions.com:DroolsEngine.git</developerConnection>
-		<tag>drools-engine-0.2.7</tag>
+		<tag>drools-engine</tag>
 	</scm>
 
 	<properties>
