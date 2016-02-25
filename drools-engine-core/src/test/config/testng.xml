@@ -5,7 +5,7 @@
 			<run>
 				<include name="droolsEngineRules" />
 				<include name="gson" />
-				<include name="pluginsTest" />
+				<exclude name="helloWorldpluginTest" />
 			</run>
 		</groups>
 		<classes>

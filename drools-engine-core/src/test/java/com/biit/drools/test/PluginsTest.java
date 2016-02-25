@@ -27,7 +27,7 @@ public class PluginsTest extends DroolsEngineFormGenerator {
 	private final static String HELLO_WORLD_PLUGIN_DROOLS_FILE = "rules/helloWorldPlugin.drl";
 	private final static String DROOLS_EXAMPLE_PLUGIN_DROOLS_FILE = "rules/droolsExamplePlugin.drl";
 
-	@Test(groups = { "pluginsTest" })
+	@Test(groups = { "helloWorldpluginTest" })
 	public void helloWorldPluginSelectionTest1() {
 		try {
 			// Calling the first plugin
@@ -40,7 +40,7 @@ public class PluginsTest extends DroolsEngineFormGenerator {
 		}
 	}
 
-	@Test(groups = { "pluginsTest" })
+	@Test(groups = { "helloWorldpluginTest" })
 	public void helloWorldPluginOneCallTest() {
 		try {
 			// Calling the hello world plugin with only one call
@@ -52,7 +52,7 @@ public class PluginsTest extends DroolsEngineFormGenerator {
 		}
 	}
 
-	@Test(groups = { "pluginsTest" })
+	@Test(groups = { "helloWorldpluginTest" })
 	public void helloWorldPluginDroolsCallWithoutParametersTest() {
 		try {
 			String drlFile = FileReader.getResource(HELLO_WORLD_PLUGIN_DROOLS_FILE, StandardCharsets.UTF_8);
@@ -71,7 +71,7 @@ public class PluginsTest extends DroolsEngineFormGenerator {
 		}
 	}
 
-	@Test(groups = { "pluginsTest" })
+	@Test(groups = { "helloWorldpluginTest" })
 	public void helloWorldPluginDroolsCallWithParametersTest() {
 		try {
 			String drlFile = FileReader.getResource(DROOLS_EXAMPLE_PLUGIN_DROOLS_FILE, StandardCharsets.UTF_8);
