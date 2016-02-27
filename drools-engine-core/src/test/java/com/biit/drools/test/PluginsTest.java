@@ -26,6 +26,8 @@ public class PluginsTest extends DroolsEngineFormGenerator {
 	private final static String HELLO_WORLD_PLUGIN_METHOD = "methodHelloWorld";
 	private final static String HELLO_WORLD_PLUGIN_DROOLS_FILE = "rules/helloWorldPlugin.drl";
 	private final static String DROOLS_EXAMPLE_PLUGIN_DROOLS_FILE = "rules/droolsExamplePlugin.drl";
+	private final static String LIFERAY_PLUGIN_DROOLS_FILE = "rules/USMO Appendix_v1.drl";
+	private final static String APPENDIX_TEXT = "This is a text appendix.";
 
 	@Test(groups = { "pluginsTest" })
 	public void helloWorldPluginSelectionTest1() {
@@ -44,9 +46,8 @@ public class PluginsTest extends DroolsEngineFormGenerator {
 	public void helloWorldPluginOneCallTest() {
 		try {
 			// Calling the hello world plugin with only one call
-			Assert.assertEquals(
-					PluginController.getInstance().executePluginMethod(PLUGIN_INTERFACE, HELLO_WORLD_PLUGIN_NAME,
-							HELLO_WORLD_PLUGIN_METHOD), HELLO_WORLD_PLUGIN_RETURN);
+			Assert.assertEquals(PluginController.getInstance().executePluginMethod(PLUGIN_INTERFACE,
+					HELLO_WORLD_PLUGIN_NAME, HELLO_WORLD_PLUGIN_METHOD), HELLO_WORLD_PLUGIN_RETURN);
 		} catch (Exception e) {
 			Assert.fail("Exception in test");
 		}
@@ -81,6 +82,25 @@ public class PluginsTest extends DroolsEngineFormGenerator {
 				// Check result
 				Assert.assertEquals(((DroolsSubmittedForm) droolsForm.getDroolsSubmittedForm())
 						.getVariableValue("customVariableResult"), 8.);
+			} else {
+				Assert.fail();
+			}
+		} catch (Exception e) {
+			DroolsEngineLogger.errorMessage(this.getClass().getName(), e);
+			Assert.fail();
+		}
+	}
+
+	@Test(groups = { "pluginsTest" })
+	public void LiferayArticleDroolsCall() {
+		try {
+			String drlFile = FileReader.getResource(LIFERAY_PLUGIN_DROOLS_FILE, StandardCharsets.UTF_8);
+			// Execution of the rules
+			DroolsForm droolsForm = runDroolsRules(drlFile);
+			if (getSubmittedForm() != null) {
+				// Check result
+				Assert.assertEquals(((DroolsSubmittedForm) droolsForm.getDroolsSubmittedForm())
+						.getVariableValue("KB-Antropometrie-Text"), APPENDIX_TEXT);
 			} else {
 				Assert.fail();
 			}

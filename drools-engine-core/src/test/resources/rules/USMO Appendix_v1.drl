@@ -1,0 +1,40 @@
+package com.biit.drools 
+
+import java.lang.Math 
+import java.util.Date 
+import java.util.List 
+import java.util.ArrayList 
+import com.biit.form.submitted.* 
+import com.biit.drools.form.* 
+import com.biit.orbeon.form.* 
+import com.biit.drools.utils.* 
+import com.biit.drools.plugins.PluginController 
+import net.xeoh.plugins.base.Plugin 
+import com.biit.plugins.interfaces.IPlugin 
+import java.lang.reflect.Method 
+import com.biit.drools.logger.DroolsEngineLogger 
+
+declare FiredRule
+	ruleName : String
+end
+
+//******************************************************************************
+//*                              GLOBAL VARIABLES                              *
+//******************************************************************************
+global java.lang.Number Taxes
+
+//******************************************************************************
+//*                           DEFAULT VALUE VARIABLES                          *
+//******************************************************************************
+//******************************************************************************
+//*                                FORM RULES                                  *
+//******************************************************************************
+rule "Appendix-Antropometrie_db0604422f404e9182506f10f3986c85"
+when
+	$droolsForm: DroolsForm()
+	$formUSMOAppendix : DroolsSubmittedForm() from $droolsForm.getDroolsSubmittedForm() 
+then
+	Object callResult = PluginController.getInstance().executePluginMethod('com.biit.plugins.interfaces.IPlugin', 'LiferayKnowledgeBasePlugin', 'methodGetLatestArticleContentByProperty', 'Appendix-Antropometrie');
+	$formUSMOAppendix.setVariableValue('KB-Antropometrie-Text', callResult);
+	DroolsEngineLogger.debug("DroolsRule", "Variable set (form, KB-Antropometrie-Text, callResult)");
+end
