@@ -98,7 +98,7 @@ public class KieManager {
 				kSession.setGlobal(dgb.getName(), dgb.getValue());
 			} catch (Exception e) {
 				DroolsEngineLogger.severe(this.getClass().getName(),
-						"Adding global variable '" + dgb.getName() + "' with value '" + dgb.getValue() + "' failed!");
+						"Global variable '" + dgb.getName() + "' with value '" + dgb.getValue() + "' failed!");
 				DroolsEngineLogger.errorMessage(this.getClass().getName(), e);
 			}
 		}
