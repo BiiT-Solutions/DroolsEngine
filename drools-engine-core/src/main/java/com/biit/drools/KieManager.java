@@ -92,9 +92,15 @@ public class KieManager {
 	// Insert global variables in the drools session
 	private void setEngineGlobalVariables(KieSession kSession, List<DroolsGlobalVariable> globalVars) {
 		for (DroolsGlobalVariable dgb : globalVars) {
-			DroolsEngineLogger.debug(this.getClass().getName(), "Adding global variable '" + dgb.getName()
-					+ "' with value '" + dgb.getValue() + "'.");
-			kSession.setGlobal(dgb.getName(), dgb.getValue());
+			DroolsEngineLogger.debug(this.getClass().getName(),
+					"Adding global variable '" + dgb.getName() + "' with value '" + dgb.getValue() + "'.");
+			try {
+				kSession.setGlobal(dgb.getName(), dgb.getValue());
+			} catch (Exception e) {
+				DroolsEngineLogger.severe(this.getClass().getName(),
+						"Adding global variable '" + dgb.getName() + "' with value '" + dgb.getValue() + "' failed!");
+				DroolsEngineLogger.errorMessage(this.getClass().getName(), e);
+			}
 		}
 	}
 
