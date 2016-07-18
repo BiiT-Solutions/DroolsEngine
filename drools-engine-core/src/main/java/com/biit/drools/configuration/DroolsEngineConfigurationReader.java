@@ -10,7 +10,7 @@ public class DroolsEngineConfigurationReader extends ConfigurationReader {
 
 	private static final String DATABASE_CONFIG_FILE = "settings.conf";
 	private static DroolsEngineConfigurationReader instance;
-	private static String PLUGINS_PATH_PROPERTY_NAME = "pluginsPath";
+	private static final String PLUGINS_PATH_PROPERTY_NAME = "pluginsPath";
 	private static final String DEFAULT_PLUGINS_PATH = "plugins/";
 	private static final String DROOLS_SYSTEM_VARIABLE_CONFIG = "DROOLS_CONFIG";
 
