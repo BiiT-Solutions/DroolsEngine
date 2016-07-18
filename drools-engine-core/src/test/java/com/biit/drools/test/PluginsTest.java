@@ -93,7 +93,7 @@ public class PluginsTest extends DroolsEngineFormGenerator {
 
 	@Test(groups = { "pluginsTest" })
 	public void LiferayArticleDroolsCall() {
-		try {
+		try {			
 			String drlFile = FileReader.getResource(LIFERAY_PLUGIN_DROOLS_FILE, StandardCharsets.UTF_8);
 			// Execution of the rules
 			DroolsForm droolsForm = runDroolsRules(drlFile);
