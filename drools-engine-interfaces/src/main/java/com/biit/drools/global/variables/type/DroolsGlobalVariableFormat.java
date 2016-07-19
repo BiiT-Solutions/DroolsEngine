@@ -8,5 +8,7 @@ public enum DroolsGlobalVariableFormat {
 
 	DATE,
 
-	POSTAL_CODE;
+	POSTAL_CODE,
+	
+	MULTI_TEXT;
 }
