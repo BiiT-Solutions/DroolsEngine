@@ -1,6 +1,7 @@
 package com.biit.drools.plugins;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Collection;
 
 import net.xeoh.plugins.base.Plugin;
@@ -171,11 +172,16 @@ public class PluginController {
 	 */
 	public Object executePluginMethod(Class interfaceName, String pluginName, String methodName, Object... parameters) {
 		try {
+			DroolsEngineLogger.debug(this.getClass().getName(), "Executing '" + methodName + "' with parameters '" + Arrays.toString(parameters)
+					+ "'.");
 			IPlugin pluginInterface = getPlugin(interfaceName, pluginName);
 			return pluginInterface.executeMethod(methodName, parameters);
 
 		} catch (IllegalArgumentException | NoMethodFoundException | InvalidMethodParametersException | MethodInvocationException e) {
+			DroolsEngineLogger.severe(this.getClass().getName(), "No plugin method found '" + methodName + "' with parameters '" + Arrays.toString(parameters)
+					+ "'.");
 			DroolsEngineLogger.errorMessage(this.getClass().getName(), e);
+			e.printStackTrace();
 		}
 		return null;
 	}
