@@ -32,12 +32,12 @@ public class DroolsDateUtils {
 
 	public static Integer returnYearsDistanceFromDate(Object object) {
 		if (object instanceof Date) {
-			return returnYearsDistanceFromDate((Date) object);
+			return Math.abs(returnYearsDistanceFromDate((Date) object));
 		}
 		return null;
 	}
 
-	public static Integer returnYearsDistanceFromDate(Date date) {
+	private static Integer returnYearsDistanceFromDate(Date date) {
 		Calendar now = Calendar.getInstance();
 		Calendar compareDate = Calendar.getInstance();
 		compareDate.setTime(date);
@@ -53,12 +53,12 @@ public class DroolsDateUtils {
 
 	public static Integer returnMonthsDistanceFromDate(Object object) {
 		if (object instanceof Date) {
-			return returnMonthsDistanceFromDate((Date) object);
+			return Math.abs(returnMonthsDistanceFromDate((Date) object));
 		}
 		return null;
 	}
 
-	public static Integer returnMonthsDistanceFromDate(Date date) {
+	private static Integer returnMonthsDistanceFromDate(Date date) {
 		Calendar now = Calendar.getInstance();
 		Calendar compareDate = Calendar.getInstance();
 		compareDate.setTime(date);
@@ -72,7 +72,7 @@ public class DroolsDateUtils {
 		return null;
 	}
 
-	public static Integer returnDaysDistanceFromDate(Date date) {
+	private static Integer returnDaysDistanceFromDate(Date date) {
 		Calendar now = Calendar.getInstance();
 		Calendar compareDate = Calendar.getInstance();
 		compareDate.setTime(date);
