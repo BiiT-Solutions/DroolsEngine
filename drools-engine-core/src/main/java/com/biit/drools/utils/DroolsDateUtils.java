@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.biit.drools.logger.DroolsEngineLogger;
+
 public class DroolsDateUtils {
 
 	private static String DATE_FORMAT = "yyyy-mm-dd";
@@ -89,8 +91,7 @@ public class DroolsDateUtils {
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("DATE_FORMAT");
 			return new SimpleDateFormat(DATE_FORMAT).parse(simpleDateFormat.format(date));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			DroolsEngineLogger.errorMessage(DroolsDateUtils.class.getName(), e);
 		}
 		return null;
 	}
