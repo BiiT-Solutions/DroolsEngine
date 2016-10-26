@@ -134,10 +134,10 @@ public class RulesOperators {
 			if (variables.size() == 1) {
 				number = variables.get(0);
 				base = 10;
-			}else if(variables.size() == 2){
+			} else if (variables.size() == 2) {
 				number = variables.get(0);
 				base = variables.get(1);
-			}else{
+			} else {
 				return null;
 			}
 			return Math.log(number) / Math.log(base);
