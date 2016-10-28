@@ -68,10 +68,12 @@ public class RulesOperators {
 		StringBuilder stringBuilder = new StringBuilder();
 		if (!variables.isEmpty()) {
 			for (String variable : variables) {
-				stringBuilder.append(variable);
+				if (variable != null) {
+					stringBuilder.append(variable);
+				}
 			}
 		} else {
-			return null;
+			return "";
 		}
 		return stringBuilder.toString();
 	}
