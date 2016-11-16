@@ -59,6 +59,26 @@ public class RulesOperators {
 	}
 
 	/**
+	 * Concatenate strings.
+	 * 
+	 * @param variables
+	 * @return
+	 */
+	public static String concatenateStringsFunction(List<String> variables) {
+		StringBuilder stringBuilder = new StringBuilder();
+		if (!variables.isEmpty()) {
+			for (String variable : variables) {
+				if (variable != null) {
+					stringBuilder.append(variable);
+				}
+			}
+		} else {
+			return "";
+		}
+		return stringBuilder.toString();
+	}
+
+	/**
 	 * Calculates the total sum of the variables array
 	 * 
 	 * @param variables
@@ -116,10 +136,10 @@ public class RulesOperators {
 			if (variables.size() == 1) {
 				number = variables.get(0);
 				base = 10;
-			}else if(variables.size() == 2){
+			} else if (variables.size() == 2) {
 				number = variables.get(0);
 				base = variables.get(1);
-			}else{
+			} else {
 				return null;
 			}
 			return Math.log(number) / Math.log(base);

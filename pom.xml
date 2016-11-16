@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.biit</groupId>
 	<artifactId>drools-engine</artifactId>
-	<version>0.2.37-SNAPSHOT</version>
+	<version>0.2.45-SNAPSHOT</version>
 	<name>BiiT Drools Engine</name>
 
 	<distributionManagement>
