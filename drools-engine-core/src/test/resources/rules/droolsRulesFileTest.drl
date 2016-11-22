@@ -29,7 +29,7 @@ when
 	$formform : DroolsSubmittedForm() from $droolsForm.getDroolsSubmittedForm()
 	$formform_Category2Lifestyle : DroolsSubmittedCategory( getText() == 'Lifestyle') from $formform.getChildren(ISubmittedCategory.class)
 	$formform_Category2Lifestyle_group0voeding : DroolsSubmittedGroup( getText() == 'voeding') from $formform_Category2Lifestyle.getChildren(ISubmittedGroup.class)
-	$formform_Category2Lifestyle_group0voeding_question0breakfast : DroolsSubmittedQuestion(getText() == 'breakfast', getAnswer('TEXT') in( 'a', 'b', 'd' )) from $formform_Category2Lifestyle_group0voeding.getChildren(ISubmittedQuestion.class)
+	$formform_Category2Lifestyle_group0voeding_question0breakfast : DroolsSubmittedQuestion(getText() == 'breakfast', getAnswer('TEXT') in( 'ä', 'b', 'd' )) from $formform_Category2Lifestyle_group0voeding.getChildren(ISubmittedQuestion.class)
 then
 	insert ( new FiredRule("andOrTest_1_46dcac7c6a7845d09ac81a6283d9593c"));
 	DroolsEngineLogger.debug("DroolsRuleFired", "Rule andOrTest_1_46dcac7c6a7845d09ac81a6283d9593c fired");

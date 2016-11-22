@@ -3,6 +3,8 @@ package com.biit.drools.plugins;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import net.xeoh.plugins.base.Plugin;
 import net.xeoh.plugins.base.PluginManager;
@@ -20,18 +22,21 @@ import com.biit.plugins.interfaces.IPlugin;
  * Singleton in charge of managing the plugins of the application
  * 
  */
-@SuppressWarnings({ "unchecked", "rawtypes" })
 public class PluginController {
-
-	private static PluginController INSTANCE = new PluginController();
+	private static PluginController instance = new PluginController();
 	private PluginManager pluginManager;
 	private PluginManagerUtil pluginManagerUtil;
+	private Collection<IPlugin> availablePlugins;
+	private Map<Class<?>, Collection<IPlugin>> pluginsByName;
 
 	public static PluginController getInstance() {
-		return INSTANCE;
+		return instance;
 	}
 
-	// Override of the clone method to avoid creating more than one instance
+	/**
+	 * Override of the clone method to avoid creating more than one instance
+	 */
+	@Override
 	public Object clone() throws CloneNotSupportedException {
 		throw new CloneNotSupportedException();
 	}
@@ -39,6 +44,7 @@ public class PluginController {
 	private PluginController() {
 		pluginManager = PluginManagerFactory.createPluginManager();
 		pluginManagerUtil = new PluginManagerUtil(pluginManager);
+		pluginsByName = new HashMap<>();
 		scanForPlugins();
 	}
 
@@ -66,7 +72,7 @@ public class PluginController {
 		return false;
 	}
 
-	private Class getInterfaceClass(String interfaceName) {
+	private Class<?> getInterfaceClass(String interfaceName) {
 		try {
 			return Class.forName(interfaceName);
 		} catch (ClassNotFoundException e) {
@@ -81,7 +87,10 @@ public class PluginController {
 	 * @return
 	 */
 	public Collection<IPlugin> getAllPlugins() {
-		return pluginManagerUtil.getPlugins(IPlugin.class);
+		if (availablePlugins == null) {
+			availablePlugins = pluginManagerUtil.getPlugins(IPlugin.class);
+		}
+		return availablePlugins;
 	}
 
 	/**
@@ -90,8 +99,12 @@ public class PluginController {
 	 * @param pluginInterface
 	 * @return
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Collection<IPlugin> getAllPlugins(Class pluginInterface) {
-		return pluginManagerUtil.getPlugins(pluginInterface);
+		if (pluginsByName.get(pluginInterface) == null) {
+			pluginsByName.put(pluginInterface, pluginManagerUtil.getPlugins(pluginInterface));
+		}
+		return pluginsByName.get(pluginInterface);
 	}
 
 	/**
@@ -113,6 +126,7 @@ public class PluginController {
 	 * @param pluginInterface
 	 * @return
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Plugin getPlugin(Class pluginInterface) {
 		return pluginManagerUtil.getPlugin(pluginInterface);
 	}
@@ -137,7 +151,7 @@ public class PluginController {
 	 * @param pluginName
 	 * @return
 	 */
-	public IPlugin getPlugin(Class interfaceName, String pluginName) {
+	public IPlugin getPlugin(Class<?> interfaceName, String pluginName) {
 		Collection<IPlugin> plugins = getAllPlugins(interfaceName);
 		for (IPlugin plugin : plugins) {
 			if (plugin.getPluginName().equals(pluginName)) {
@@ -170,10 +184,9 @@ public class PluginController {
 	 * @param parameters
 	 * @return
 	 */
-	public Object executePluginMethod(Class interfaceName, String pluginName, String methodName, Object... parameters) {
+	public Object executePluginMethod(Class<?> interfaceName, String pluginName, String methodName, Object... parameters) {
 		try {
-			DroolsEngineLogger.debug(this.getClass().getName(), "Executing '" + methodName + "' with parameters '" + Arrays.toString(parameters)
-					+ "'.");
+			DroolsEngineLogger.debug(this.getClass().getName(), "Executing '" + methodName + "' with parameters '" + Arrays.toString(parameters) + "'.");
 			IPlugin pluginInterface = getPlugin(interfaceName, pluginName);
 			return pluginInterface.executeMethod(methodName, parameters);
 

@@ -12,7 +12,7 @@
 	<liferay_email_address>support@biit-solutions.com</liferay_email_address>
 	<Algemeen>
 		<subcategory-1-1 />
-		<name>Jan</name>
+		<name>Jän</name>
 		<school>niet</school>
 		<group>7</group>
 		<birthdate>2007-09-01</birthdate>
@@ -32,7 +32,7 @@
 	<Lifestyle>
 		<subcategory-3-1 />
 		<voeding>
-			<breakfast>b</breakfast>
+			<breakfast>ä</breakfast>
 			<fruit>d</fruit>
 			<fruitAmount>2</fruitAmount>
 			<vegetables>d</vegetables>
