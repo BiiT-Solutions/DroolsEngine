@@ -19,15 +19,15 @@ public class KieManager {
 
 	private List<DroolsGlobalVariable> globalVariables;
 	private List<ISubmittedForm> facts;
-	private KieServices ks;
+	private KieServices kieServices;
 
 	public KieManager() {
-		this.globalVariables = new ArrayList<DroolsGlobalVariable>();
-		this.facts = new ArrayList<ISubmittedForm>();
+		globalVariables = new ArrayList<DroolsGlobalVariable>();
+		facts = new ArrayList<ISubmittedForm>();
 	}
 
 	public List<DroolsGlobalVariable> getGlobalVariables() {
-		return this.globalVariables;
+		return globalVariables;
 	}
 
 	public void setGlobalVariables(List<DroolsGlobalVariable> globalVariables) {
@@ -37,22 +37,22 @@ public class KieManager {
 	}
 
 	public List<ISubmittedForm> getFacts() {
-		return this.facts;
+		return facts;
 	}
 
-	public void setFacts(List<ISubmittedForm> list) {
-		this.facts = list;
+	public void setFacts(List<ISubmittedForm> listOfFacts) {
+		facts = listOfFacts;
 	}
 
 	public void buildSessionRules(String rules) {
-		this.ks = KieServices.Factory.get();
-		KieFileSystem kfs = this.ks.newKieFileSystem();
-		createRules(kfs, rules);
-		build(this.ks, kfs);
+		kieServices = KieServices.Factory.get();
+		KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
+		createRules(kieFileSystem, rules);
+		build(kieServices, kieFileSystem);
 	}
 
 	public void execute() {
-		this.startKie(this.globalVariables, this.facts);
+		startKie(getGlobalVariables(), getFacts());
 	}
 
 	/**
@@ -64,50 +64,51 @@ public class KieManager {
 	 * @param facts
 	 */
 	public void startKie(List<DroolsGlobalVariable> globalVars, List<ISubmittedForm> facts) {
-		KieRepository kr = ks.getRepository();
-		KieContainer kContainer = ks.newKieContainer(kr.getDefaultReleaseId());
-		KieSession kSession = kContainer.newKieSession();
-		this.setEngineGlobalVariables(kSession, globalVars);
-		this.insertFacts(kSession, facts);
-		kSession.fireAllRules();
-		kSession.dispose();
+		KieRepository kieRepository = kieServices.getRepository();
+		KieContainer kContainer = kieServices.newKieContainer(kieRepository.getDefaultReleaseId());
+		KieSession kieServicesession = kContainer.newKieSession();
+		setEngineGlobalVariables(kieServicesession, globalVars);
+		insertFacts(kieServicesession, facts);
+		kieServicesession.fireAllRules();
+		kieServicesession.dispose();
 	}
 
-	private void createRules(KieFileSystem kfs, String rules) {
+	private void createRules(KieFileSystem kieFileSystem, String rules) {
 		// Needs a virtual path to store the file and retrieve it
 		// Can't load the string directly
-		kfs.write("src/main/resources/kiemodulemodel/form.drl", rules);
+		kieFileSystem.write("src/main/resources/kiemodulemodel/form.drl", rules);
 	}
 
-	private void build(KieServices ks, KieFileSystem kfs) {
+	private void build(KieServices kieServices, KieFileSystem kieFileSystem) {
 		// Build and deploy the new information
-		KieBuilder kb = ks.newKieBuilder(kfs);
-		kb.buildAll(); // kieModule is automatically deployed to KieRepository
-						// if successfully built.
-		if (kb.getResults().hasMessages(Level.ERROR)) {
-			throw new RuntimeException("Build Errors:\n" + kb.getResults().toString());
+		KieBuilder kiebuilder = kieServices.newKieBuilder(kieFileSystem);
+		kiebuilder.buildAll(); // kieModule is automatically deployed to
+								// KieRepository
+		// if successfully built.
+		if (kiebuilder.getResults().hasMessages(Level.ERROR)) {
+			throw new RuntimeException("Build Errors:\n" + kiebuilder.getResults().toString());
 		}
 	}
 
 	// Insert global variables in the drools session
-	private void setEngineGlobalVariables(KieSession kSession, List<DroolsGlobalVariable> globalVars) {
-		for (DroolsGlobalVariable dgb : globalVars) {
-			DroolsEngineLogger.debug(this.getClass().getName(),
-					"Adding global variable '" + dgb.getName() + "' with value '" + dgb.getValue() + "'.");
+	private void setEngineGlobalVariables(KieSession kieServicesession, List<DroolsGlobalVariable> globalVariables) {
+		for (DroolsGlobalVariable droolsGlobalVariable : globalVariables) {
+			DroolsEngineLogger.debug(this.getClass().getName(), "Adding global variable '" + droolsGlobalVariable.getName() + "' with value '"
+					+ droolsGlobalVariable.getValue() + "'.");
 			try {
-				kSession.setGlobal(dgb.getName(), dgb.getValue());
+				kieServicesession.setGlobal(droolsGlobalVariable.getName(), droolsGlobalVariable.getValue());
 			} catch (Exception e) {
-				DroolsEngineLogger.severe(this.getClass().getName(),
-						"Global variable '" + dgb.getName() + "' with value '" + dgb.getValue() + "' failed!");
+				DroolsEngineLogger.severe(this.getClass().getName(), "Global variable '" + droolsGlobalVariable.getName() + "' with value '"
+						+ droolsGlobalVariable.getValue() + "' failed!");
 				DroolsEngineLogger.errorMessage(this.getClass().getName(), e);
 			}
 		}
 	}
 
 	// Insert any number of facts in the drools session
-	private void insertFacts(KieSession kSession, List<ISubmittedForm> facts) {
+	private void insertFacts(KieSession kieServicesession, List<ISubmittedForm> facts) {
 		for (ISubmittedForm fact : facts) {
-			kSession.insert(fact);
+			kieServicesession.insert(fact);
 		}
 	};
 }

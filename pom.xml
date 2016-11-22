@@ -29,7 +29,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- Version 6.2 of drools is not accepting special characters like 'ë', 
 			do not update -->
-		<drools.version>6.1.0.Final</drools.version>
+		<drools.version>6.4.0.Final</drools.version>
 		<org.testng.version>6.8.7</org.testng.version>
 		<slf4j-log4j12.version>1.7.7</slf4j-log4j12.version>
 		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
