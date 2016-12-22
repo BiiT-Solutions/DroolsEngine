@@ -1,10 +1,17 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.biit</groupId>
 	<artifactId>drools-engine</artifactId>
-	<version>0.2.46-SNAPSHOT</version>
+	<version>0.3.1-SNAPSHOT</version>
 	<name>BiiT Drools Engine</name>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>drools-engine-core</module>
+		<module>drools-engine-interfaces</module>
+	</modules>
 
 	<distributionManagement>
 		<repository>
@@ -39,6 +46,7 @@
 		<maven-scm-provider-gitexe.version>1.9.2</maven-scm-provider-gitexe.version>
 		<project.scm.id>git</project.scm.id>
 		<graph-maven-plugin.version>1.2.3</graph-maven-plugin.version>
+		<aspectj.version>1.8.7</aspectj.version>
 		<!-- BiiT dependencies -->
 		<form-structure.version>[1.0,1.1)</form-structure.version>
 		<form-structure-submitted.version>[0.2,0.3)</form-structure-submitted.version>
@@ -110,9 +118,5 @@
 		</plugins>
 	</build>
 
-	<packaging>pom</packaging>
-	<modules>
-		<module>drools-engine-core</module>
-		<module>drools-engine-interfaces</module>
-	</modules>
+
 </project>

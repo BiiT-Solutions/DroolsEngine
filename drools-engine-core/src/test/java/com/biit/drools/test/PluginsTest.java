@@ -6,10 +6,10 @@ import java.nio.charset.StandardCharsets;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.biit.drools.engine.plugins.PluginController;
 import com.biit.drools.form.DroolsForm;
 import com.biit.drools.form.DroolsSubmittedForm;
 import com.biit.drools.logger.DroolsEngineLogger;
-import com.biit.drools.plugins.PluginController;
 import com.biit.plugins.interfaces.IPlugin;
 import com.biit.utils.file.FileReader;
 

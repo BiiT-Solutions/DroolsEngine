@@ -1,4 +1,4 @@
-package com.biit.drools.plugins;
+package com.biit.drools.engine.plugins;
 
 import java.io.File;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.biit.drools.importer;
+package com.biit.drools.engine.importer;
 
 import com.biit.drools.form.DroolsSubmittedCategory;
 import com.biit.drools.form.DroolsSubmittedForm;

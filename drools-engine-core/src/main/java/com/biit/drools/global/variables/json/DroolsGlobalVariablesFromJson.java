@@ -23,18 +23,15 @@ public class DroolsGlobalVariablesFromJson {
 	public static List<DroolsGlobalVariable> fromJson(String jsonString) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.registerTypeAdapter(DroolsGlobalVariable.class, new DroolsGlobalVariableDeserializer());
-		gsonBuilder.registerTypeAdapter(DroolsVariableData.class,
-				new GenericVariableDataDeserializer<DroolsVariableData>());
+		gsonBuilder.registerTypeAdapter(DroolsVariableData.class, new GenericVariableDataDeserializer<DroolsVariableData>());
 		gsonBuilder.registerTypeAdapter(DroolsVariableDataNumber.class, new DroolsVariableDataNumberDeserializer());
 		gsonBuilder.registerTypeAdapter(DroolsVariableDataText.class, new DroolsVariableDataTextDeserializer());
 		gsonBuilder.registerTypeAdapter(DroolsVariableDataDate.class, new DroolsVariableDataDateDeserializer());
-		gsonBuilder.registerTypeAdapter(DroolsVariableDataPostalCode.class,
-				new DroolsVariableDataPostalCodeDeserializer());
+		gsonBuilder.registerTypeAdapter(DroolsVariableDataPostalCode.class, new DroolsVariableDataPostalCodeDeserializer());
 		Gson gson = gsonBuilder.create();
 		DroolsGlobalVariable[] variables = gson.fromJson(jsonString, DroolsGlobalVariable[].class);
 		if (variables == null) {
-			DroolsEngineLogger.warning(DroolsGlobalVariablesFromJson.class.getName(),
-					"Global variables are null! Probably the file is not correct.");
+			DroolsEngineLogger.warning(DroolsGlobalVariablesFromJson.class.getName(), "Global variables are null! Probably the file is not correct.");
 			return new ArrayList<DroolsGlobalVariable>();
 		}
 		return Arrays.asList(variables);

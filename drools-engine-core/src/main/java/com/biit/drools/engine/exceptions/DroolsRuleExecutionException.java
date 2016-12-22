@@ -1,4 +1,4 @@
-package com.biit.drools.exceptions;
+package com.biit.drools.engine.exceptions;
 
 public class DroolsRuleExecutionException extends Exception {
 	private static final long serialVersionUID = 4083630225112950394L;

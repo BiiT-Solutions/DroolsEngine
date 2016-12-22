@@ -6,7 +6,7 @@ import java.util.Date;
 import com.biit.drools.global.variables.exceptions.NotValidTypeInVariableData;
 
 public class DroolsVariableDataDate extends DroolsVariableData {
-	
+
 	private Timestamp value;
 
 	public DroolsVariableDataDate() {

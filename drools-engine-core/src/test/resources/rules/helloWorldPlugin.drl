@@ -8,7 +8,7 @@ import com.biit.form.submitted.*
 import com.biit.drools.form.* 
 import com.biit.orbeon.form.* 
 import com.biit.drools.utils.* 
-import com.biit.drools.plugins.PluginController 
+import com.biit.drools.engine.plugins.PluginController 
 import net.xeoh.plugins.base.Plugin 
 import com.biit.plugins.interfaces.IPlugin 
 import java.lang.reflect.Method 

@@ -15,7 +15,7 @@ public class DroolsVariableDataDeserializer<T extends DroolsVariableData> extend
 	public DroolsVariableDataDeserializer(Class<T> specificClass) {
 		this.specificClass = specificClass;
 	}
-	
+
 	@Override
 	public void deserialize(JsonElement json, JsonDeserializationContext context, T element) throws NotValidTypeInVariableData {
 		super.deserialize(json, context, element);

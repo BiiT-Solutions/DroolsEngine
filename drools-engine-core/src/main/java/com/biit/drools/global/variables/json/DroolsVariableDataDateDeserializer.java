@@ -13,8 +13,7 @@ public class DroolsVariableDataDateDeserializer extends DroolsVariableDataDeseri
 	}
 
 	@Override
-	public void deserialize(JsonElement json, JsonDeserializationContext context, DroolsVariableDataDate element)
-			throws NotValidTypeInVariableData {
+	public void deserialize(JsonElement json, JsonDeserializationContext context, DroolsVariableDataDate element) throws NotValidTypeInVariableData {
 		JsonObject jobject = (JsonObject) json;
 		element.setValue(parseTimestamp("value", jobject, context));
 		super.deserialize(json, context, element);

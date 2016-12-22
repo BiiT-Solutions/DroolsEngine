@@ -4,11 +4,11 @@ import java.nio.charset.StandardCharsets;
 
 import org.testng.Assert;
 
-import com.biit.drools.DroolsRulesEngine;
-import com.biit.drools.exceptions.DroolsRuleExecutionException;
+import com.biit.drools.engine.DroolsRulesEngine;
+import com.biit.drools.engine.exceptions.DroolsRuleExecutionException;
+import com.biit.drools.engine.importer.OrbeonSubmittedAnswerImporter;
 import com.biit.drools.form.DroolsForm;
 import com.biit.drools.form.DroolsSubmittedForm;
-import com.biit.drools.importer.OrbeonSubmittedAnswerImporter;
 import com.biit.drools.logger.DroolsEngineLogger;
 import com.biit.form.submitted.ISubmittedForm;
 import com.biit.utils.file.FileReader;
