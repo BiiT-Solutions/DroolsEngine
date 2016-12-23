@@ -22,22 +22,24 @@ public class DroolsRulesEngine {
 	 * @return submittedForm with the scores calculated by drools
 	 * @throws DroolsRuleExecutionException
 	 */
-	public DroolsForm applyDrools(ISubmittedForm submittedForm, String droolsRules,
-			List<DroolsGlobalVariable> globalVariables) throws DroolsRuleExecutionException {
+	public DroolsForm applyDrools(ISubmittedForm submittedForm, String droolsRules, List<DroolsGlobalVariable> globalVariables)
+			throws DroolsRuleExecutionException {
 		DroolsForm droolsForm = null;
 		try {
 			if (droolsRules != null && droolsRules.length() > 0) {
 				DroolsEngineLogger.debug(this.getClass().getName(), droolsRules);
 				// Launch kie
 				KieManager km = new KieManager();
-				// Load the rules in memory
+				// Load the rules in memory. Takes around the 60% of the
+				// operation time.
 				km.buildSessionRules(droolsRules);
 				if (globalVariables != null && !globalVariables.isEmpty()) {
 					// Creation of the global constants
 					km.setGlobalVariables(globalVariables);
 				}
-				droolsForm = new DroolsForm((SubmittedForm) submittedForm);
-				runDroolsRules(droolsForm, km);
+				//droolsForm = new DroolsForm((SubmittedForm) submittedForm);
+				// Takes 25% of the operation time.
+				//runDroolsRules(droolsForm, km);
 			}
 		} catch (Exception e) {
 			DroolsEngineLogger.errorMessage(this.getClass().getName(), e);

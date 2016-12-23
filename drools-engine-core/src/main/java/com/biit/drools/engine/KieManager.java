@@ -46,13 +46,24 @@ public class KieManager {
 
 	public void buildSessionRules(String rules) {
 		kieServices = KieServices.Factory.get();
-		KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
-		createRules(kieFileSystem, rules);
+		KieFileSystem kieFileSystem = createKieFileSystem(rules);
 		build(kieServices, kieFileSystem);
 	}
 
 	public void execute() {
 		startKie(getGlobalVariables(), getFacts());
+	}
+
+	/**
+	 * These are fast operations and are not needed to cache it.
+	 * 
+	 * @param rules
+	 * @return
+	 */
+	private KieFileSystem createKieFileSystem(String rules) {
+		KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
+		createRules(kieFileSystem, rules);
+		return kieFileSystem;
 	}
 
 	/**
@@ -80,7 +91,8 @@ public class KieManager {
 	}
 
 	private void build(KieServices kieServices, KieFileSystem kieFileSystem) {
-		// Build and deploy the new information
+		// Build and deploy the new information. Creating a KiedBuilder is a
+		// fast operation that is not necessary to cache.
 		KieBuilder kiebuilder = kieServices.newKieBuilder(kieFileSystem);
 		kiebuilder.buildAll(); // kieModule is automatically deployed to
 								// KieRepository
@@ -111,4 +123,8 @@ public class KieManager {
 			kieServicesession.insert(fact);
 		}
 	};
+
+	private int getRulesId(String rules) {
+		return rules.hashCode();
+	}
 }

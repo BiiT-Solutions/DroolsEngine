@@ -14,7 +14,7 @@ import com.biit.form.submitted.ISubmittedForm;
 import com.biit.utils.file.FileReader;
 
 public class DroolsEngineFormGenerator {
-	
+
 	private final static String APP = "Application1";
 	private final static String FORM_NAME = "Form1";
 	private final static String INPUT_XML_PATH = "kidScreen.xml";
@@ -36,18 +36,12 @@ public class DroolsEngineFormGenerator {
 		}
 	}
 
-	public DroolsForm runDroolsRules(String drlFile) {
+	public DroolsForm runDroolsRules(String drlFile) throws DroolsRuleExecutionException {
 		// Generate the drools rules.
-		try {
-			createSubmittedForm();
-			DroolsRulesEngine droolsEngine = new DroolsRulesEngine();
-			DroolsForm resultsOfForm = droolsEngine.applyDrools(getSubmittedForm(), drlFile, null);
-			return resultsOfForm;
-		} catch (DroolsRuleExecutionException e) {
-			DroolsEngineLogger.errorMessage(this.getClass().getName(), e);
-			Assert.fail();
-		}
-		return null;
+		createSubmittedForm();
+		DroolsRulesEngine droolsEngine = new DroolsRulesEngine();
+		DroolsForm resultsOfForm = droolsEngine.applyDrools(getSubmittedForm(), drlFile, null);
+		return resultsOfForm;
 	}
 
 	protected ISubmittedForm getSubmittedForm() {
