@@ -37,9 +37,9 @@ public class DroolsRulesEngine {
 					// Creation of the global constants
 					km.setGlobalVariables(globalVariables);
 				}
-				//droolsForm = new DroolsForm((SubmittedForm) submittedForm);
+				droolsForm = new DroolsForm((SubmittedForm) submittedForm);
 				// Takes 25% of the operation time.
-				//runDroolsRules(droolsForm, km);
+				runDroolsRules(droolsForm, km);
 			}
 		} catch (Exception e) {
 			DroolsEngineLogger.errorMessage(this.getClass().getName(), e);

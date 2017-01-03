@@ -27,7 +27,9 @@ public class DroolsEngineRulesTest extends DroolsEngineFormGenerator {
 		// Execution of the rules
 		DroolsForm droolsForm = runDroolsRules(drlFile);
 		Assert.assertNotNull(getSubmittedForm());
+		Assert.assertNotNull(droolsForm);
 		// Check result
+		Assert.assertNotNull(((DroolsSubmittedForm) droolsForm.getDroolsSubmittedForm()));
 		Assert.assertEquals(((DroolsSubmittedForm) droolsForm.getDroolsSubmittedForm()).getVariableValue("customVariableResult"), 11.);
 	}
 }

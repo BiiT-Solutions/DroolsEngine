@@ -36,7 +36,7 @@ public class PerformanceTest extends DroolsEngineFormGenerator {
 		}
 		long end_time = System.nanoTime();
 		// Pools (KieBuilderPool and KieFileSystemPool) improves this test from
-		// 16s to 6s.
+		// 30s to 11s.
 		System.out.println("############### Total Drools Execution: " + ((double) end_time - start_time) / 1e6);
 	}
 
@@ -58,7 +58,7 @@ public class PerformanceTest extends DroolsEngineFormGenerator {
 		}
 		long end_time = System.nanoTime();
 		// Pools (KieBuilderPool and KieFileSystemPool) improves this test from
-		// 14s to 7s.
+		// 16s to 10s.
 		System.out.println("############### Total Simple Plugin: " + ((double) end_time - start_time) / 1e6);
 	}
 
@@ -82,7 +82,7 @@ public class PerformanceTest extends DroolsEngineFormGenerator {
 		}
 		long end_time = System.nanoTime();
 		// Pools (KieBuilderPool and KieFileSystemPool) improves this test from
-		// 12s to 6s.
+		// 23s to 15s.
 		System.out.println("############### Total Liferay Plugin: " + ((double) end_time - start_time) / 1e6);
 	}
 }

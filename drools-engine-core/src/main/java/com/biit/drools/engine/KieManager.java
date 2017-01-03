@@ -58,28 +58,12 @@ public class KieManager {
 
 	public void buildSessionRules(String rules) {
 		kieServices = KieServices.Factory.get();
-		KieFileSystem kieFileSystem = createKieFileSystem(rules);
+		KieFileSystem kieFileSystem = getKieFileSystem(rules);
 		build(kieServices, kieFileSystem);
 	}
 
 	public void execute() {
 		startKie(getGlobalVariables(), getFacts());
-	}
-
-	/**
-	 * These are fast operations and are not needed to cache it.
-	 * 
-	 * @param rules
-	 * @return
-	 */
-	private KieFileSystem createKieFileSystem(String rules) {
-		int rulesId = getRulesId(rules);
-		if (kieFileSystemPool.getElement(rulesId) == null) {
-			KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
-			createRules(kieFileSystem, rules);
-			kieFileSystemPool.addElement(new PoolableKieFileSystem(rulesId, kieFileSystem));
-		}
-		return kieFileSystemPool.getElement(rulesId).getKieFileSystem();
 	}
 
 	/**
@@ -107,9 +91,7 @@ public class KieManager {
 	}
 
 	private void build(KieServices kieServices, KieFileSystem kieFileSystem) {
-		// Build and deploy the new information. Creating a KiedBuilder is a
-		// fast operation that is not necessary to cache.
-		// KieBuilder kiebuilder = kieServices.newKieBuilder(kieFileSystem);
+		// Build and deploy the new information.
 		KieBuilder kiebuilder = getKieBuilder(kieServices, kieFileSystem);
 
 		kiebuilder.buildAll(); // kieModule is automatically deployed to
@@ -117,6 +99,22 @@ public class KieManager {
 		if (kiebuilder.getResults().hasMessages(Level.ERROR)) {
 			throw new RuntimeException("Build Errors:\n" + kiebuilder.getResults().toString());
 		}
+	}
+
+	/**
+	 * These are fast operations and are not needed to cache it.
+	 * 
+	 * @param rules
+	 * @return
+	 */
+	private KieFileSystem getKieFileSystem(String rules) {
+		int rulesId = getRulesId(rules);
+		if (kieFileSystemPool.getElement(rulesId) == null) {
+			KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
+			createRules(kieFileSystem, rules);
+			kieFileSystemPool.addElement(new PoolableKieFileSystem(rulesId, kieFileSystem));
+		}
+		return kieFileSystemPool.getElement(rulesId).getKieFileSystem();
 	}
 
 	private KieBuilder getKieBuilder(KieServices kieServices, KieFileSystem kieFileSystem) {
