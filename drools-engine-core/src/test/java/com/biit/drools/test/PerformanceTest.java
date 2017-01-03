@@ -1,10 +1,12 @@
 package com.biit.drools.test;
 
 import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 
+import org.dom4j.DocumentException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -25,7 +27,7 @@ public class PerformanceTest extends DroolsEngineFormGenerator {
 	private final static String LIFERAY_PLUGIN_DROOLS_FILE = "rules/USMO Appendix_v1.drl";
 
 	@Test(groups = { "performanceTest" }, enabled = true)
-	public void rulesTestStaticRules() throws DroolsRuleExecutionException, FileNotFoundException {
+	public void rulesTestStaticRules() throws DroolsRuleExecutionException, FileNotFoundException, UnsupportedEncodingException, DocumentException {
 		String drlFile = FileReader.getResource(DROOLS_RULES_PATH, StandardCharsets.UTF_8);
 		// Execution of the rules
 		long start_time = System.nanoTime();
@@ -40,7 +42,7 @@ public class PerformanceTest extends DroolsEngineFormGenerator {
 
 	@Test(groups = { "performanceTest" }, enabled = true)
 	public void rulesTestPluginRules() throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
-			FileNotFoundException, DroolsRuleExecutionException {
+			FileNotFoundException, DroolsRuleExecutionException, UnsupportedEncodingException, DocumentException {
 		// Calling the first plugin
 		long start_time = System.nanoTime();
 		for (int i = 0; i < RULES_REPETITIONS; i++) {
@@ -67,9 +69,11 @@ public class PerformanceTest extends DroolsEngineFormGenerator {
 	 * 
 	 * @throws FileNotFoundException
 	 * @throws DroolsRuleExecutionException
+	 * @throws DocumentException 
+	 * @throws UnsupportedEncodingException 
 	 */
 	@Test(groups = { "performanceTest" }, enabled = true)
-	public void rulesTestPluginRulesLiferayCall() throws FileNotFoundException, DroolsRuleExecutionException {
+	public void rulesTestPluginRulesLiferayCall() throws FileNotFoundException, DroolsRuleExecutionException, UnsupportedEncodingException, DocumentException {
 		long start_time = System.nanoTime();
 		for (int i = 0; i < RULES_REPETITIONS; i++) {
 			String drlFile = FileReader.getResource(LIFERAY_PLUGIN_DROOLS_FILE, StandardCharsets.UTF_8);

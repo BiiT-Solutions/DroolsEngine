@@ -1,10 +1,12 @@
 package com.biit.drools.test;
 
 import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 
+import org.dom4j.DocumentException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -46,33 +48,29 @@ public class PluginsTest extends DroolsEngineFormGenerator {
 	}
 
 	@Test(groups = { "pluginsTest" })
-	public void helloWorldPluginDroolsCallWithoutParametersTest() throws FileNotFoundException, DroolsRuleExecutionException {
+	public void helloWorldPluginDroolsCallWithoutParametersTest() throws FileNotFoundException, DroolsRuleExecutionException, UnsupportedEncodingException,
+			DocumentException {
 		String drlFile = FileReader.getResource(HELLO_WORLD_PLUGIN_DROOLS_FILE, StandardCharsets.UTF_8);
 		// Execution of the rules
 		DroolsForm droolsForm = runDroolsRules(drlFile);
-		if (getSubmittedForm() != null) {
-			// Check result
-			Assert.assertEquals(((DroolsSubmittedForm) droolsForm.getDroolsSubmittedForm()).getVariableValue("customVariableResult"), "Hello World");
-		} else {
-			Assert.fail();
-		}
+		Assert.assertNotNull(getSubmittedForm());
+		// Check result
+		Assert.assertEquals(((DroolsSubmittedForm) droolsForm.getDroolsSubmittedForm()).getVariableValue("customVariableResult"), "Hello World");
 	}
 
 	@Test(groups = { "pluginsTest" })
-	public void helloWorldPluginDroolsCallWithParametersTest() throws FileNotFoundException, DroolsRuleExecutionException {
+	public void helloWorldPluginDroolsCallWithParametersTest() throws FileNotFoundException, DroolsRuleExecutionException, UnsupportedEncodingException,
+			DocumentException {
 		String drlFile = FileReader.getResource(DROOLS_EXAMPLE_PLUGIN_DROOLS_FILE, StandardCharsets.UTF_8);
 		// Execution of the rules
 		DroolsForm droolsForm = runDroolsRules(drlFile);
-		if (getSubmittedForm() != null) {
-			// Check result
-			Assert.assertEquals(((DroolsSubmittedForm) droolsForm.getDroolsSubmittedForm()).getVariableValue("customVariableResult"), 8.);
-		} else {
-			Assert.fail();
-		}
+		Assert.assertNotNull(getSubmittedForm());
+		// Check result
+		Assert.assertEquals(((DroolsSubmittedForm) droolsForm.getDroolsSubmittedForm()).getVariableValue("customVariableResult"), 8.);
 	}
 
 	@Test(groups = { "pluginsTest" })
-	public void LiferayArticleDroolsCall() throws FileNotFoundException, DroolsRuleExecutionException {
+	public void LiferayArticleDroolsCall() throws FileNotFoundException, DroolsRuleExecutionException, UnsupportedEncodingException, DocumentException {
 		String drlFile = FileReader.getResource(LIFERAY_PLUGIN_DROOLS_FILE, StandardCharsets.UTF_8);
 		// Execution of the rules
 		runDroolsRules(drlFile);
