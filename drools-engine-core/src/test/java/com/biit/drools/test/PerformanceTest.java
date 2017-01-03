@@ -68,9 +68,13 @@ public class PerformanceTest extends DroolsEngineFormGenerator {
 	 * libraries the first time are loaded.
 	 * 
 	 * @throws FileNotFoundException
+	 *             not desired exception.
 	 * @throws DroolsRuleExecutionException
-	 * @throws DocumentException 
-	 * @throws UnsupportedEncodingException 
+	 *             not desired exception.
+	 * @throws DocumentException
+	 *             not desired exception.
+	 * @throws UnsupportedEncodingException
+	 *             not desired exception.
 	 */
 	@Test(groups = { "performanceTest" }, enabled = true)
 	public void rulesTestPluginRulesLiferayCall() throws FileNotFoundException, DroolsRuleExecutionException, UnsupportedEncodingException, DocumentException {

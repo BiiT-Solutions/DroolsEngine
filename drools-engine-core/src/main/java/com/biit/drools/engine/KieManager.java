@@ -70,9 +70,10 @@ public class KieManager {
 	 * Method in charge of initializing the kie session, set the rules,
 	 * variables and facts and fire the rules
 	 * 
-	 * @param rules
 	 * @param globalVars
+	 *            variables to bused.
 	 * @param facts
+	 *            input values
 	 */
 	public void startKie(List<DroolsGlobalVariable> globalVars, List<ISubmittedForm> facts) {
 		KieRepository kieRepository = kieServices.getRepository();

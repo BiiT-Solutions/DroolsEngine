@@ -18,9 +18,12 @@ public class DroolsRulesEngine {
 	 * @param submittedForm
 	 *            without scores
 	 * @param droolsRules
+	 *            rules to be applied
 	 * @param globalVariables
+	 *            variables to be used.
 	 * @return submittedForm with the scores calculated by drools
 	 * @throws DroolsRuleExecutionException
+	 *             something was wrong.
 	 */
 	public DroolsForm applyDrools(ISubmittedForm submittedForm, String droolsRules, List<DroolsGlobalVariable> globalVariables)
 			throws DroolsRuleExecutionException {
@@ -55,6 +58,9 @@ public class DroolsRulesEngine {
 	 * engine.
 	 * 
 	 * @param form
+	 *            form with the values
+	 * @param kieManager
+	 *            manager to be used.
 	 */
 	private void runDroolsRules(ISubmittedForm form, KieManager kieManager) {
 		if ((form != null) && (kieManager != null)) {

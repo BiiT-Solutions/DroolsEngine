@@ -16,6 +16,7 @@ public class DroolsEngineLogger {
 	 * ...). To follow user actions.
 	 * 
 	 * @param message
+	 *            message to be shown.
 	 */
 	private static void info(String message) {
 		logger.info(message);
@@ -24,6 +25,12 @@ public class DroolsEngineLogger {
 	/**
 	 * Events that have business meaning (i.e. creating category, deleting form,
 	 * ...). To follow user actions.
+	 * 
+	 * @param className
+	 *            class to be logged.
+	 * 
+	 * @param message
+	 *            message to be shown.
 	 */
 	public static void info(String className, String message) {
 		info(className + ": " + message);
@@ -34,6 +41,7 @@ public class DroolsEngineLogger {
 	 * allowed for this user, ...
 	 * 
 	 * @param message
+	 *            message to be shown.
 	 */
 	private static void warning(String message) {
 		logger.warn(message);
@@ -43,7 +51,11 @@ public class DroolsEngineLogger {
 	 * Shows not critical errors. I.e. Email address not found, permissions not
 	 * allowed for this user, ...
 	 * 
+	 * @param className
+	 *            class to be logged.
+	 * 
 	 * @param message
+	 *            message to be shown.
 	 */
 	public static void warning(String className, String message) {
 		warning(className + ": " + message);
@@ -54,6 +66,7 @@ public class DroolsEngineLogger {
 	 * access to a method, opening database connection, etc.
 	 * 
 	 * @param message
+	 *            message to be shown.
 	 */
 	private static void debug(String message) {
 		if (isDebugEnabled()) {
@@ -64,6 +77,12 @@ public class DroolsEngineLogger {
 	/**
 	 * For following the trace of the execution. I.e. Knowing if the application
 	 * access to a method, opening database connection, etc.
+	 * 
+	 * @param className
+	 *            class to be logged.
+	 * 
+	 * @param message
+	 *            message logged.
 	 */
 	public static void debug(String className, String message) {
 		debug(className + ": " + message);
@@ -74,6 +93,7 @@ public class DroolsEngineLogger {
 	 * I.e. couldn't open database connection, etc..
 	 * 
 	 * @param message
+	 *            message to be shown.
 	 */
 	private static void severe(String message) {
 		logger.error(message);
@@ -82,7 +102,12 @@ public class DroolsEngineLogger {
 	/**
 	 * To log any not expected error that can cause application malfuncionality.
 	 * 
+	 * @param className
+	 *            class to be logged.
+	 * 
 	 * @param message
+	 *            message logged.
+	 * 
 	 */
 	public static void severe(String className, String message) {
 		severe(className + ": " + message);
@@ -92,7 +117,9 @@ public class DroolsEngineLogger {
 	 * Used for debugging when accessing to a method.
 	 * 
 	 * @param className
+	 *            class to be logged.
 	 * @param method
+	 *            method logged.
 	 */
 	public static void entering(String className, String method) {
 		debug(className, "ENTRY (" + method + ")");
@@ -102,7 +129,9 @@ public class DroolsEngineLogger {
 	 * Used for debugging when exiting from a method.
 	 * 
 	 * @param className
+	 *            class to be logged.
 	 * @param method
+	 *            method logged.
 	 */
 	public static void exiting(String className, String method) {
 		debug(className, "RETURN (" + method + ")");
@@ -112,7 +141,9 @@ public class DroolsEngineLogger {
 	 * To log java exceptions and log also the stack trace.
 	 * 
 	 * @param className
+	 *            class to be logged.
 	 * @param throwable
+	 *            exception to be logged.
 	 */
 	public static void errorMessage(String className, Throwable throwable) {
 		String error = stackTraceToString(throwable);

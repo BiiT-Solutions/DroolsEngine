@@ -36,6 +36,9 @@ public class CompleteDroolsEngineLogging extends AbstractLogging {
 	/**
 	 * This is the method which I would like to execute before a selected method
 	 * execution.
+	 * 
+	 * @param joinPoint
+	 *            the jointpoint to be used.
 	 */
 	@Before(value = "selectAll() || isAnnotated()")
 	public void beforeAdvice(JoinPoint joinPoint) {
@@ -63,6 +66,9 @@ public class CompleteDroolsEngineLogging extends AbstractLogging {
 
 	/**
 	 * This is the method which I would like to execute when any method returns.
+	 * 
+	 * @param retVal
+	 *            the returned value
 	 */
 	@AfterReturning(pointcut = "selectAll() || isAnnotated()", returning = "retVal")
 	public void afterReturningAdvice(Object retVal) {
@@ -76,6 +82,9 @@ public class CompleteDroolsEngineLogging extends AbstractLogging {
 	/**
 	 * This is the method which I would like to execute if there is an exception
 	 * raised by any method.
+	 * 
+	 * @param ex
+	 *            exception to be logged.
 	 */
 	@AfterThrowing(pointcut = "selectAll() || isAnnotated()", throwing = "ex")
 	public void afterThrowingAdvice(IllegalArgumentException ex) {

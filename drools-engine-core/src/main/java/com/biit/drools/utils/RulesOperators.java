@@ -8,7 +8,8 @@ public class RulesOperators {
 	 * Calculates the maximum of the variables array
 	 * 
 	 * @param variables
-	 * @return
+	 *            input variables.
+	 * @return max value
 	 */
 	public static Double calculateMaxValueFunction(List<Double> variables) {
 		Double max = 0.;
@@ -26,7 +27,8 @@ public class RulesOperators {
 	 * Calculates the minimum of the variables array
 	 * 
 	 * @param variables
-	 * @return
+	 *            input variables.
+	 * @return min value
 	 */
 	public static Double calculateMinValueFunction(List<Double> variables) {
 		if (!variables.isEmpty()) {
@@ -44,7 +46,8 @@ public class RulesOperators {
 	 * Calculates the average of the variables array
 	 * 
 	 * @param variables
-	 * @return
+	 *            input variables.
+	 * @return average value
 	 */
 	public static Double calculateAvgValueFunction(List<Double> variables) {
 		Double avg = 0.;
@@ -62,7 +65,8 @@ public class RulesOperators {
 	 * Concatenate strings.
 	 * 
 	 * @param variables
-	 * @return
+	 *            input variables.
+	 * @return string
 	 */
 	public static String concatenateStringsFunction(List<String> variables) {
 		StringBuilder stringBuilder = new StringBuilder();
@@ -82,7 +86,8 @@ public class RulesOperators {
 	 * Calculates the total sum of the variables array
 	 * 
 	 * @param variables
-	 * @return
+	 *            input variables.
+	 * @return total value
 	 */
 	public static Double calculateSumValueFunction(List<Double> variables) {
 		Double sum = 0.;
@@ -101,7 +106,8 @@ public class RulesOperators {
 	 * interest rate and a constant payment schedule.
 	 * 
 	 * @param variables
-	 * @return
+	 *            input variables.
+	 * @return obtained value
 	 */
 	public static Double calculatePmtValueFunction(List<Double> variables) {
 		Double pmtValue = 0.0;
@@ -127,7 +133,8 @@ public class RulesOperators {
 	 * Second variable of the array is the base.
 	 * 
 	 * @param variables
-	 * @return
+	 *            input variables.
+	 * @return obtained value
 	 */
 	public static Double calculateLogarithmFunction(List<Double> variables) {
 		if (variables != null) {

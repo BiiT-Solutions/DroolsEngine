@@ -84,7 +84,7 @@ public class PluginController {
 	/**
 	 * Returns all the plugins that are loaded
 	 * 
-	 * @return
+	 * @return all available plugins.
 	 */
 	public Collection<IPlugin> getAllPlugins() {
 		if (availablePlugins == null) {
@@ -97,7 +97,8 @@ public class PluginController {
 	 * Returns all the plugins that implement the passed interface
 	 * 
 	 * @param pluginInterface
-	 * @return
+	 *            the interface that defines the plugin.
+	 * @return all available plugins of the selected class.
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Collection<IPlugin> getAllPlugins(Class pluginInterface) {
@@ -110,8 +111,9 @@ public class PluginController {
 	/**
 	 * Returns all the plugins that implement the passed class name
 	 * 
-	 * @param pluginInterface
-	 * @return
+	 * @param interfaceName
+	 *            the interface that defines the plugin.
+	 * @return all available plugins that implements the selected interface.
 	 */
 	public Collection<IPlugin> getAllPlugins(String interfaceName) {
 		return getAllPlugins(getInterfaceClass(interfaceName));
@@ -124,7 +126,8 @@ public class PluginController {
 	 * randomly.
 	 * 
 	 * @param pluginInterface
-	 * @return
+	 *            the interface that defines the plugin.
+	 * @return the plugin
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Plugin getPlugin(Class pluginInterface) {
@@ -138,7 +141,8 @@ public class PluginController {
 	 * randomly.
 	 * 
 	 * @param interfaceName
-	 * @return
+	 *            the interface that defines the plugin.
+	 * @return the plugin.
 	 */
 	public Plugin getPlugin(String interfaceName) {
 		return getPlugin(getInterfaceClass(interfaceName));
@@ -148,8 +152,10 @@ public class PluginController {
 	 * Returns the plugin that matches the interface and the plugin name passed
 	 * 
 	 * @param interfaceName
+	 *            the plugin interface
 	 * @param pluginName
-	 * @return
+	 *            the plugin name
+	 * @return the plugin.
 	 */
 	public IPlugin getPlugin(Class<?> interfaceName, String pluginName) {
 		Collection<IPlugin> plugins = getAllPlugins(interfaceName);
@@ -166,8 +172,10 @@ public class PluginController {
 	 * passed as strings
 	 * 
 	 * @param interfaceName
+	 *            the plugin interface
 	 * @param pluginName
-	 * @return
+	 *            the plugin name
+	 * @return the plugin.
 	 */
 	public IPlugin getPlugin(String interfaceName, String pluginName) {
 		return getPlugin(getInterfaceClass(interfaceName), pluginName);
@@ -179,10 +187,14 @@ public class PluginController {
 	 * invocation.
 	 * 
 	 * @param interfaceName
+	 *            interface of the plugin.
 	 * @param pluginName
+	 *            name of the plugin.
 	 * @param methodName
+	 *            method to be used.
 	 * @param parameters
-	 * @return
+	 *            parameters of the method.
+	 * @return the result of the execution of the plugin method.
 	 */
 	public Object executePluginMethod(Class<?> interfaceName, String pluginName, String methodName, Object... parameters) {
 		try {
@@ -205,10 +217,14 @@ public class PluginController {
 	 * invocation.
 	 * 
 	 * @param interfaceName
+	 *            interface of the plugin.
 	 * @param pluginName
+	 *            name of the plugin.
 	 * @param methodName
+	 *            method to be used.
 	 * @param parameters
-	 * @return
+	 *            parameters of the method.
+	 * @return the result of the execution of the plugin method.
 	 */
 	public Object executePluginMethod(String interfaceName, String pluginName, String methodName, Object... parameters) {
 		return executePluginMethod(getInterfaceClass(interfaceName), pluginName, methodName, parameters);
