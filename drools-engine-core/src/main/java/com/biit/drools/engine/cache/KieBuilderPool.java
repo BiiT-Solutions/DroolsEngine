@@ -5,7 +5,7 @@ import org.kie.api.builder.KieFileSystem;
 import com.biit.utils.pool.SimplePool;
 
 public class KieBuilderPool extends SimplePool<KieFileSystem, PoolableKieBuilder> {
-	private static final long EXPIRATION_TIME = 300000;
+	private static final long EXPIRATION_TIME = 3600000;
 
 	@Override
 	public boolean isDirty(PoolableKieBuilder element) {

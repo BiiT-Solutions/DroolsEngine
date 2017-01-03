@@ -3,7 +3,7 @@ package com.biit.drools.engine.cache;
 import com.biit.utils.pool.SimplePool;
 
 public class KieFileSystemPool extends SimplePool<Integer, PoolableKieFileSystem> {
-	private static final long EXPIRATION_TIME = 300000;
+	private static final long EXPIRATION_TIME = 3600000;
 
 	@Override
 	public boolean isDirty(PoolableKieFileSystem element) {
