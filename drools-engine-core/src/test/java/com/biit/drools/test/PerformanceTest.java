@@ -4,16 +4,15 @@ import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.nio.charset.StandardCharsets;
 
 import org.dom4j.DocumentException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.biit.drools.engine.DroolsRuleFile;
 import com.biit.drools.engine.exceptions.DroolsRuleExecutionException;
 import com.biit.drools.engine.plugins.PluginController;
 import com.biit.plugins.interfaces.IPlugin;
-import com.biit.utils.file.FileReader;
 
 public class PerformanceTest extends DroolsEngineFormGenerator {
 	private final static String DROOLS_RULES_PATH = "rules/droolsRulesFileTest.drl";
@@ -28,7 +27,7 @@ public class PerformanceTest extends DroolsEngineFormGenerator {
 
 	@Test(groups = { "performanceTest" }, enabled = true)
 	public void rulesTestStaticRules() throws DroolsRuleExecutionException, FileNotFoundException, UnsupportedEncodingException, DocumentException {
-		String drlFile = FileReader.getResource(DROOLS_RULES_PATH, StandardCharsets.UTF_8);
+		DroolsRuleFile drlFile = new DroolsRuleFile(DROOLS_RULES_PATH);
 		// Execution of the rules
 		long start_time = System.nanoTime();
 		for (int i = 0; i < RULES_REPETITIONS; i++) {
@@ -52,9 +51,8 @@ public class PerformanceTest extends DroolsEngineFormGenerator {
 			// Calling the hello world plugin with only one call
 			Assert.assertEquals(PluginController.getInstance().executePluginMethod(PLUGIN_INTERFACE, HELLO_WORLD_PLUGIN_NAME, HELLO_WORLD_PLUGIN_METHOD),
 					HELLO_WORLD_PLUGIN_RETURN);
-			String drlFile = FileReader.getResource(HELLO_WORLD_PLUGIN_DROOLS_FILE, StandardCharsets.UTF_8);
 			// Execution of the rules
-			runDroolsRules(drlFile);
+			runDroolsRules(new DroolsRuleFile(HELLO_WORLD_PLUGIN_DROOLS_FILE));
 		}
 		long end_time = System.nanoTime();
 		// Pools (KieBuilderPool and KieFileSystemPool) improves this test from
@@ -80,9 +78,8 @@ public class PerformanceTest extends DroolsEngineFormGenerator {
 	public void rulesTestPluginRulesLiferayCall() throws FileNotFoundException, DroolsRuleExecutionException, UnsupportedEncodingException, DocumentException {
 		long start_time = System.nanoTime();
 		for (int i = 0; i < RULES_REPETITIONS; i++) {
-			String drlFile = FileReader.getResource(LIFERAY_PLUGIN_DROOLS_FILE, StandardCharsets.UTF_8);
 			// Execution of the rules
-			runDroolsRules(drlFile);
+			runDroolsRules(new DroolsRuleFile(LIFERAY_PLUGIN_DROOLS_FILE));
 		}
 		long end_time = System.nanoTime();
 		// Pools (KieBuilderPool and KieFileSystemPool) improves this test from

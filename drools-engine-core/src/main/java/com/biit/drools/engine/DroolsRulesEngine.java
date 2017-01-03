@@ -25,12 +25,12 @@ public class DroolsRulesEngine {
 	 * @throws DroolsRuleExecutionException
 	 *             something was wrong.
 	 */
-	public DroolsForm applyDrools(ISubmittedForm submittedForm, String droolsRules, List<DroolsGlobalVariable> globalVariables)
+	public DroolsForm applyDrools(ISubmittedForm submittedForm, DroolsRuleFile droolsRules, List<DroolsGlobalVariable> globalVariables)
 			throws DroolsRuleExecutionException {
 		DroolsForm droolsForm = null;
 		try {
-			if (droolsRules != null && droolsRules.length() > 0) {
-				DroolsEngineLogger.debug(this.getClass().getName(), droolsRules);
+			if (droolsRules != null && droolsRules.getContent().length() > 0) {
+				DroolsEngineLogger.debug(this.getClass().getName(), droolsRules.getContent());
 				// Launch kie
 				KieManager km = new KieManager();
 				// Load the rules in memory. Takes around the 60% of the

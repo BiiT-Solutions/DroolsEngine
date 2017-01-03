@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 
 import org.dom4j.DocumentException;
 
+import com.biit.drools.engine.DroolsRuleFile;
 import com.biit.drools.engine.DroolsRulesEngine;
 import com.biit.drools.engine.exceptions.DroolsRuleExecutionException;
 import com.biit.drools.engine.importer.OrbeonSubmittedAnswerImporter;
@@ -33,7 +34,7 @@ public class DroolsEngineFormGenerator {
 
 	}
 
-	public DroolsForm runDroolsRules(String drlFile) throws DroolsRuleExecutionException, UnsupportedEncodingException, FileNotFoundException,
+	public DroolsForm runDroolsRules(DroolsRuleFile drlFile) throws DroolsRuleExecutionException, UnsupportedEncodingException, FileNotFoundException,
 			DocumentException {
 		// Generate the drools rules.
 		createSubmittedForm();
