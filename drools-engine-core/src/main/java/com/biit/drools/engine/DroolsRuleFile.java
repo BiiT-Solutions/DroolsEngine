@@ -9,11 +9,14 @@ public class DroolsRuleFile {
 
 	private String resourceName;
 
-	private transient String content;
+	private String content;
 
 	public DroolsRuleFile(String resourceName) throws FileNotFoundException {
 		this.resourceName = resourceName;
 		content = FileReader.getResource(resourceName, StandardCharsets.UTF_8);
+	}
+
+	public DroolsRuleFile() {
 	}
 
 	public String getResourceName() {
@@ -22,6 +25,10 @@ public class DroolsRuleFile {
 
 	public String getContent() {
 		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 }

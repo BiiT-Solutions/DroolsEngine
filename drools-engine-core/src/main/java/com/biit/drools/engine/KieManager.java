@@ -56,7 +56,7 @@ public class KieManager {
 		facts = listOfFacts;
 	}
 
-	public void buildSessionRules(DroolsRuleFile rules) {
+	public void buildSessionRules(String rules) {
 		kieServices = KieServices.Factory.get();
 		KieFileSystem kieFileSystem = getKieFileSystem(rules);
 		build(kieServices, kieFileSystem);
@@ -85,10 +85,10 @@ public class KieManager {
 		kieServicesession.dispose();
 	}
 
-	private void createRules(KieFileSystem kieFileSystem, DroolsRuleFile rules) {
+	private void createRules(KieFileSystem kieFileSystem, String rules) {
 		// Needs a virtual path to store the file and retrieve it
 		// Can't load the string directly
-		kieFileSystem.write("src/main/resources/kiemodulemodel/form.drl", rules.getContent());
+		kieFileSystem.write("src/main/resources/kiemodulemodel/form.drl", rules);
 	}
 
 	private void build(KieServices kieServices, KieFileSystem kieFileSystem) {
@@ -108,7 +108,7 @@ public class KieManager {
 	 * @param rules
 	 * @return
 	 */
-	private KieFileSystem getKieFileSystem(DroolsRuleFile rules) {
+	private KieFileSystem getKieFileSystem(String rules) {
 		int rulesId = getRulesId(rules);
 		if (kieFileSystemPool.getElement(rulesId) == null) {
 			KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
@@ -147,7 +147,7 @@ public class KieManager {
 		}
 	};
 
-	private int getRulesId(DroolsRuleFile rules) {
-		return rules.getResourceName().hashCode();
+	private int getRulesId(String rules) {
+		return rules.hashCode();
 	}
 }

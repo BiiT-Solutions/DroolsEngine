@@ -2,15 +2,16 @@ package com.biit.drools.test;
 
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 import org.dom4j.DocumentException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.biit.drools.engine.DroolsRuleFile;
 import com.biit.drools.engine.exceptions.DroolsRuleExecutionException;
 import com.biit.drools.form.DroolsForm;
 import com.biit.drools.form.DroolsSubmittedForm;
+import com.biit.utils.file.FileReader;
 
 /**
  * Tests the rule loading from a static file<br>
@@ -22,8 +23,9 @@ public class DroolsEngineRulesTest extends DroolsEngineFormGenerator {
 
 	@Test(groups = { "droolsEngineRules" })
 	public void rulesTest() throws DroolsRuleExecutionException, FileNotFoundException, UnsupportedEncodingException, DocumentException {
+		String drlFile = FileReader.getResource(DROOLS_RULES_PATH, StandardCharsets.UTF_8);
 		// Execution of the rules
-		DroolsForm droolsForm = runDroolsRules(new DroolsRuleFile(DROOLS_RULES_PATH));
+		DroolsForm droolsForm = runDroolsRules(drlFile);
 		Assert.assertNotNull(getSubmittedForm());
 		Assert.assertNotNull(droolsForm);
 		// Check result
