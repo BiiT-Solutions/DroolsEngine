@@ -3,10 +3,10 @@
 	<test name="AbcdTest" enabled="true" preserve-order="true">
 		<groups>
 			<run>
-				<exclude name="droolsEngineRules" />
-				<exclude name="gson" />
-				<exclude name="pluginsTest" />
-				<include name="performanceTest" />
+				<include name="droolsEngineRules" />
+				<include name="gson" />
+				<include name="pluginsTest" />
+				<exclude name="performanceTest" />
 			</run>
 		</groups>
 		<classes>

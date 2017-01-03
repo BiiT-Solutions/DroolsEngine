@@ -11,6 +11,10 @@ import org.kie.api.builder.Message.Level;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
+import com.biit.drools.engine.cache.KieBuilderPool;
+import com.biit.drools.engine.cache.KieFileSystemPool;
+import com.biit.drools.engine.cache.PoolableKieBuilder;
+import com.biit.drools.engine.cache.PoolableKieFileSystem;
 import com.biit.drools.global.variables.DroolsGlobalVariable;
 import com.biit.drools.logger.DroolsEngineLogger;
 import com.biit.form.submitted.ISubmittedForm;
@@ -20,6 +24,14 @@ public class KieManager {
 	private List<DroolsGlobalVariable> globalVariables;
 	private List<ISubmittedForm> facts;
 	private KieServices kieServices;
+
+	private static KieBuilderPool kieBuilderPool;
+	private static KieFileSystemPool kieFileSystemPool;
+
+	static {
+		kieFileSystemPool = new KieFileSystemPool();
+		kieBuilderPool = new KieBuilderPool();
+	}
 
 	public KieManager() {
 		globalVariables = new ArrayList<DroolsGlobalVariable>();
@@ -61,9 +73,13 @@ public class KieManager {
 	 * @return
 	 */
 	private KieFileSystem createKieFileSystem(String rules) {
-		KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
-		createRules(kieFileSystem, rules);
-		return kieFileSystem;
+		int rulesId = getRulesId(rules);
+		if (kieFileSystemPool.getElement(rulesId) == null) {
+			KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
+			createRules(kieFileSystem, rules);
+			kieFileSystemPool.addElement(new PoolableKieFileSystem(rulesId, kieFileSystem));
+		}
+		return kieFileSystemPool.getElement(rulesId).getKieFileSystem();
 	}
 
 	/**
@@ -93,13 +109,21 @@ public class KieManager {
 	private void build(KieServices kieServices, KieFileSystem kieFileSystem) {
 		// Build and deploy the new information. Creating a KiedBuilder is a
 		// fast operation that is not necessary to cache.
-		KieBuilder kiebuilder = kieServices.newKieBuilder(kieFileSystem);
+		// KieBuilder kiebuilder = kieServices.newKieBuilder(kieFileSystem);
+		KieBuilder kiebuilder = getKieBuilder(kieServices, kieFileSystem);
+
 		kiebuilder.buildAll(); // kieModule is automatically deployed to
-								// KieRepository
-		// if successfully built.
+								// KieRepository if successfully built.
 		if (kiebuilder.getResults().hasMessages(Level.ERROR)) {
 			throw new RuntimeException("Build Errors:\n" + kiebuilder.getResults().toString());
 		}
+	}
+
+	private KieBuilder getKieBuilder(KieServices kieServices, KieFileSystem kieFileSystem) {
+		if (kieBuilderPool.getElement(kieFileSystem) == null) {
+			kieBuilderPool.addElement(new PoolableKieBuilder(kieFileSystem, kieServices.newKieBuilder(kieFileSystem)));
+		}
+		return kieBuilderPool.getElement(kieFileSystem).getKieBuilder();
 	}
 
 	// Insert global variables in the drools session

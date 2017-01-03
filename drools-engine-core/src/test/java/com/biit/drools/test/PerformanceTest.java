@@ -24,7 +24,7 @@ public class PerformanceTest extends DroolsEngineFormGenerator {
 	private final static String HELLO_WORLD_PLUGIN_DROOLS_FILE = "rules/helloWorldPlugin.drl";
 	private final static String LIFERAY_PLUGIN_DROOLS_FILE = "rules/USMO Appendix_v1.drl";
 
-	@Test(groups = { "performanceTest" })
+	@Test(groups = { "performanceTest" }, enabled = true)
 	public void rulesTestStaticRules() throws DroolsRuleExecutionException, FileNotFoundException {
 		String drlFile = FileReader.getResource(DROOLS_RULES_PATH, StandardCharsets.UTF_8);
 		// Execution of the rules
@@ -33,10 +33,12 @@ public class PerformanceTest extends DroolsEngineFormGenerator {
 			runDroolsRules(drlFile);
 		}
 		long end_time = System.nanoTime();
+		// Pools (KieBuilderPool and KieFileSystemPool) improves this test from
+		// 16s to 6s.
 		System.out.println("############### Total Drools Execution: " + ((double) end_time - start_time) / 1e6);
 	}
 
-	@Test(groups = { "performanceTest" }, enabled = false)
+	@Test(groups = { "performanceTest" }, enabled = true)
 	public void rulesTestPluginRules() throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
 			FileNotFoundException, DroolsRuleExecutionException {
 		// Calling the first plugin
@@ -53,6 +55,8 @@ public class PerformanceTest extends DroolsEngineFormGenerator {
 			runDroolsRules(drlFile);
 		}
 		long end_time = System.nanoTime();
+		// Pools (KieBuilderPool and KieFileSystemPool) improves this test from
+		// 14s to 7s.
 		System.out.println("############### Total Simple Plugin: " + ((double) end_time - start_time) / 1e6);
 	}
 
@@ -64,7 +68,7 @@ public class PerformanceTest extends DroolsEngineFormGenerator {
 	 * @throws FileNotFoundException
 	 * @throws DroolsRuleExecutionException
 	 */
-	@Test(groups = { "performanceTest" }, enabled = false)
+	@Test(groups = { "performanceTest" }, enabled = true)
 	public void rulesTestPluginRulesLiferayCall() throws FileNotFoundException, DroolsRuleExecutionException {
 		long start_time = System.nanoTime();
 		for (int i = 0; i < RULES_REPETITIONS; i++) {
@@ -73,6 +77,8 @@ public class PerformanceTest extends DroolsEngineFormGenerator {
 			runDroolsRules(drlFile);
 		}
 		long end_time = System.nanoTime();
+		// Pools (KieBuilderPool and KieFileSystemPool) improves this test from
+		// 12s to 6s.
 		System.out.println("############### Total Liferay Plugin: " + ((double) end_time - start_time) / 1e6);
 	}
 }
