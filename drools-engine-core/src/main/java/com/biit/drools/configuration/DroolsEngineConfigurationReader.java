@@ -14,9 +14,15 @@ public class DroolsEngineConfigurationReader extends ConfigurationReader {
 	private static final String DEFAULT_PLUGINS_PATH = "plugins/";
 	private static final String DROOLS_SYSTEM_VARIABLE_CONFIG = "DROOLS_CONFIG";
 
+	private static final String POOL_EXPIRATION_TIME = "drools.group.pool.expiration";
+
+	// Default
+	private static final String DEFAULT_EXPIRATION_TIME = "3600000";
+
 	private DroolsEngineConfigurationReader() {
 		super();
 		addProperty(PLUGINS_PATH_PROPERTY_NAME, DEFAULT_PLUGINS_PATH);
+		addProperty(POOL_EXPIRATION_TIME, DEFAULT_EXPIRATION_TIME);
 		addPropertiesSource(new PropertiesSourceFile(DATABASE_CONFIG_FILE));
 		addPropertiesSource(new SystemVariablePropertiesSourceFile(DROOLS_SYSTEM_VARIABLE_CONFIG, DATABASE_CONFIG_FILE));
 		readConfigurations();
@@ -45,5 +51,13 @@ public class DroolsEngineConfigurationReader extends ConfigurationReader {
 
 	public String getPluginsPath() {
 		return getProperty(PLUGINS_PATH_PROPERTY_NAME);
+	}
+
+	public Long getPoolExpirationTime() {
+		try {
+			return Long.parseLong(getProperty(POOL_EXPIRATION_TIME));
+		} catch (Exception e) {
+			return Long.parseLong(DEFAULT_EXPIRATION_TIME);
+		}
 	}
 }
