@@ -2,10 +2,10 @@ package com.biit.drools.engine.cache;
 
 import org.kie.api.builder.KieFileSystem;
 
+import com.biit.drools.configuration.DroolsEngineConfigurationReader;
 import com.biit.utils.pool.SimplePool;
 
 public class KieBuilderPool extends SimplePool<KieFileSystem, PoolableKieBuilder> {
-	private static final long EXPIRATION_TIME = 3600000;
 
 	@Override
 	public boolean isDirty(PoolableKieBuilder element) {
@@ -14,7 +14,7 @@ public class KieBuilderPool extends SimplePool<KieFileSystem, PoolableKieBuilder
 
 	@Override
 	public long getExpirationTime() {
-		return EXPIRATION_TIME;
+		return DroolsEngineConfigurationReader.getInstance().getPoolExpirationTime();
 	}
 
 }
