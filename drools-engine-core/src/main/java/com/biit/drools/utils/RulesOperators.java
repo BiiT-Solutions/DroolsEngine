@@ -13,7 +13,7 @@ public class RulesOperators {
 	 */
 	public static Double calculateMaxValueFunction(List<Double> variables) {
 		Double max = 0.;
-		if (!variables.isEmpty()) {
+		if (variables != null && !variables.isEmpty()) {
 			for (Double variable : variables) {
 				max = Math.max(max, variable);
 			}
@@ -31,7 +31,7 @@ public class RulesOperators {
 	 * @return min value
 	 */
 	public static Double calculateMinValueFunction(List<Double> variables) {
-		if (!variables.isEmpty()) {
+		if (variables != null && !variables.isEmpty()) {
 			Double min = 10000000.;
 			for (Double variable : variables) {
 				min = Math.min(min, variable);
@@ -51,7 +51,7 @@ public class RulesOperators {
 	 */
 	public static Double calculateAvgValueFunction(List<Double> variables) {
 		Double avg = 0.;
-		if (!variables.isEmpty()) {
+		if (variables != null && !variables.isEmpty()) {
 			for (Double variable : variables) {
 				avg += variable;
 			}
@@ -70,7 +70,7 @@ public class RulesOperators {
 	 */
 	public static String concatenateStringsFunction(List<String> variables) {
 		StringBuilder stringBuilder = new StringBuilder();
-		if (!variables.isEmpty()) {
+		if (variables != null && !variables.isEmpty()) {
 			for (String variable : variables) {
 				if (variable != null) {
 					stringBuilder.append(variable);
@@ -91,7 +91,7 @@ public class RulesOperators {
 	 */
 	public static Double calculateSumValueFunction(List<Double> variables) {
 		Double sum = 0.;
-		if (!variables.isEmpty()) {
+		if (variables != null && !variables.isEmpty()) {
 			for (Double variable : variables) {
 				sum += variable;
 			}
@@ -111,7 +111,7 @@ public class RulesOperators {
 	 */
 	public static Double calculatePmtValueFunction(List<Double> variables) {
 		Double pmtValue = 0.0;
-		if (!variables.isEmpty()) {
+		if (variables != null && !variables.isEmpty()) {
 			if (variables.size() == 3) {
 				double rate = variables.get(0);
 				double term = variables.get(1);
