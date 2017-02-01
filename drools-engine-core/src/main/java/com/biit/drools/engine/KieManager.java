@@ -19,6 +19,7 @@ import com.biit.drools.global.variables.DroolsGlobalVariable;
 import com.biit.drools.logger.DroolsEngineLogger;
 import com.biit.form.submitted.ISubmittedForm;
 import com.biit.logger.BiitPoolLogger;
+import com.biit.persistence.utils.IdGenerator;
 
 public class KieManager {
 
@@ -89,7 +90,7 @@ public class KieManager {
 	private void createRules(KieFileSystem kieFileSystem, String rules) {
 		// Needs a virtual path to store the file and retrieve it
 		// Can't load the string directly
-		kieFileSystem.write("src/main/resources/kiemodulemodel/form.drl", rules);
+		kieFileSystem.write("src/main/resources/kiemodulemodel/form_" + IdGenerator.createId() + ".drl", rules);
 	}
 
 	private void build(KieServices kieServices, KieFileSystem kieFileSystem) {
