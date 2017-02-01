@@ -11,14 +11,9 @@ import org.kie.api.builder.Message.Level;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
-import com.biit.drools.engine.cache.KieBuilderPool;
-import com.biit.drools.engine.cache.KieFileSystemPool;
-import com.biit.drools.engine.cache.PoolableKieBuilder;
-import com.biit.drools.engine.cache.PoolableKieFileSystem;
 import com.biit.drools.global.variables.DroolsGlobalVariable;
 import com.biit.drools.logger.DroolsEngineLogger;
 import com.biit.form.submitted.ISubmittedForm;
-import com.biit.logger.BiitPoolLogger;
 import com.biit.persistence.utils.IdGenerator;
 
 public class KieManager {
@@ -26,14 +21,6 @@ public class KieManager {
 	private List<DroolsGlobalVariable> globalVariables;
 	private List<ISubmittedForm> facts;
 	private KieServices kieServices;
-
-	private static KieBuilderPool kieBuilderPool;
-	private static KieFileSystemPool kieFileSystemPool;
-
-	static {
-		kieFileSystemPool = new KieFileSystemPool();
-		kieBuilderPool = new KieBuilderPool();
-	}
 
 	public KieManager() {
 		globalVariables = new ArrayList<DroolsGlobalVariable>();
@@ -114,29 +101,13 @@ public class KieManager {
 	 * @return
 	 */
 	private KieFileSystem getKieFileSystem(String rules, int id) {
-		if (kieFileSystemPool.getElement(id) == null) {
-			BiitPoolLogger.debug(this.getClass(), "KieFileSystem '" + id + "' cache miss.");
-			KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
-			createRules(kieFileSystem, rules);
-			PoolableKieFileSystem poolableKieFileSystem = new PoolableKieFileSystem(id, kieFileSystem);
-			kieFileSystemPool.addElement(poolableKieFileSystem);
-			return poolableKieFileSystem.getKieFileSystem();
-		} else {
-			BiitPoolLogger.debug(this.getClass(), "KieFileSystem '" + id + "' cache hit!");
-		}
-		return kieFileSystemPool.getElement(id).getKieFileSystem();
+		KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
+		createRules(kieFileSystem, rules);
+		return kieFileSystem;
 	}
 
 	private KieBuilder getKieBuilder(KieServices kieServices, KieFileSystem kieFileSystem, int id) {
-		if (kieBuilderPool.getElement(id) == null) {
-			BiitPoolLogger.debug(this.getClass(), "KieBuilder for '" + kieFileSystem + "' cache miss.");
-			PoolableKieBuilder poolableKieBuilder = new PoolableKieBuilder(id, kieServices.newKieBuilder(kieFileSystem));
-			kieBuilderPool.addElement(poolableKieBuilder);
-			return poolableKieBuilder.getKieBuilder();
-		} else {
-			BiitPoolLogger.debug(this.getClass(), "KieBuilder for '" + kieFileSystem + "' cache hit!");
-		}
-		return kieBuilderPool.getElement(id).getKieBuilder();
+		return kieServices.newKieBuilder(kieFileSystem);
 	}
 
 	// Insert global variables in the drools session
