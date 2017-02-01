@@ -115,7 +115,9 @@ public class KieManager {
 			BiitPoolLogger.debug(this.getClass(), "KieFileSystem '" + rulesId + "' cache miss.");
 			KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
 			createRules(kieFileSystem, rules);
-			kieFileSystemPool.addElement(new PoolableKieFileSystem(rulesId, kieFileSystem));
+			PoolableKieFileSystem poolableKieFileSystem = new PoolableKieFileSystem(rulesId, kieFileSystem);
+			kieFileSystemPool.addElement(poolableKieFileSystem);
+			return poolableKieFileSystem.getKieFileSystem();
 		} else {
 			BiitPoolLogger.debug(this.getClass(), "KieFileSystem '" + rulesId + "' cache hit!");
 		}
@@ -125,7 +127,9 @@ public class KieManager {
 	private KieBuilder getKieBuilder(KieServices kieServices, KieFileSystem kieFileSystem) {
 		if (kieBuilderPool.getElement(kieFileSystem) == null) {
 			BiitPoolLogger.debug(this.getClass(), "KieBuilder for '" + kieFileSystem + "' cache miss.");
-			kieBuilderPool.addElement(new PoolableKieBuilder(kieFileSystem, kieServices.newKieBuilder(kieFileSystem)));
+			PoolableKieBuilder poolableKieBuilder = new PoolableKieBuilder(kieFileSystem, kieServices.newKieBuilder(kieFileSystem));
+			kieBuilderPool.addElement(poolableKieBuilder);
+			return poolableKieBuilder.getKieBuilder();
 		} else {
 			BiitPoolLogger.debug(this.getClass(), "KieBuilder for '" + kieFileSystem + "' cache hit!");
 		}
