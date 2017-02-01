@@ -1,22 +1,21 @@
 package com.biit.drools.engine.cache;
 
 import org.kie.api.builder.KieBuilder;
-import org.kie.api.builder.KieFileSystem;
 
 import com.biit.utils.pool.PoolElement;
 
-public class PoolableKieBuilder implements PoolElement<KieFileSystem> {
+public class PoolableKieBuilder implements PoolElement<Integer> {
 
-	private KieFileSystem id;
+	private Integer id;
 	private KieBuilder kieBuilder;
 
-	public PoolableKieBuilder(KieFileSystem id, KieBuilder kieBuilder) {
+	public PoolableKieBuilder(Integer id, KieBuilder kieBuilder) {
 		this.id = id;
 		this.kieBuilder = kieBuilder;
 	}
 
 	@Override
-	public KieFileSystem getId() {
+	public Integer getId() {
 		return id;
 	}
 
