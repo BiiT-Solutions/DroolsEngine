@@ -18,6 +18,7 @@ import com.biit.drools.engine.cache.PoolableKieFileSystem;
 import com.biit.drools.global.variables.DroolsGlobalVariable;
 import com.biit.drools.logger.DroolsEngineLogger;
 import com.biit.form.submitted.ISubmittedForm;
+import com.biit.logger.BiitPoolLogger;
 
 public class KieManager {
 
@@ -75,10 +76,10 @@ public class KieManager {
 	 * @param facts
 	 *            input values
 	 */
-	public void startKie(List<DroolsGlobalVariable> globalVars, List<ISubmittedForm> facts) {
+	private void startKie(List<DroolsGlobalVariable> globalVars, List<ISubmittedForm> facts) {
 		KieRepository kieRepository = kieServices.getRepository();
-		KieContainer kContainer = kieServices.newKieContainer(kieRepository.getDefaultReleaseId());
-		KieSession kieServicesession = kContainer.newKieSession();
+		KieContainer kieContainer = kieServices.newKieContainer(kieRepository.getDefaultReleaseId());
+		KieSession kieServicesession = kieContainer.newKieSession();
 		setEngineGlobalVariables(kieServicesession, globalVars);
 		insertFacts(kieServicesession, facts);
 		kieServicesession.fireAllRules();
@@ -111,16 +112,22 @@ public class KieManager {
 	private KieFileSystem getKieFileSystem(String rules) {
 		int rulesId = getRulesId(rules);
 		if (kieFileSystemPool.getElement(rulesId) == null) {
+			BiitPoolLogger.debug(this.getClass(), "KieFileSystem '" + rulesId + "' cache miss.");
 			KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
 			createRules(kieFileSystem, rules);
 			kieFileSystemPool.addElement(new PoolableKieFileSystem(rulesId, kieFileSystem));
+		} else {
+			BiitPoolLogger.debug(this.getClass(), "KieFileSystem '" + rulesId + "' cache hit!");
 		}
 		return kieFileSystemPool.getElement(rulesId).getKieFileSystem();
 	}
 
 	private KieBuilder getKieBuilder(KieServices kieServices, KieFileSystem kieFileSystem) {
 		if (kieBuilderPool.getElement(kieFileSystem) == null) {
+			BiitPoolLogger.debug(this.getClass(), "KieBuilder for '" + kieFileSystem + "' cache miss.");
 			kieBuilderPool.addElement(new PoolableKieBuilder(kieFileSystem, kieServices.newKieBuilder(kieFileSystem)));
+		} else {
+			BiitPoolLogger.debug(this.getClass(), "KieBuilder for '" + kieFileSystem + "' cache hit!");
 		}
 		return kieBuilderPool.getElement(kieFileSystem).getKieBuilder();
 	}

@@ -58,7 +58,7 @@ public class DroolsRulesEngine {
 	 * engine.
 	 * 
 	 * @param form
-	 *            form with the values
+	 *            form with the values. Also has the drools returned results. 
 	 * @param kieManager
 	 *            manager to be used.
 	 */
