@@ -7,18 +7,17 @@ import com.biit.utils.configuration.SystemVariablePropertiesSourceFile;
 import com.biit.utils.configuration.exceptions.PropertyNotFoundException;
 
 public class DroolsEngineConfigurationReader extends ConfigurationReader {
-
-	private static final String DATABASE_CONFIG_FILE = "settings.conf";
-	private static DroolsEngineConfigurationReader instance;
+	private static final String CONFIG_FILE = "settings.conf";
 	private static final String PLUGINS_PATH_PROPERTY_NAME = "pluginsPath";
 	private static final String DEFAULT_PLUGINS_PATH = "plugins/";
 	private static final String DROOLS_SYSTEM_VARIABLE_CONFIG = "DROOLS_CONFIG";
+	private static DroolsEngineConfigurationReader instance;
 
 	private DroolsEngineConfigurationReader() {
 		super();
 		addProperty(PLUGINS_PATH_PROPERTY_NAME, DEFAULT_PLUGINS_PATH);
-		addPropertiesSource(new PropertiesSourceFile(DATABASE_CONFIG_FILE));
-		addPropertiesSource(new SystemVariablePropertiesSourceFile(DROOLS_SYSTEM_VARIABLE_CONFIG, DATABASE_CONFIG_FILE));
+		addPropertiesSource(new PropertiesSourceFile(CONFIG_FILE));
+		addPropertiesSource(new SystemVariablePropertiesSourceFile(DROOLS_SYSTEM_VARIABLE_CONFIG, CONFIG_FILE));
 		readConfigurations();
 	}
 
