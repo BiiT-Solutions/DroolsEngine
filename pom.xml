@@ -24,13 +24,6 @@
 			<url>https://git.biit-solutions.com:8443/artifactory/libs-snapshot</url>
 		</snapshotRepository>
 	</distributionManagement>
-	
-	<repositories>
-        <repository>
-            <id>JBoss repository</id>
-            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
-        </repository>
-    </repositories>
 
 	<scm>
 		<connection>scm:git:git.biit-solutions.com:DroolsEngine.git</connection>
