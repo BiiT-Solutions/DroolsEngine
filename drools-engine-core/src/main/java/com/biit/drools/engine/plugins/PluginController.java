@@ -54,11 +54,9 @@ public class PluginController {
 	public void scanForPlugins() {
 		String folderToScan = DroolsEngineConfigurationReader.getInstance().getPluginsPath();
 		DroolsEngineLogger.debug(this.getClass().getName(), "Scanning folder '" + folderToScan + "' for plugins.");
-		// If too short, plugin library launch
-		// Caused by: java.lang.StringIndexOutOfBoundsException: String index
-		// out of range: 4
-		// at java.lang.String.substring(String.java:1907)
-		// at
+		// If too short, plugin library launch Caused by:
+		// java.lang.StringIndexOutOfBoundsException: String index out of range:
+		// 4 at java.lang.String.substring(String.java:1907) at
 		// net.xeoh.plugins.base.impl.classpath.loader.FileLoader.loadFrom(FileLoader.java:83)
 		if (folderToScan != null && folderToScan.length() > 4) {
 			pluginManager.addPluginsFrom(new File(folderToScan).toURI());

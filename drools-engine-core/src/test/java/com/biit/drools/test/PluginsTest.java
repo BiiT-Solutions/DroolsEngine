@@ -36,6 +36,7 @@ public class PluginsTest extends DroolsEngineFormGenerator {
 	public void helloWorldPluginSelectionTest1() throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		// Calling the first plugin
 		IPlugin pluginInterface = PluginController.getInstance().getPlugin(PLUGIN_INTERFACE, HELLO_WORLD_PLUGIN_NAME);
+		Assert.assertNotNull(pluginInterface);
 		Method method = ((IPlugin) pluginInterface).getPluginMethod(HELLO_WORLD_PLUGIN_METHOD);
 		Assert.assertEquals(method.invoke(pluginInterface), HELLO_WORLD_PLUGIN_RETURN);
 	}
