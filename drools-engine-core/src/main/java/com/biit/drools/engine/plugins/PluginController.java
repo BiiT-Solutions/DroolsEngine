@@ -199,10 +199,12 @@ public class PluginController {
 			DroolsEngineLogger.debug(this.getClass().getName(), "Executing '" + methodName + "' with parameters '" + Arrays.toString(parameters) + "'.");
 			IPlugin pluginInterface = getPlugin(interfaceName, pluginName);
 			return pluginInterface.executeMethod(methodName, parameters);
-
 		} catch (IllegalArgumentException | NoMethodFoundException | InvalidMethodParametersException | MethodInvocationException e) {
-			DroolsEngineLogger.severe(this.getClass().getName(), "No plugin method found '" + methodName + "' with parameters '" + Arrays.toString(parameters)
-					+ "'.");
+			StringBuilder sb = new StringBuilder();
+			for (Object parameter : parameters) {
+				sb.append(parameter + " (" + parameter.getClass().getName() + ")");
+			}
+			DroolsEngineLogger.severe(this.getClass().getName(), "No plugin method found '" + methodName + "' with parameters '" + sb.toString() + "'.");
 			DroolsEngineLogger.errorMessage(this.getClass().getName(), e);
 			e.printStackTrace();
 		}
