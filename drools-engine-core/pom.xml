@@ -67,7 +67,7 @@
 		</dependency>
 		<!-- Plugin Manager -->
 		<dependency>
-			<groupId>com.biit.plugins</groupId>
+			<groupId>com.biit</groupId>
 			<artifactId>plugin-manager</artifactId>
 			<version>${plugin-manager.version}</version>
 		</dependency>
