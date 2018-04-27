@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.biit</groupId>
 		<artifactId>drools-engine</artifactId>
-		<version>0.3.34-SNAPSHOT</version>
+		<version>0.3.42-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
@@ -67,7 +67,7 @@
 		</dependency>
 		<!-- Plugin Manager -->
 		<dependency>
-			<groupId>com.biit.plugins</groupId>
+			<groupId>com.biit</groupId>
 			<artifactId>plugin-manager</artifactId>
 			<version>${plugin-manager.version}</version>
 		</dependency>

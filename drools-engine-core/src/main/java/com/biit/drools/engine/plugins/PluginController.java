@@ -54,11 +54,9 @@ public class PluginController {
 	public void scanForPlugins() {
 		String folderToScan = DroolsEngineConfigurationReader.getInstance().getPluginsPath();
 		DroolsEngineLogger.debug(this.getClass().getName(), "Scanning folder '" + folderToScan + "' for plugins.");
-		// If too short, plugin library launch
-		// Caused by: java.lang.StringIndexOutOfBoundsException: String index
-		// out of range: 4
-		// at java.lang.String.substring(String.java:1907)
-		// at
+		// If too short, plugin library launch Caused by:
+		// java.lang.StringIndexOutOfBoundsException: String index out of range:
+		// 4 at java.lang.String.substring(String.java:1907) at
 		// net.xeoh.plugins.base.impl.classpath.loader.FileLoader.loadFrom(FileLoader.java:83)
 		if (folderToScan != null && folderToScan.length() > 4) {
 			pluginManager.addPluginsFrom(new File(folderToScan).toURI());
@@ -201,10 +199,12 @@ public class PluginController {
 			DroolsEngineLogger.debug(this.getClass().getName(), "Executing '" + methodName + "' with parameters '" + Arrays.toString(parameters) + "'.");
 			IPlugin pluginInterface = getPlugin(interfaceName, pluginName);
 			return pluginInterface.executeMethod(methodName, parameters);
-
 		} catch (IllegalArgumentException | NoMethodFoundException | InvalidMethodParametersException | MethodInvocationException e) {
-			DroolsEngineLogger.severe(this.getClass().getName(), "No plugin method found '" + methodName + "' with parameters '" + Arrays.toString(parameters)
-					+ "'.");
+			StringBuilder sb = new StringBuilder();
+			for (Object parameter : parameters) {
+				sb.append(parameter + " (" + parameter.getClass().getName() + ")");
+			}
+			DroolsEngineLogger.severe(this.getClass().getName(), "No plugin method found '" + methodName + "' with parameters '" + sb.toString() + "'.");
 			DroolsEngineLogger.errorMessage(this.getClass().getName(), e);
 			e.printStackTrace();
 		}
