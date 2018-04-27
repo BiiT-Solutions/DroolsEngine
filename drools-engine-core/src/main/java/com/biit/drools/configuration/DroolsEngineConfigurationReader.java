@@ -1,10 +1,13 @@
 package com.biit.drools.configuration;
 
+import java.nio.file.Path;
+
 import com.biit.drools.logger.DroolsEngineLogger;
 import com.biit.utils.configuration.ConfigurationReader;
 import com.biit.utils.configuration.PropertiesSourceFile;
 import com.biit.utils.configuration.SystemVariablePropertiesSourceFile;
 import com.biit.utils.configuration.exceptions.PropertyNotFoundException;
+import com.biit.utils.file.watcher.FileWatcher.FileModifiedListener;
 
 public class DroolsEngineConfigurationReader extends ConfigurationReader {
 	private static final String CONFIG_FILE = "settings.conf";
@@ -16,8 +19,30 @@ public class DroolsEngineConfigurationReader extends ConfigurationReader {
 	private DroolsEngineConfigurationReader() {
 		super();
 		addProperty(PLUGINS_PATH_PROPERTY_NAME, DEFAULT_PLUGINS_PATH);
-		addPropertiesSource(new PropertiesSourceFile(CONFIG_FILE));
-		addPropertiesSource(new SystemVariablePropertiesSourceFile(DROOLS_SYSTEM_VARIABLE_CONFIG, CONFIG_FILE));
+	
+		PropertiesSourceFile sourceFile = new PropertiesSourceFile(CONFIG_FILE);
+		sourceFile.addFileModifiedListeners(new FileModifiedListener() {
+
+			@Override
+			public void changeDetected(Path pathToFile) {
+				DroolsEngineLogger.info(this.getClass().getName(), "WAR settings file '" + pathToFile + "' change detected.");
+				readConfigurations();
+			}
+		});
+		addPropertiesSource(sourceFile);
+		
+		SystemVariablePropertiesSourceFile systemSourceFile = new SystemVariablePropertiesSourceFile(DROOLS_SYSTEM_VARIABLE_CONFIG, CONFIG_FILE);
+		systemSourceFile.addFileModifiedListeners(new FileModifiedListener() {
+
+			@Override
+			public void changeDetected(Path pathToFile) {
+				DroolsEngineLogger.info(this.getClass().getName(), "System variable settings file '" + pathToFile + "' change detected.");
+				readConfigurations();
+			}
+		});
+		addPropertiesSource(systemSourceFile);
+		
+		
 		readConfigurations();
 	}
 
