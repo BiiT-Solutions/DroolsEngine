@@ -3,6 +3,8 @@ package com.biit.drools.engine;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.biit.drools.engine.exceptions.DroolsRuleExecutionException;
 import com.biit.drools.form.DroolsForm;
 import com.biit.drools.global.variables.DroolsGlobalVariable;
@@ -10,6 +12,7 @@ import com.biit.drools.logger.DroolsEngineLogger;
 import com.biit.form.submitted.ISubmittedForm;
 import com.biit.form.submitted.implementation.SubmittedForm;
 
+@Component
 public class DroolsRulesEngine {
 
 	/**
@@ -58,7 +61,7 @@ public class DroolsRulesEngine {
 	 * engine.
 	 * 
 	 * @param form
-	 *            form with the values. Also has the drools returned results. 
+	 *            form with the values. Also has the drools returned results.
 	 * @param kieManager
 	 *            manager to be used.
 	 */

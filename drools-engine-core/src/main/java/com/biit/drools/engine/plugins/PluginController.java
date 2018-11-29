@@ -1,18 +1,24 @@
 package com.biit.drools.engine.plugins;
 
 import java.io.File;
+import java.io.FilenameFilter;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import net.xeoh.plugins.base.Plugin;
-import net.xeoh.plugins.base.PluginManager;
-import net.xeoh.plugins.base.impl.PluginManagerFactory;
-import net.xeoh.plugins.base.util.PluginManagerUtil;
+import org.pf4j.DefaultPluginManager;
+import org.pf4j.JarPluginLoader;
+import org.pf4j.ManifestPluginDescriptorFinder;
+import org.pf4j.PluginDescriptorFinder;
+import org.pf4j.PluginLoader;
+import org.pf4j.PluginManager;
 
 import com.biit.drools.configuration.DroolsEngineConfigurationReader;
 import com.biit.drools.logger.DroolsEngineLogger;
+import com.biit.plugins.BasePlugin;
 import com.biit.plugins.exceptions.InvalidMethodParametersException;
 import com.biit.plugins.exceptions.MethodInvocationException;
 import com.biit.plugins.exceptions.NoMethodFoundException;
@@ -25,9 +31,8 @@ import com.biit.plugins.interfaces.IPlugin;
 public class PluginController {
 	private static PluginController instance = new PluginController();
 	private PluginManager pluginManager;
-	private PluginManagerUtil pluginManagerUtil;
-	private Collection<IPlugin> availablePlugins;
-	private Map<Class<?>, Collection<IPlugin>> pluginsByName;
+	private Collection<BasePlugin> availablePlugins;
+	private Map<Class<?>, Collection<BasePlugin>> pluginsByClass;
 
 	public static PluginController getInstance() {
 		return instance;
@@ -42,25 +47,43 @@ public class PluginController {
 	}
 
 	private PluginController() {
-		pluginManager = PluginManagerFactory.createPluginManager();
-		pluginManagerUtil = new PluginManagerUtil(pluginManager);
-		pluginsByName = new HashMap<>();
-		scanForPlugins();
-	}
-
-	/**
-	 * Scans for new plugins in the specified path of the configuration file.
-	 */
-	public void scanForPlugins() {
+		// create the plugin manager
 		String folderToScan = DroolsEngineConfigurationReader.getInstance().getPluginsPath();
 		DroolsEngineLogger.debug(this.getClass().getName(), "Scanning folder '" + folderToScan + "' for plugins.");
-		// If too short, plugin library launch Caused by:
-		// java.lang.StringIndexOutOfBoundsException: String index out of range:
-		// 4 at java.lang.String.substring(String.java:1907) at
-		// net.xeoh.plugins.base.impl.classpath.loader.FileLoader.loadFrom(FileLoader.java:83)
-		if (folderToScan != null && folderToScan.length() > 4) {
-			pluginManager.addPluginsFrom(new File(folderToScan).toURI());
-		}
+		pluginManager = new DefaultPluginManager(Paths.get(folderToScan)) {
+
+			@Override
+			protected PluginLoader createPluginLoader() {
+				// load only jar plugins
+				return new JarPluginLoader(this);
+			}
+
+			@Override
+			protected PluginDescriptorFinder createPluginDescriptorFinder() {
+				// read plugin descriptor from jar's manifest
+				return new ManifestPluginDescriptorFinder();
+			}
+		};
+
+		pluginsByClass = new HashMap<>();
+		// start and load all plugins of application
+		pluginManager.loadPlugins();
+		pluginManager.startPlugins();
+
+		List<IPlugin> greetings = pluginManager.getExtensions(IPlugin.class);
+		System.out.println("#~############################## " + greetings.size());
+		System.out.println(greetings.get(0).getClass());
+		System.out.println(String.format("Found %d extensions for extension point '%s'", greetings.size(), IPlugin.class.getName()));
+	}
+
+	private File[] getAllJars(String folderToScan) {
+		File dir = new File(folderToScan);
+		return dir.listFiles(new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String name) {
+				return name.endsWith(".jar");
+			}
+		});
 	}
 
 	public boolean existsPlugins() {
@@ -84,9 +107,9 @@ public class PluginController {
 	 * 
 	 * @return all available plugins.
 	 */
-	public Collection<IPlugin> getAllPlugins() {
+	public Collection<BasePlugin> getAllPlugins() {
 		if (availablePlugins == null) {
-			availablePlugins = pluginManagerUtil.getPlugins(IPlugin.class);
+			availablePlugins = pluginManager.getExtensions(BasePlugin.class);
 		}
 		return availablePlugins;
 	}
@@ -99,11 +122,11 @@ public class PluginController {
 	 * @return all available plugins of the selected class.
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public Collection<IPlugin> getAllPlugins(Class pluginInterface) {
-		if (pluginsByName.get(pluginInterface) == null) {
-			pluginsByName.put(pluginInterface, pluginManagerUtil.getPlugins(pluginInterface));
+	public Collection<BasePlugin> getAllPlugins(Class pluginInterface) {
+		if (pluginsByClass.get(pluginInterface) == null) {
+			pluginsByClass.put(pluginInterface, pluginManager.getExtensions(pluginInterface));
 		}
-		return pluginsByName.get(pluginInterface);
+		return pluginsByClass.get(pluginInterface);
 	}
 
 	/**
@@ -113,7 +136,7 @@ public class PluginController {
 	 *            the interface that defines the plugin.
 	 * @return all available plugins that implements the selected interface.
 	 */
-	public Collection<IPlugin> getAllPlugins(String interfaceName) {
+	public Collection<BasePlugin> getAllPlugins(String interfaceName) {
 		return getAllPlugins(getInterfaceClass(interfaceName));
 	}
 
@@ -127,9 +150,8 @@ public class PluginController {
 	 *            the interface that defines the plugin.
 	 * @return the plugin
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public Plugin getPlugin(Class pluginInterface) {
-		return pluginManagerUtil.getPlugin(pluginInterface);
+	public IPlugin getPlugin(Class<?> pluginInterface) {
+		return getAllPlugins(pluginInterface).iterator().next();
 	}
 
 	/**
@@ -142,7 +164,7 @@ public class PluginController {
 	 *            the interface that defines the plugin.
 	 * @return the plugin.
 	 */
-	public Plugin getPlugin(String interfaceName) {
+	public IPlugin getPlugin(String interfaceName) {
 		return getPlugin(getInterfaceClass(interfaceName));
 	}
 
@@ -156,7 +178,7 @@ public class PluginController {
 	 * @return the plugin.
 	 */
 	public IPlugin getPlugin(Class<?> interfaceName, String pluginName) {
-		Collection<IPlugin> plugins = getAllPlugins(interfaceName);
+		Collection<BasePlugin> plugins = getAllPlugins(interfaceName);
 		for (IPlugin plugin : plugins) {
 			if (plugin.getPluginName().equals(pluginName)) {
 				return plugin;

@@ -9,7 +9,6 @@ import com.biit.drools.form.*
 import com.biit.orbeon.form.* 
 import com.biit.drools.utils.* 
 import com.biit.drools.engine.plugins.PluginController 
-import net.xeoh.plugins.base.Plugin 
 import com.biit.plugins.interfaces.IPlugin 
 import java.lang.reflect.Method 
 import com.biit.drools.logger.DroolsEngineLogger 
@@ -36,7 +35,7 @@ when
 	$droolsForm: DroolsForm()
 	$formform : DroolsSubmittedForm() from $droolsForm.getDroolsSubmittedForm() 
 then
-	Object callResult = PluginController.getInstance().executePluginMethod('com.biit.plugins.interfaces.IPlugin', 'HelloWorld', 'methodHelloWorld');
+	Object callResult = PluginController.getInstance().executePluginMethod('com.biit.plugins.interfaces.IPlugin', 'hello-world', 'methodHelloWorld');
 	$formform.setVariableValue('customVariableResult', callResult);
 	DroolsEngineLogger.debug("DroolsRule", "Variable set (form, customVariableResult, callResult)");
 end
