@@ -11,7 +11,12 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.biit.drools.engine.exceptions.DroolsRuleExecutionException;
-import com.biit.drools.engine.plugins.PluginController;
+import com.biit.plugins.PluginController;
+import com.biit.plugins.exceptions.DuplicatedPluginFoundException;
+import com.biit.plugins.exceptions.InvalidMethodParametersException;
+import com.biit.plugins.exceptions.MethodInvocationException;
+import com.biit.plugins.exceptions.NoMethodFoundException;
+import com.biit.plugins.exceptions.NoPluginFoundException;
 import com.biit.plugins.interfaces.IPlugin;
 import com.biit.utils.file.FileReader;
 
@@ -19,7 +24,6 @@ public class PerformanceTest extends DroolsEngineFormGenerator {
 	private final static String DROOLS_RULES_PATH = "rules/droolsRulesFileTest.drl";
 	private final static int RULES_REPETITIONS = 100;
 
-	private final static Class<?> PLUGIN_INTERFACE = com.biit.plugins.interfaces.IPlugin.class;
 	private final static String HELLO_WORLD_PLUGIN_NAME = "HelloWorld";
 	private final static String HELLO_WORLD_PLUGIN_RETURN = "Hello World";
 	private final static String HELLO_WORLD_PLUGIN_METHOD = "methodHelloWorld";
@@ -42,15 +46,16 @@ public class PerformanceTest extends DroolsEngineFormGenerator {
 
 	@Test(groups = { "performanceTest" }, enabled = true)
 	public void rulesTestPluginRules() throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
-			FileNotFoundException, DroolsRuleExecutionException, UnsupportedEncodingException, DocumentException {
+			FileNotFoundException, DroolsRuleExecutionException, UnsupportedEncodingException, DocumentException, NoPluginFoundException,
+			DuplicatedPluginFoundException, NoMethodFoundException, InvalidMethodParametersException, MethodInvocationException {
 		// Calling the first plugin
 		long start_time = System.nanoTime();
 		for (int i = 0; i < RULES_REPETITIONS; i++) {
-			IPlugin pluginInterface = PluginController.getInstance().getPlugin(PLUGIN_INTERFACE, HELLO_WORLD_PLUGIN_NAME);
+			IPlugin pluginInterface = PluginController.getInstance().<IPlugin> getPlugin(IPlugin.class, HELLO_WORLD_PLUGIN_NAME);
 			Method method = ((IPlugin) pluginInterface).getPluginMethod(HELLO_WORLD_PLUGIN_METHOD);
 			Assert.assertEquals(method.invoke(pluginInterface), HELLO_WORLD_PLUGIN_RETURN);
 			// Calling the hello world plugin with only one call
-			Assert.assertEquals(PluginController.getInstance().executePluginMethod(PLUGIN_INTERFACE, HELLO_WORLD_PLUGIN_NAME, HELLO_WORLD_PLUGIN_METHOD),
+			Assert.assertEquals(PluginController.getInstance().executePluginMethod(IPlugin.class, HELLO_WORLD_PLUGIN_NAME, HELLO_WORLD_PLUGIN_METHOD),
 					HELLO_WORLD_PLUGIN_RETURN);
 			String drlFile = FileReader.getResource(HELLO_WORLD_PLUGIN_DROOLS_FILE, StandardCharsets.UTF_8);
 			// Execution of the rules

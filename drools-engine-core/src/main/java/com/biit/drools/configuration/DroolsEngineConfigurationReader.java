@@ -11,14 +11,12 @@ import com.biit.utils.file.watcher.FileWatcher.FileModifiedListener;
 
 public class DroolsEngineConfigurationReader extends ConfigurationReader {
 	private static final String CONFIG_FILE = "settings.conf";
-	private static final String PLUGINS_PATH_PROPERTY_NAME = "drools.plugins.path";
-	private static final String DEFAULT_PLUGINS_PATH = "plugins/";
 	private static final String DROOLS_SYSTEM_VARIABLE_CONFIG = "DROOLS_CONFIG";
 	private static DroolsEngineConfigurationReader instance;
 
 	private DroolsEngineConfigurationReader() {
 		super();
-		addProperty(PLUGINS_PATH_PROPERTY_NAME, DEFAULT_PLUGINS_PATH);
+	
 	
 		PropertiesSourceFile sourceFile = new PropertiesSourceFile(CONFIG_FILE);
 		sourceFile.addFileModifiedListeners(new FileModifiedListener() {
@@ -67,7 +65,4 @@ public class DroolsEngineConfigurationReader extends ConfigurationReader {
 		}
 	}
 
-	public String getPluginsPath() {
-		return getProperty(PLUGINS_PATH_PROPERTY_NAME);
-	}
 }

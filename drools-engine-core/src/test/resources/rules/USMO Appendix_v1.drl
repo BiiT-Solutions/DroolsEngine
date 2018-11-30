@@ -8,7 +8,7 @@ import com.biit.form.submitted.*
 import com.biit.drools.form.* 
 import com.biit.orbeon.form.* 
 import com.biit.drools.utils.* 
-import com.biit.drools.engine.plugins.PluginController 
+import com.biit.plugins.PluginController
 import com.biit.plugins.interfaces.IPlugin 
 import java.lang.reflect.Method 
 import com.biit.drools.logger.DroolsEngineLogger 
@@ -33,7 +33,7 @@ when
 	$droolsForm: DroolsForm()
 	$formUSMOAppendix : DroolsSubmittedForm() from $droolsForm.getDroolsSubmittedForm() 
 then
-	Object callResult = PluginController.getInstance().executePluginMethod('com.biit.plugins.interfaces.IPlugin', 'LiferayKnowledgeBasePlugin', 'methodGetLatestArticleContentByProperty', 'Appendix-Antropometrie');
+	Object callResult = PluginController.getInstance().executePluginMethod(IPlugin.class, 'liferay-article', 'methodGetLatestArticleContentByProperty', 'Appendix-Antropometrie');
 	$formUSMOAppendix.setVariableValue('KB-Antropometrie-Text', callResult);
 	DroolsEngineLogger.debug("DroolsRule", "Variable set (form, KB-Antropometrie-Text, callResult)");
 end

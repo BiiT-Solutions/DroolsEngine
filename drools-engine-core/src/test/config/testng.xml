@@ -3,9 +3,10 @@
 	<test name="AbcdTest" enabled="true" preserve-order="true">
 		<groups>
 			<run>
-				<exclude name="droolsEngineRules" />
-				<exclude name="gson" />
+				<include name="droolsEngineRules" />
+				<include name="gson" />
 				<include name="pluginsTest" />
+				<include name="liferayPluginsTest" />
 				<exclude name="performanceTest" />
 			</run>
 		</groups>
@@ -13,6 +14,7 @@
 			<class name="com.biit.drools.test.DroolsEngineRulesTest" />
 			<class name="com.biit.drools.test.GlobalVariablesSerializerTest" />
 			<class name="com.biit.drools.test.PluginsTest" />
+			<class name="com.biit.drools.test.LiferayPluginsTest" />
 			<class name="com.biit.drools.test.PerformanceTest" />
 		</classes>
 	</test>
