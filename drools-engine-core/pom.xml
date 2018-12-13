@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>com.biit</groupId>
 		<artifactId>drools-engine</artifactId>
-		<version>0.5.2-SNAPSHOT</version>
+		<version>0.5.4-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
@@ -46,6 +46,12 @@
 			<groupId>com.biit</groupId>
 			<artifactId>form-structure-submitted</artifactId>
 			<version>${form-structure-submitted.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.biit</groupId>
+			<artifactId>rest-generic-client</artifactId>
+			<version>${rest-generic-client.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<!-- Drools Form -->
 		<dependency>

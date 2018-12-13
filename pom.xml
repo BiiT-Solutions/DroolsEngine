@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.biit</groupId>
 	<artifactId>drools-engine</artifactId>
-	<version>0.5.2-SNAPSHOT</version>
+	<version>0.5.4-SNAPSHOT</version>
 	<name>BiiT Drools Engine</name>
 	<packaging>pom</packaging>
 
@@ -52,6 +52,7 @@
 		<form-structure-drools.version>[0.2,0.3)</form-structure-drools.version>
 		<form-structure-orbeon.version>[0.4,0.5)</form-structure-orbeon.version>
 		<plugin-manager.version>[0.2,0.3)</plugin-manager.version>
+		<rest-generic-client.version>[0.0, 0.1)</rest-generic-client.version>
 	</properties>
 
 	<dependencies>
