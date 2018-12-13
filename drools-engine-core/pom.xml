@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>drools-engine-core</artifactId>
 	<name>Drools Engine Core</name>
@@ -52,17 +53,18 @@
 			<artifactId>form-structure-drools</artifactId>
 			<version>${form-structure-drools.version}</version>
 		</dependency>
-		<!-- Orbeon form -->
-		<dependency>
-			<groupId>com.biit</groupId>
-			<artifactId>form-structure-orbeon</artifactId>
-			<version>${form-structure-orbeon.version}</version>
-		</dependency>
 		<!-- Testing -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>${org.testng.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- Orbeon form -->
+		<dependency>
+			<groupId>com.biit</groupId>
+			<artifactId>form-structure-orbeon</artifactId>
+			<version>${form-structure-orbeon.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- Plugin Manager -->
