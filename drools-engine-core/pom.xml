@@ -46,6 +46,12 @@
 			<artifactId>form-structure-submitted</artifactId>
 			<version>${form-structure-submitted.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.biit</groupId>
+			<artifactId>rest-generic-client</artifactId>
+			<version>${rest-generic-client.version}</version>
+			<scope>test</scope>
+		</dependency>
 		<!-- Drools Form -->
 		<dependency>
 			<groupId>com.biit</groupId>

@@ -86,7 +86,7 @@ public class PluginsTest extends DroolsEngineFormGenerator {
 	@Test
 	public void checkLoadedPluginsByClass() {
 		List<IPlugin> plugins = pluginManager.getExtensions(IPlugin.class);
-		Assert.assertEquals(plugins.size(), 3);
+		Assert.assertEquals(plugins.size(), 4);
 	}
 
 	@Test

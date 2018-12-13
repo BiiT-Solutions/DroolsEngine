@@ -8,12 +8,14 @@
 				<include name="pluginsTest" />
 				<include name="liferayPluginsTest" />
 				<exclude name="performanceTest" />
+				<include name="kafkaPluginsTest" />
 			</run>
 		</groups>
 		<classes>
 			<class name="com.biit.drools.test.DroolsEngineRulesTest" />
 			<class name="com.biit.drools.test.GlobalVariablesSerializerTest" />
 			<class name="com.biit.drools.test.PluginsTest" />
+			<class name="com.biit.drools.test.KafkaPluginsTest" />
 			<class name="com.biit.drools.test.LiferayPluginsTest" />
 			<class name="com.biit.drools.test.PerformanceTest" />
 		</classes>
