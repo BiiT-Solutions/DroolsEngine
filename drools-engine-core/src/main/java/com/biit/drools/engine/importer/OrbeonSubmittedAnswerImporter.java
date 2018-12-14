@@ -11,7 +11,6 @@ import com.biit.form.submitted.ISubmittedObject;
 import com.biit.form.submitted.ISubmittedQuestion;
 import com.biit.orbeon.OrbeonImporter;
 
-
 /**
  * Reads data from Orbeon Form.
  */
