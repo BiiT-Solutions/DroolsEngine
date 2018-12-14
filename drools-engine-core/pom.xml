@@ -70,7 +70,7 @@
 			<groupId>com.biit</groupId>
 			<artifactId>form-structure-orbeon</artifactId>
 			<version>${form-structure-orbeon.version}</version>
-			<scope>test</scope>
+			<!-- <scope>test</scope> -->
 		</dependency>
 		<!-- Plugin Manager -->
 		<dependency>
