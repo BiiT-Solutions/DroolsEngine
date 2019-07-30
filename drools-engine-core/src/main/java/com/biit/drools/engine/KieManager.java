@@ -80,7 +80,7 @@ public class KieManager {
 		try {
 			if (DroolsEngineLogger.isDebugEnabled()) {
 				kieLogger = kieServices.getLoggers().newFileLogger(kieServicesession,
-						Files.createTempFile("DroolsAudit", ".log").toString());
+						Files.createTempFile("DroolsAudit", ".log").toString(), 0);
 			}
 		} catch (IOException e) {
 			DroolsEngineLogger.errorMessage(this.getClass().getName(), e);
