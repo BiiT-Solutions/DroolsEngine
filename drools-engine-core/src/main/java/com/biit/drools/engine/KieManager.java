@@ -1,5 +1,7 @@
 package com.biit.drools.engine;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,10 +10,12 @@ import org.kie.api.builder.KieBuilder;
 import org.kie.api.builder.KieFileSystem;
 import org.kie.api.builder.KieRepository;
 import org.kie.api.builder.Message.Level;
+import org.kie.api.logger.KieRuntimeLogger;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
 import com.biit.drools.global.variables.DroolsGlobalVariable;
+import com.biit.drools.logger.DroolRuleListenerLogger;
 import com.biit.drools.logger.DroolsEngineLogger;
 import com.biit.form.submitted.ISubmittedForm;
 import com.biit.persistence.utils.IdGenerator;
@@ -59,13 +63,11 @@ public class KieManager {
 	}
 
 	/**
-	 * Method in charge of initializing the kie session, set the rules,
-	 * variables and facts and fire the rules
+	 * Method in charge of initializing the kie session, set the rules, variables
+	 * and facts and fire the rules
 	 * 
-	 * @param globalVars
-	 *            variables to bused.
-	 * @param facts
-	 *            input values
+	 * @param globalVars variables to bused.
+	 * @param facts      input values
 	 */
 	private void startKie(List<DroolsGlobalVariable> globalVars, List<ISubmittedForm> facts) {
 		KieRepository kieRepository = kieServices.getRepository();
@@ -73,8 +75,21 @@ public class KieManager {
 		KieSession kieServicesession = kieContainer.newKieSession();
 		setEngineGlobalVariables(kieServicesession, globalVars);
 		insertFacts(kieServicesession, facts);
+		kieServicesession.addEventListener(new DroolRuleListenerLogger());
+		KieRuntimeLogger kieLogger = null;
+		try {
+			if (DroolsEngineLogger.isDebugEnabled()) {
+				kieLogger = kieServices.getLoggers().newFileLogger(kieServicesession,
+						Files.createTempFile("DroolsAudit", ".log").toString());
+			}
+		} catch (IOException e) {
+			DroolsEngineLogger.errorMessage(this.getClass().getName(), e);
+		}
 		kieServicesession.fireAllRules();
 		kieServicesession.dispose();
+		if (kieLogger != null) {
+			kieLogger.close();
+		}
 	}
 
 	private void createRules(KieFileSystem kieFileSystem, String rules) {
@@ -113,13 +128,14 @@ public class KieManager {
 	// Insert global variables in the drools session
 	private void setEngineGlobalVariables(KieSession kieServicesession, List<DroolsGlobalVariable> globalVariables) {
 		for (DroolsGlobalVariable droolsGlobalVariable : globalVariables) {
-			DroolsEngineLogger.debug(this.getClass().getName(), "Adding global variable '" + droolsGlobalVariable.getName() + "' with value '"
-					+ droolsGlobalVariable.getValue() + "'.");
+			DroolsEngineLogger.debug(this.getClass().getName(), "Adding global variable '"
+					+ droolsGlobalVariable.getName() + "' with value '" + droolsGlobalVariable.getValue() + "'.");
 			try {
 				kieServicesession.setGlobal(droolsGlobalVariable.getName(), droolsGlobalVariable.getValue());
 			} catch (Exception e) {
-				DroolsEngineLogger.severe(this.getClass().getName(), "Global variable '" + droolsGlobalVariable.getName() + "' with value '"
-						+ droolsGlobalVariable.getValue() + "' failed!");
+				DroolsEngineLogger.severe(this.getClass().getName(),
+						"Global variable '" + droolsGlobalVariable.getName() + "' with value '"
+								+ droolsGlobalVariable.getValue() + "' failed!");
 				DroolsEngineLogger.errorMessage(this.getClass().getName(), e);
 			}
 		}
