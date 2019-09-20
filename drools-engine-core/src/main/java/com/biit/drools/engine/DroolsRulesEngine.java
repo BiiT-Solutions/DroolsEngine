@@ -18,22 +18,18 @@ public class DroolsRulesEngine {
 	/**
 	 * Method for executing the drools rules
 	 * 
-	 * @param submittedForm
-	 *            without scores
-	 * @param droolsRules
-	 *            rules to be applied
-	 * @param globalVariables
-	 *            variables to be used.
+	 * @param submittedForm   without scores
+	 * @param droolsRules     rules to be applied
+	 * @param globalVariables variables to be used.
 	 * @return submittedForm with the scores calculated by drools
-	 * @throws DroolsRuleExecutionException
-	 *             something was wrong.
+	 * @throws DroolsRuleExecutionException something was wrong.
 	 */
-	public DroolsForm applyDrools(ISubmittedForm submittedForm, String droolsRules, List<DroolsGlobalVariable> globalVariables)
-			throws DroolsRuleExecutionException {
+	public DroolsForm applyDrools(ISubmittedForm submittedForm, String droolsRules,
+			List<DroolsGlobalVariable> globalVariables) throws DroolsRuleExecutionException {
 		DroolsForm droolsForm = null;
 		try {
 			if (droolsRules != null && droolsRules.length() > 0) {
-				DroolsEngineLogger.debug(this.getClass().getName(), droolsRules);
+				DroolsEngineLogger.debug(this.getClass().getName(), "Rules launched:\n" + droolsRules);
 				// Launch kie
 				KieManager km = new KieManager();
 				// Load the rules in memory. Takes around the 60% of the
@@ -60,10 +56,8 @@ public class DroolsRulesEngine {
 	 * It also starts the engine execution by firing all the rules inside the
 	 * engine.
 	 * 
-	 * @param form
-	 *            form with the values. Also has the drools returned results.
-	 * @param kieManager
-	 *            manager to be used.
+	 * @param form       form with the values. Also has the drools returned results.
+	 * @param kieManager manager to be used.
 	 */
 	private void runDroolsRules(ISubmittedForm form, KieManager kieManager) {
 		if ((form != null) && (kieManager != null)) {

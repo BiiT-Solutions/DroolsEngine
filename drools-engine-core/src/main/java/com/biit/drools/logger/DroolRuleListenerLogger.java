@@ -9,6 +9,6 @@ public class DroolRuleListenerLogger extends DefaultAgendaEventListener {
 	@Override
 	public void afterMatchFired(AfterMatchFiredEvent event) {
 		Rule rule = event.getMatch().getRule();
-		DroolsEngineLogger.debug(this.getClass().getName(), "Rule fired '" + rule.getName() + "'.");
+		DroolsRulesLogger.debug(this.getClass().getName(), "Rule fired '" + rule.getName() + "'.");
 	}
 }
