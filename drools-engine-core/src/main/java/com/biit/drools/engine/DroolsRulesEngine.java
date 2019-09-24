@@ -9,6 +9,7 @@ import com.biit.drools.engine.exceptions.DroolsRuleExecutionException;
 import com.biit.drools.form.DroolsForm;
 import com.biit.drools.global.variables.DroolsGlobalVariable;
 import com.biit.drools.logger.DroolsEngineLogger;
+import com.biit.drools.logger.DroolsRulesLogger;
 import com.biit.form.submitted.ISubmittedForm;
 import com.biit.form.submitted.implementation.SubmittedForm;
 
@@ -29,7 +30,7 @@ public class DroolsRulesEngine {
 		DroolsForm droolsForm = null;
 		try {
 			if (droolsRules != null && droolsRules.length() > 0) {
-				DroolsEngineLogger.debug(this.getClass().getName(), "Rules launched:\n" + droolsRules);
+				DroolsRulesLogger.debug(this.getClass().getName(), "Rules launched:\n" + droolsRules);
 				// Launch kie
 				KieManager km = new KieManager();
 				// Load the rules in memory. Takes around the 60% of the
