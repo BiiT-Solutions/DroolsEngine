@@ -8,7 +8,7 @@
 				<include name="pluginsTest" />
 				<include name="liferayPluginsTest" />
 				<exclude name="performanceTest" />
-				<include name="kafkaPluginsTest" />
+				<exclude name="kafkaPluginsTest" />
 			</run>
 		</groups>
 		<classes>
