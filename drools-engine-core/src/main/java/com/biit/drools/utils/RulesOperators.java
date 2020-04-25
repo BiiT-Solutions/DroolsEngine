@@ -7,8 +7,7 @@ public class RulesOperators {
 	/**
 	 * Calculates the maximum of the variables array
 	 * 
-	 * @param variables
-	 *            input variables.
+	 * @param variables input variables.
 	 * @return max value
 	 */
 	public static Double calculateMaxValueFunction(List<Double> variables) {
@@ -26,8 +25,7 @@ public class RulesOperators {
 	/**
 	 * Calculates the minimum of the variables array
 	 * 
-	 * @param variables
-	 *            input variables.
+	 * @param variables input variables.
 	 * @return min value
 	 */
 	public static Double calculateMinValueFunction(List<Double> variables) {
@@ -45,8 +43,7 @@ public class RulesOperators {
 	/**
 	 * Calculates the average of the variables array
 	 * 
-	 * @param variables
-	 *            input variables.
+	 * @param variables input variables.
 	 * @return average value
 	 */
 	public static Double calculateAvgValueFunction(List<Double> variables) {
@@ -64,8 +61,7 @@ public class RulesOperators {
 	/**
 	 * Concatenate strings.
 	 * 
-	 * @param variables
-	 *            input variables.
+	 * @param variables input variables.
 	 * @return string
 	 */
 	public static String concatenateStringsFunction(List<String> variables) {
@@ -82,11 +78,14 @@ public class RulesOperators {
 		return stringBuilder.toString();
 	}
 
+	public static String concatenateStringsSeaparatedFunction(List<String> variables) {
+		return String.join(",", variables);
+	}
+
 	/**
 	 * Calculates the total sum of the variables array
 	 * 
-	 * @param variables
-	 *            input variables.
+	 * @param variables input variables.
 	 * @return total value
 	 */
 	public static Double calculateSumValueFunction(List<Double> variables) {
@@ -105,8 +104,7 @@ public class RulesOperators {
 	 * Calculates how much your monthly payment would be on a loan based on an
 	 * interest rate and a constant payment schedule.
 	 * 
-	 * @param variables
-	 *            input variables.
+	 * @param variables input variables.
 	 * @return obtained value
 	 */
 	public static Double calculatePmtValueFunction(List<Double> variables) {
@@ -132,8 +130,7 @@ public class RulesOperators {
 	 * First variable of the array is the number.<br>
 	 * Second variable of the array is the base.
 	 * 
-	 * @param variables
-	 *            input variables.
+	 * @param variables input variables.
 	 * @return obtained value
 	 */
 	public static Double calculateLogarithmFunction(List<Double> variables) {
