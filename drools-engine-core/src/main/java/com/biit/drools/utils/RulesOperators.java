@@ -3,6 +3,8 @@ package com.biit.drools.utils;
 import java.util.List;
 
 public class RulesOperators {
+	private final static String DEFAULT_CONCAT_SEPARATOR = ", ";
+	private final static int MAX_CONCAT_SEPARATOR_LENGTH = 3;
 
 	/**
 	 * Calculates the maximum of the variables array
@@ -65,6 +67,8 @@ public class RulesOperators {
 	 * @return string
 	 */
 	public static String concatenateStringsFunction(List<String> variables) {
+		while (variables.remove(null)) {
+		}
 		StringBuilder stringBuilder = new StringBuilder();
 		if (variables != null && !variables.isEmpty()) {
 			for (String variable : variables) {
@@ -79,7 +83,18 @@ public class RulesOperators {
 	}
 
 	public static String concatenateStringsSeaparatedFunction(List<String> variables) {
-		return String.join(", ", variables);
+		while (variables.remove(null)) {
+
+		}
+		if (variables.size() <= 1) {
+			return String.join(DEFAULT_CONCAT_SEPARATOR, variables);
+		}
+		// First element is a separator?
+		if (variables.get(0).length() > MAX_CONCAT_SEPARATOR_LENGTH) {
+			return String.join(DEFAULT_CONCAT_SEPARATOR, variables);
+		}
+		String separator = variables.remove(0);
+		return String.join(separator, variables);
 	}
 
 	/**
