@@ -79,7 +79,7 @@ public class RulesOperators {
 	}
 
 	public static String concatenateStringsSeaparatedFunction(List<String> variables) {
-		return String.join(",", variables);
+		return String.join(", ", variables);
 	}
 
 	/**
