@@ -4,7 +4,7 @@ import java.util.List;
 
 public class RulesOperators {
 	private final static String DEFAULT_CONCAT_SEPARATOR = ", ";
-	private final static int MAX_CONCAT_SEPARATOR_LENGTH = 3;
+	private final static int MAX_CONCAT_SEPARATOR_LENGTH = 1;
 
 	/**
 	 * Calculates the maximum of the variables array
