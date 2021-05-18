@@ -27,7 +27,7 @@
 
 	<scm>
 		<connection>scm:git:git.biit-solutions.com:BiiT/DroolsEngine.git</connection>
-		<connection>scm:git:git.biit-solutions.com:BiiT/DroolsEngine.git</developerConnection>
+		<developerConnection>scm:git:git.biit-solutions.com:BiiT/DroolsEngine.git</developerConnection>
 		<tag>drools-engine</tag>
 	</scm>
 
