@@ -5,10 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Abstract class to provide basic logging capabilities to logging advises.
@@ -16,7 +16,7 @@ import org.aspectj.lang.annotation.Aspect;
 @Aspect
 public abstract class AbstractLogging {
 	// Logger specialized for each subclass.
-	protected final Log logger = LogFactory.getLog(this.getClass());
+	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * Method used for logging the name of the target class, parameters and the

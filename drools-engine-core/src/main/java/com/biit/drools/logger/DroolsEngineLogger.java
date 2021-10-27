@@ -1,12 +1,14 @@
 package com.biit.drools.logger;
 
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * Defines basic log behavior. Uses log4j.properties.
+ * Defines basic log behavior.
  */
 public class DroolsEngineLogger {
-	private static final Logger logger = Logger.getLogger(DroolsEngineLogger.class);
+	private static final Logger logger = LoggerFactory.getLogger(DroolsEngineLogger.class);
 
 	private DroolsEngineLogger() {
 	}
