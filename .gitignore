@@ -17,5 +17,6 @@ pom.xml.versionsBackup
 pom.xml.releaseBackup
 release.properties
 /target/
-/target/
-/target/
+.idea
+*.iml
+*.log

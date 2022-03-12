@@ -1,123 +1,115 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<artifactId>drools-engine-core</artifactId>
-	<name>Drools Engine Core</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>drools-engine-core</artifactId>
+    <name>Drools Engine Core</name>
 
-	<parent>
-		<groupId>com.biit</groupId>
-		<artifactId>drools-engine</artifactId>
-		<version>1.0.3-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>com.biit</groupId>
+        <artifactId>drools-engine</artifactId>
+        <version>1.0.3-SNAPSHOT</version>
+    </parent>
 
-	<dependencies>
-		<!-- Drools Engine Interfaces -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>drools-engine-interfaces</artifactId>
-			<version>${project.version}</version>
-			<type>jar</type>
-		</dependency>
-		<!-- Drools -->
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-core</artifactId>
-			<version>${drools.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-compiler</artifactId>
-			<version>${drools.version}</version>
-		</dependency>
-		<!-- Basic From Structure -->
-		<dependency>
-			<groupId>com.biit</groupId>
-			<artifactId>form-structure</artifactId>
-			<version>${form-structure.version}</version>
-		</dependency>
-		<!-- Submitted Form -->
-		<dependency>
-			<groupId>com.biit</groupId>
-			<artifactId>form-structure-submitted</artifactId>
-			<version>${form-structure-submitted.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.biit</groupId>
-			<artifactId>rest-generic-client</artifactId>
-			<version>${rest-generic-client.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- Drools Form -->
-		<dependency>
-			<groupId>com.biit</groupId>
-			<artifactId>form-structure-drools</artifactId>
-			<version>${form-structure-drools.version}</version>
-		</dependency>
-		<!-- Testing -->
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>${org.testng.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- Orbeon form -->
-		<dependency>
-			<groupId>com.biit</groupId>
-			<artifactId>form-structure-orbeon</artifactId>
-			<version>${form-structure-orbeon.version}</version>
-		</dependency>
-		<!-- Plugin Manager -->
-		<dependency>
-			<groupId>com.biit</groupId>
-			<artifactId>plugin-manager</artifactId>
-			<version>${plugin-manager.version}</version>
-		</dependency>
-		<!-- AspectJ -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>${aspectj.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>${aspectj.version}</version>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <!-- Drools Engine Interfaces -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drools-engine-interfaces</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
+        <!-- Drools -->
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-core</artifactId>
+            <version>${drools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-compiler</artifactId>
+            <version>${drools.version}</version>
+        </dependency>
+        <!-- Basic From Structure -->
+        <dependency>
+            <groupId>com.biit</groupId>
+            <artifactId>form-structure</artifactId>
+        </dependency>
+        <!-- Submitted Form -->
+        <dependency>
+            <groupId>com.biit</groupId>
+            <artifactId>form-structure-submitted</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.biit</groupId>
+            <artifactId>rest-generic-client</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Drools Form -->
+        <dependency>
+            <groupId>com.biit</groupId>
+            <artifactId>form-structure-drools</artifactId>
+        </dependency>
+        <!-- Testing -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Orbeon form -->
+        <dependency>
+            <groupId>com.biit</groupId>
+            <artifactId>form-structure-orbeon</artifactId>
+        </dependency>
+        <!-- Plugin Manager -->
+        <dependency>
+            <groupId>com.biit</groupId>
+            <artifactId>plugin-manager</artifactId>
+        </dependency>
+        <!-- AspectJ -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
+    </dependencies>
 
-	<!-- JBOSS repository -->
-	<repositories>
-		<repository>
-			<id>jboss-public-repository-group</id>
-			<name>JBoss Public Repository Group</name>
-			<url>http://repository.jboss.org/nexus/content/groups/public/</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</releases>
-		</repository>
-	</repositories>
+    <!-- JBOSS repository -->
+    <repositories>
+        <repository>
+            <id>jboss-public-repository-group</id>
+            <name>JBoss Public Repository Group</name>
+            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+        </repository>
+    </repositories>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>aspectj-maven-plugin</artifactId>
-				<version>1.8</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-							<goal>test-compile</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<complianceLevel>1.7</complianceLevel>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <complianceLevel>1.7</complianceLevel>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
