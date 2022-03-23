@@ -9,7 +9,7 @@ import com.biit.drools.logger.DroolsEngineLogger;
 
 public class DroolsDateUtils {
 
-	private static String DATE_FORMAT = "yyyy-mm-dd";
+	private static final String DATE_FORMAT = "yyyy-mm-dd";
 
 	public static Date returnCurrentDateMinusYears(int years) {
 		Calendar now = Calendar.getInstance();
@@ -43,14 +43,7 @@ public class DroolsDateUtils {
 	private static Integer returnYearsDistanceFromDate(Date date, Calendar comparation) {
 		Calendar compareDate = Calendar.getInstance();
 		compareDate.setTime(date);
-		int diff = comparation.get(Calendar.YEAR) - compareDate.get(Calendar.YEAR);
-		// if ((now.get(Calendar.MONTH) > compareDate.get(Calendar.MONTH))
-		// || ((now.get(Calendar.MONTH) == compareDate.get(Calendar.MONTH)) &&
-		// (now.get(Calendar.DATE) > compareDate
-		// .get(Calendar.DATE)))) {
-		// diff--;
-		// }
-		return diff;
+		return comparation.get(Calendar.YEAR) - compareDate.get(Calendar.YEAR);
 	}
 
 	public static Integer returnMonthsDistanceFromDate(Object object) {
@@ -86,7 +79,7 @@ public class DroolsDateUtils {
 	}
 
 	public static Date transformLongStringToDate(String time) {
-		Date date = new Date(Long.valueOf(time).longValue());
+		Date date = new Date(Long.parseLong(time));
 		try {
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("DATE_FORMAT");
 			return new SimpleDateFormat(DATE_FORMAT).parse(simpleDateFormat.format(date));
