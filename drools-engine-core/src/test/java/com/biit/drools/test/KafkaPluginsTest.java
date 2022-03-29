@@ -1,5 +1,24 @@
 package com.biit.drools.test;
 
+import com.biit.drools.engine.exceptions.DroolsRuleExecutionException;
+import com.biit.drools.form.DroolsForm;
+import com.biit.drools.form.DroolsSubmittedForm;
+import com.biit.plugins.BasePlugin;
+import com.biit.plugins.PluginController;
+import com.biit.plugins.exceptions.DuplicatedPluginFoundException;
+import com.biit.plugins.interfaces.IPlugin;
+import com.biit.plugins.interfaces.exceptions.InvalidMethodParametersException;
+import com.biit.plugins.interfaces.exceptions.MethodInvocationException;
+import com.biit.plugins.interfaces.exceptions.NoMethodFoundException;
+import com.biit.plugins.interfaces.exceptions.NoPluginFoundException;
+import com.biit.utils.file.FileReader;
+import org.dom4j.DocumentException;
+import org.pf4j.*;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
@@ -7,30 +26,6 @@ import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.List;
-
-import org.dom4j.DocumentException;
-import org.pf4j.DefaultPluginManager;
-import org.pf4j.JarPluginLoader;
-import org.pf4j.ManifestPluginDescriptorFinder;
-import org.pf4j.PluginDescriptorFinder;
-import org.pf4j.PluginLoader;
-import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
-import com.biit.drools.engine.exceptions.DroolsRuleExecutionException;
-import com.biit.drools.form.DroolsForm;
-import com.biit.drools.form.DroolsSubmittedForm;
-import com.biit.plugins.BasePlugin;
-import com.biit.plugins.PluginController;
-import com.biit.plugins.exceptions.DuplicatedPluginFoundException;
-import com.biit.plugins.exceptions.InvalidMethodParametersException;
-import com.biit.plugins.exceptions.MethodInvocationException;
-import com.biit.plugins.exceptions.NoMethodFoundException;
-import com.biit.plugins.exceptions.NoPluginFoundException;
-import com.biit.plugins.interfaces.IPlugin;
-import com.biit.utils.file.FileReader;
 
 /**
  * For executing this test correctly the plugins must be placed in the specified
@@ -104,8 +99,7 @@ public class KafkaPluginsTest extends DroolsEngineFormGenerator {
 	}
 
 	@Test
-	public void kafkaPluginOneCallTest() throws NoPluginFoundException, DuplicatedPluginFoundException,
-			NoMethodFoundException, InvalidMethodParametersException, MethodInvocationException {
+	public void kafkaPluginOneCallTest() throws NoPluginFoundException, DuplicatedPluginFoundException {
 		// Calling the hello world plugin with only one call
 		Assert.assertEquals(PluginController.getInstance().executePluginMethod(IPlugin.class, PLUGIN_ID,
 				KAFKA_PLUGIN_METHOD, (Object)PROCESS_ID, (Object)NEXT_BEST_ACTION), KAFKA_PLUGIN_RETURN);

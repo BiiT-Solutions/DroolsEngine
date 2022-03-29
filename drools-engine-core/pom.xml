@@ -72,7 +72,7 @@
         <!-- Plugin Manager -->
         <dependency>
             <groupId>com.biit</groupId>
-            <artifactId>plugin-manager</artifactId>
+            <artifactId>plugin-manager-core</artifactId>
         </dependency>
         <!-- AspectJ -->
         <dependency>

@@ -1,24 +1,20 @@
 package com.biit.drools.test;
 
+import com.biit.drools.engine.exceptions.DroolsRuleExecutionException;
+import com.biit.plugins.PluginController;
+import com.biit.plugins.exceptions.DuplicatedPluginFoundException;
+import com.biit.plugins.interfaces.IPlugin;
+import com.biit.plugins.interfaces.exceptions.NoPluginFoundException;
+import com.biit.utils.file.FileReader;
+import org.dom4j.DocumentException;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
-
-import org.dom4j.DocumentException;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
-import com.biit.drools.engine.exceptions.DroolsRuleExecutionException;
-import com.biit.plugins.PluginController;
-import com.biit.plugins.exceptions.DuplicatedPluginFoundException;
-import com.biit.plugins.exceptions.InvalidMethodParametersException;
-import com.biit.plugins.exceptions.MethodInvocationException;
-import com.biit.plugins.exceptions.NoMethodFoundException;
-import com.biit.plugins.exceptions.NoPluginFoundException;
-import com.biit.plugins.interfaces.IPlugin;
-import com.biit.utils.file.FileReader;
 
 public class PerformanceTest extends DroolsEngineFormGenerator {
 	private final static String DROOLS_RULES_PATH = "rules/droolsRulesFileTest.drl";
@@ -47,7 +43,7 @@ public class PerformanceTest extends DroolsEngineFormGenerator {
 	@Test(groups = { "performanceTest" }, enabled = true)
 	public void rulesTestPluginRules() throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
 			FileNotFoundException, DroolsRuleExecutionException, UnsupportedEncodingException, DocumentException, NoPluginFoundException,
-			DuplicatedPluginFoundException, NoMethodFoundException, InvalidMethodParametersException, MethodInvocationException {
+			DuplicatedPluginFoundException{
 		// Calling the first plugin
 		long start_time = System.nanoTime();
 		for (int i = 0; i < RULES_REPETITIONS; i++) {
