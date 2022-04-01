@@ -11,7 +11,8 @@ import com.biit.drools.utils.*
 import com.biit.plugins.PluginController
 import com.biit.plugins.interfaces.IPlugin 
 import java.lang.reflect.Method 
-import com.biit.drools.logger.DroolsEngineLogger 
+import com.biit.drools.logger.DroolsEngineLogger
+import function com.biit.drools.engine.debug.Utility.helper;
 
 declare FiredRule
 	ruleName : String
@@ -36,4 +37,5 @@ then
 	Object callResult = PluginController.getInstance().executePluginMethod(IPlugin.class, 'liferay-article', 'methodGetLatestArticleContentByProperty', 'Appendix-Antropometrie');
 	$formUSMOAppendix.setVariableValue('KB-Antropometrie-Text', callResult);
 	DroolsEngineLogger.debug("DroolsRule", "Variable set (form, KB-Antropometrie-Text, callResult)");
+	helper(drools);
 end

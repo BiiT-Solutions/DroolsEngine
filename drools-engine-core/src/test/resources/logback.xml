@@ -32,6 +32,14 @@
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="DAILY"/>
     </logger>
+    <logger name="com.biit.plugins.logger.PluginManagerLogger" additivity="false" level="DEBUG">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="DAILY"/>
+    </logger>
+    <logger name="org.pf4j.AbstractExtensionFinder" additivity="false" level="DEBUG">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="DAILY"/>
+    </logger>
     <root level="ERROR">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="DAILY"/>
