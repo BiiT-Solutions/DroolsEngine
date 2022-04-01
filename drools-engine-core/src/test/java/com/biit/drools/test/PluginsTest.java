@@ -13,6 +13,7 @@ import com.biit.plugins.interfaces.exceptions.NoPluginFoundException;
 import com.biit.utils.file.FileReader;
 import org.dom4j.DocumentException;
 import org.pf4j.*;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -31,6 +32,7 @@ import java.util.List;
  * path by the settings.conf file
  * 
  */
+@SpringBootTest
 @Test(groups = { "pluginsTest" })
 public class PluginsTest extends DroolsEngineFormGenerator {
 
@@ -80,7 +82,7 @@ public class PluginsTest extends DroolsEngineFormGenerator {
 	@Test
 	public void checkLoadedPluginsByClass() {
 		List<IPlugin> plugins = pluginManager.getExtensions(IPlugin.class);
-		Assert.assertEquals(plugins.size(), 4);
+		Assert.assertEquals(plugins.size(), 3);
 	}
 
 	@Test

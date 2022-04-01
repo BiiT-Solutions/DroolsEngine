@@ -40,6 +40,15 @@
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="DAILY"/>
     </logger>
+    <logger name="com.biit.drools.plugin.log.LiferayArticlePluginLogger" additivity="false" level="DEBUG">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="DAILY"/>
+    </logger>
+    <logger name="com.biit.liferay.log.LiferayClientLogger" additivity="false" level="DEBUG">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="DAILY"/>
+    </logger>
+
     <root level="ERROR">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="DAILY"/>

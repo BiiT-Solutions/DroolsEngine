@@ -13,8 +13,9 @@ import com.biit.drools.form.DroolsForm;
 import com.biit.drools.form.DroolsSubmittedForm;
 import com.biit.form.submitted.ISubmittedForm;
 import com.biit.utils.file.FileReader;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
-public class DroolsEngineFormGenerator {
+public class DroolsEngineFormGenerator extends AbstractTestNGSpringContextTests {
 
 	private final static String APP = "Application1";
 	private final static String FORM_NAME = "Form1";
