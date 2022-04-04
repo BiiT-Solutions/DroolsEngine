@@ -7,6 +7,7 @@ import com.biit.plugins.interfaces.IPlugin;
 import com.biit.plugins.interfaces.exceptions.NoPluginFoundException;
 import com.biit.utils.file.FileReader;
 import org.dom4j.DocumentException;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -16,11 +17,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 
+@SpringBootTest
 public class PerformanceTest extends DroolsEngineFormGenerator {
 	private final static String DROOLS_RULES_PATH = "rules/droolsRulesFileTest.drl";
 	private final static int RULES_REPETITIONS = 100;
 
-	private final static String HELLO_WORLD_PLUGIN_NAME = "HelloWorld";
+	private final static String HELLO_WORLD_PLUGIN_NAME = "hello-world";
 	private final static String HELLO_WORLD_PLUGIN_RETURN = "Hello World";
 	private final static String HELLO_WORLD_PLUGIN_METHOD = "methodHelloWorld";
 	private final static String HELLO_WORLD_PLUGIN_DROOLS_FILE = "rules/helloWorldPlugin.drl";
@@ -47,8 +49,8 @@ public class PerformanceTest extends DroolsEngineFormGenerator {
 		// Calling the first plugin
 		long start_time = System.nanoTime();
 		for (int i = 0; i < RULES_REPETITIONS; i++) {
-			IPlugin pluginInterface = PluginController.getInstance().<IPlugin> getPlugin(IPlugin.class, HELLO_WORLD_PLUGIN_NAME);
-			Method method = ((IPlugin) pluginInterface).getPluginMethod(HELLO_WORLD_PLUGIN_METHOD);
+			IPlugin pluginInterface = PluginController.getInstance().getPlugin(IPlugin.class, HELLO_WORLD_PLUGIN_NAME);
+			Method method = pluginInterface.getPluginMethod(HELLO_WORLD_PLUGIN_METHOD);
 			Assert.assertEquals(method.invoke(pluginInterface), HELLO_WORLD_PLUGIN_RETURN);
 			// Calling the hello world plugin with only one call
 			Assert.assertEquals(PluginController.getInstance().executePluginMethod(IPlugin.class, HELLO_WORLD_PLUGIN_NAME, HELLO_WORLD_PLUGIN_METHOD),
