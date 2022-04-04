@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 
 import com.biit.plugins.configuration.PluginConfigurationReader;
+import com.biit.plugins.interfaces.IStandardPlugin;
 import com.biit.plugins.interfaces.exceptions.NoPluginFoundException;
 import org.dom4j.DocumentException;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,7 +39,7 @@ public class LiferayPluginsTest extends DroolsEngineFormGenerator {
     @Test
     public void helloWorldPluginSelectionTest1() throws NoPluginFoundException, DuplicatedPluginFoundException {
         // Calling the first plugin
-        IPlugin pluginInterface = PluginController.getInstance().getPlugin(IPlugin.class, LIFERAY_PLUGIN_NAME);
+        IPlugin pluginInterface = PluginController.getInstance().getPlugin(IStandardPlugin.class, LIFERAY_PLUGIN_NAME);
         Assert.assertNotNull(pluginInterface);
     }
 
@@ -47,7 +48,7 @@ public class LiferayPluginsTest extends DroolsEngineFormGenerator {
     public void liferayPluginDroolsCallWithParametersTest()
             throws NoPluginFoundException, DuplicatedPluginFoundException {
         // Calling the hello world plugin with only one call
-        Assert.assertEquals(PluginController.getInstance().executePluginMethod(IPlugin.class, LIFERAY_PLUGIN_NAME,
+        Assert.assertEquals(PluginController.getInstance().executePluginMethod(IStandardPlugin.class, LIFERAY_PLUGIN_NAME,
                 LIFERAY_PLUGIN_METHOD, LIFERAY_ARTICLE_PROPERTY), LIFERAY_PLUGIN_RETURN);
     }
 
