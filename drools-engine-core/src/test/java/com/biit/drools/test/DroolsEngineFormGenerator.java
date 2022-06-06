@@ -39,8 +39,7 @@ public class DroolsEngineFormGenerator extends AbstractTestNGSpringContextTests 
 		// Generate the drools rules.
 		createSubmittedForm();
 		DroolsRulesEngine droolsEngine = new DroolsRulesEngine();
-		DroolsForm resultsOfForm = droolsEngine.applyDrools(getSubmittedForm(), drlFile, null);
-		return resultsOfForm;
+		return droolsEngine.applyDrools(getSubmittedForm(), drlFile, null);
 	}
 
 	protected ISubmittedForm getSubmittedForm() {

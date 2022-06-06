@@ -3,6 +3,7 @@ package com.biit.drools.engine;
 import java.util.Arrays;
 import java.util.List;
 
+import com.biit.drools.global.variables.interfaces.IGlobalVariable;
 import org.springframework.stereotype.Component;
 
 import com.biit.drools.engine.exceptions.DroolsRuleExecutionException;
@@ -26,7 +27,7 @@ public class DroolsRulesEngine {
 	 * @throws DroolsRuleExecutionException something was wrong.
 	 */
 	public DroolsForm applyDrools(ISubmittedForm submittedForm, String droolsRules,
-			List<DroolsGlobalVariable> globalVariables) throws DroolsRuleExecutionException {
+			List<IGlobalVariable> globalVariables) throws DroolsRuleExecutionException {
 		DroolsForm droolsForm = null;
 		try {
 			if (droolsRules != null && droolsRules.length() > 0) {
@@ -40,7 +41,7 @@ public class DroolsRulesEngine {
 					// Creation of the global constants
 					km.setGlobalVariables(globalVariables);
 				}
-				droolsForm = new DroolsForm((SubmittedForm) submittedForm);
+				droolsForm = new DroolsForm(submittedForm);
 				// Takes 25% of the operation time.
 				runDroolsRules(droolsForm, km);
 			}
