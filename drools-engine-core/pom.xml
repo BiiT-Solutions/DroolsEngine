@@ -103,7 +103,7 @@
         <repository>
             <id>jboss-public-repository-group</id>
             <name>JBoss Public Repository Group</name>
-            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
             <layout>default</layout>
             <releases>
                 <enabled>true</enabled>
@@ -117,7 +117,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
-                <version>1.8</version>
                 <executions>
                     <execution>
                         <goals>
@@ -127,9 +126,9 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <complianceLevel>1.7</complianceLevel>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <complianceLevel>${java.jdk.version}</complianceLevel>
+                    <source>${java.jdk.version}</source>
+                    <target>${java.jdk.version}</target>
                 </configuration>
             </plugin>
         </plugins>
