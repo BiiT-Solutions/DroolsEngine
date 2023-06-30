@@ -1,22 +1,22 @@
 package com.biit.drools.global.variables.interfaces;
 
-import java.sql.Timestamp;
-
 import com.biit.drools.global.variables.exceptions.NotValidTypeInVariableData;
+
+import java.sql.Timestamp;
 
 public interface IVariableData {
 
-	public Object getValue();
+    Object getValue();
 
-	public void setValue(Object value) throws NotValidTypeInVariableData;
+    void setValue(Object value) throws NotValidTypeInVariableData;
 
-	public Timestamp getValidFrom();
+    Timestamp getValidFrom();
 
-	public void setValidFrom(Timestamp validFrom);
+    void setValidFrom(Timestamp validFrom);
 
-	public Timestamp getValidTo();
+    Timestamp getValidTo();
 
-	public void setValidTo(Timestamp validTo);
+    void setValidTo(Timestamp validTo);
 
-	public String toString();
+    String toString();
 }

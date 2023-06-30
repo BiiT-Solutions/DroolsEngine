@@ -13,6 +13,7 @@ import com.biit.plugins.interfaces.exceptions.NoPluginFoundException;
 import com.biit.utils.file.FileReader;
 import org.dom4j.DocumentException;
 import org.pf4j.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -42,29 +43,14 @@ public class PluginsTest extends DroolsEngineFormGenerator {
 	private final static String DROOLS_EXAMPLE_PLUGIN_DROOLS_FILE = "rules/droolsExamplePlugin.drl";
 	private final static String LIFERAY_PLUGIN_DROOLS_FILE = "rules/USMO Appendix_v1.drl";
 
-	private final static String PLUGINS_FOLDER = "src/test/plugins";
 	private final static String PLUGIN_ID = "hello-world";
 
+	@Autowired
 	private DefaultPluginManager pluginManager;
 
 	@BeforeClass
 	public void loadPlugin() {
-		// create the plugin manager
-		pluginManager = new DefaultPluginManager(Paths.get(PLUGINS_FOLDER)) {
-
-			@Override
-			protected PluginLoader createPluginLoader() {
-				// load only jar plugins
-				return new JarPluginLoader(this);
-			}
-
-			@Override
-			protected PluginDescriptorFinder createPluginDescriptorFinder() {
-				// read plugin descriptor from jar's manifest
-				return new ManifestPluginDescriptorFinder();
-			}
-		};
-		// start and load all plugins of application
+		// start and load all plugins of application as all tests unloads them at the end.
 		pluginManager.loadPlugins();
 		pluginManager.startPlugins();
 	}
@@ -82,7 +68,7 @@ public class PluginsTest extends DroolsEngineFormGenerator {
 	@Test
 	public void checkLoadedPluginsByClass() {
 		List<IPlugin> plugins = pluginManager.getExtensions(IPlugin.class);
-		Assert.assertEquals(plugins.size(), 3);
+		Assert.assertEquals(plugins.size(), 4);
 	}
 
 	@Test

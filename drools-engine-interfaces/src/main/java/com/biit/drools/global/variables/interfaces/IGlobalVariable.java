@@ -1,16 +1,16 @@
 package com.biit.drools.global.variables.interfaces;
 
-import java.util.List;
-
 import com.biit.drools.global.variables.type.DroolsGlobalVariableFormat;
+
+import java.util.List;
 
 public interface IGlobalVariable {
 
-	public String getName();
+    String getName();
 
-	public DroolsGlobalVariableFormat getDroolsVariableFormat();
+    DroolsGlobalVariableFormat getDroolsVariableFormat();
 
-	public Object getValue();
-	
-	public List<IVariableData> getGenericVariableData();
+    Object getValue();
+
+    List<IVariableData> getGenericVariableData();
 }

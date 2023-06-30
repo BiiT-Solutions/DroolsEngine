@@ -7,17 +7,17 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 public class DroolsVariableDataPostalCodeDeserializer extends
-		DroolsVariableDataDeserializer<DroolsVariableDataPostalCode> {
+        DroolsVariableDataDeserializer<DroolsVariableDataPostalCode> {
 
-	public DroolsVariableDataPostalCodeDeserializer() {
-		super(DroolsVariableDataPostalCode.class);
-	}
+    public DroolsVariableDataPostalCodeDeserializer() {
+        super(DroolsVariableDataPostalCode.class);
+    }
 
-	@Override
-	public void deserialize(JsonElement json, JsonDeserializationContext context, DroolsVariableDataPostalCode element)
-			throws NotValidTypeInVariableData {
-		JsonObject jobject = (JsonObject) json;
-		element.setValue(parseString("value", jobject, context));
-		super.deserialize(json, context, element);
-	}
+    @Override
+    public void deserialize(JsonElement json, JsonDeserializationContext context, DroolsVariableDataPostalCode element)
+            throws NotValidTypeInVariableData {
+        final JsonObject jobject = (JsonObject) json;
+        element.setValue(parseString("value", jobject, context));
+        super.deserialize(json, context, element);
+    }
 }

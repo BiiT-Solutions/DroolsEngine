@@ -6,9 +6,9 @@ import org.kie.api.event.rule.AfterMatchFiredEvent;
 
 public class DroolRuleListenerLogger extends DefaultAgendaEventListener {
 
-	@Override
-	public void afterMatchFired(AfterMatchFiredEvent event) {
-		Rule rule = event.getMatch().getRule();
-		DroolsRulesLogger.debug(this.getClass().getName(), "Rule fired '" + rule.getName() + "'.");
-	}
+    @Override
+    public void afterMatchFired(AfterMatchFiredEvent event) {
+        final Rule rule = event.getMatch().getRule();
+        DroolsRulesLogger.debug(this.getClass().getName(), "Rule fired '" + rule.getName() + "'.");
+    }
 }

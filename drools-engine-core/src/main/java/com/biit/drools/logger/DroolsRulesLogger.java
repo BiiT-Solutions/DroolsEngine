@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
 /**
  * Defines basic log behavior.
  */
-public class DroolsRulesLogger {
-    private static final Logger logger = LoggerFactory.getLogger(DroolsRulesLogger.class);
+public final class DroolsRulesLogger {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DroolsRulesLogger.class);
 
     private DroolsRulesLogger() {
     }
@@ -20,7 +20,7 @@ public class DroolsRulesLogger {
      * @param message message to be shown.
      */
     private static void info(String message) {
-        logger.info(message);
+        LOGGER.info(message);
     }
 
     /**
@@ -41,7 +41,7 @@ public class DroolsRulesLogger {
      * @param message message to be shown.
      */
     private static void warning(String message) {
-        logger.warn(message);
+        LOGGER.warn(message);
     }
 
     /**
@@ -63,7 +63,7 @@ public class DroolsRulesLogger {
      */
     private static void debug(String message) {
         if (isDebugEnabled()) {
-            logger.debug(message);
+            LOGGER.debug(message);
         }
     }
 
@@ -85,7 +85,7 @@ public class DroolsRulesLogger {
      * @param message message to be shown.
      */
     private static void severe(String message) {
-        logger.error(message);
+        LOGGER.error(message);
     }
 
     /**
@@ -125,12 +125,12 @@ public class DroolsRulesLogger {
      * @param throwable exception to be logged.
      */
     public static void errorMessage(String className, Throwable throwable) {
-        String error = stackTraceToString(throwable);
+        final String error = stackTraceToString(throwable);
         severe(className, error);
     }
 
     public static String stackTraceToString(Throwable e) {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         for (StackTraceElement element : e.getStackTrace()) {
             sb.append(element.toString());
             sb.append("\n");
@@ -139,6 +139,6 @@ public class DroolsRulesLogger {
     }
 
     public static boolean isDebugEnabled() {
-        return logger.isDebugEnabled();
+        return LOGGER.isDebugEnabled();
     }
 }

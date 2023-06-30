@@ -8,14 +8,14 @@ import com.google.gson.JsonObject;
 
 public class DroolsVariableDataDateDeserializer extends DroolsVariableDataDeserializer<DroolsVariableDataDate> {
 
-	public DroolsVariableDataDateDeserializer() {
-		super(DroolsVariableDataDate.class);
-	}
+    public DroolsVariableDataDateDeserializer() {
+        super(DroolsVariableDataDate.class);
+    }
 
-	@Override
-	public void deserialize(JsonElement json, JsonDeserializationContext context, DroolsVariableDataDate element) throws NotValidTypeInVariableData {
-		JsonObject jobject = (JsonObject) json;
-		element.setValue(parseTimestamp("value", jobject, context));
-		super.deserialize(json, context, element);
-	}
+    @Override
+    public void deserialize(JsonElement json, JsonDeserializationContext context, DroolsVariableDataDate element) throws NotValidTypeInVariableData {
+        final JsonObject jobject = (JsonObject) json;
+        element.setValue(parseTimestamp("value", jobject, context));
+        super.deserialize(json, context, element);
+    }
 }

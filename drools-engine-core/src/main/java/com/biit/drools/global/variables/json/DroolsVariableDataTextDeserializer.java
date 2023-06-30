@@ -8,15 +8,15 @@ import com.google.gson.JsonObject;
 
 public class DroolsVariableDataTextDeserializer extends DroolsVariableDataDeserializer<DroolsVariableDataText> {
 
-	public DroolsVariableDataTextDeserializer() {
-		super(DroolsVariableDataText.class);
-	}
+    public DroolsVariableDataTextDeserializer() {
+        super(DroolsVariableDataText.class);
+    }
 
-	@Override
-	public void deserialize(JsonElement json, JsonDeserializationContext context, DroolsVariableDataText element)
-			throws NotValidTypeInVariableData {
-		JsonObject jobject = (JsonObject) json;
-		element.setValue(parseString("value", jobject, context));
-		super.deserialize(json, context, element);
-	}
+    @Override
+    public void deserialize(JsonElement json, JsonDeserializationContext context, DroolsVariableDataText element)
+            throws NotValidTypeInVariableData {
+        final JsonObject jobject = (JsonObject) json;
+        element.setValue(parseString("value", jobject, context));
+        super.deserialize(json, context, element);
+    }
 }

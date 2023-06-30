@@ -2,13 +2,13 @@ package com.biit.drools.global.variables.type;
 
 public enum DroolsGlobalVariableFormat {
 
-	TEXT,
+    TEXT,
 
-	NUMBER,
+    NUMBER,
 
-	DATE,
+    DATE,
 
-	POSTAL_CODE,
-	
-	MULTI_TEXT;
+    POSTAL_CODE,
+
+    MULTI_TEXT;
 }

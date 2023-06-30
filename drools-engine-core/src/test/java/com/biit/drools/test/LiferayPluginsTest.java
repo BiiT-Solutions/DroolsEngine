@@ -8,8 +8,11 @@ import com.biit.plugins.configuration.PluginConfigurationReader;
 import com.biit.plugins.interfaces.IStandardPlugin;
 import com.biit.plugins.interfaces.exceptions.NoPluginFoundException;
 import org.dom4j.DocumentException;
+import org.pf4j.DefaultPluginManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.biit.drools.engine.exceptions.DroolsRuleExecutionException;
@@ -34,6 +37,16 @@ public class LiferayPluginsTest extends DroolsEngineFormGenerator {
     static {
         //Set the system environment.
         System.setProperty(PluginConfigurationReader.SYSTEM_VARIABLE_PLUGINS_CONFIG_FOLDER, "src/test/plugins");
+    }
+
+    @Autowired
+    private DefaultPluginManager pluginManager;
+
+    @BeforeClass
+    public void loadPlugin() {
+        // start and load all plugins of application as all tests unloads them at the end.
+        pluginManager.loadPlugins();
+        pluginManager.startPlugins();
     }
 
     @Test

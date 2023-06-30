@@ -16,29 +16,29 @@ import com.biit.orbeon.OrbeonImporter;
  */
 public class OrbeonSubmittedAnswerImporter extends OrbeonImporter {
 
-	@Override
-	public ISubmittedCategory createCategory(ISubmittedObject parent, String tag) {
-		ISubmittedCategory category = new DroolsSubmittedCategory(tag);
-		category.setParent(parent);
-		return category;
-	}
+    @Override
+    public ISubmittedCategory createCategory(ISubmittedObject parent, String tag) {
+        final ISubmittedCategory category = new DroolsSubmittedCategory(tag);
+        category.setParent(parent);
+        return category;
+    }
 
-	@Override
-	public ISubmittedForm createForm(String applicationName, String formName) {
-		return new DroolsSubmittedForm(applicationName, formName);
-	}
+    @Override
+    public ISubmittedForm createForm(String applicationName, String formName) {
+        return new DroolsSubmittedForm(applicationName, formName);
+    }
 
-	@Override
-	public ISubmittedGroup createGroup(ISubmittedObject parent, String tag) {
-		ISubmittedGroup group = new DroolsSubmittedGroup(tag);
-		group.setParent(parent);
-		return group;
-	}
+    @Override
+    public ISubmittedGroup createGroup(ISubmittedObject parent, String tag) {
+        final ISubmittedGroup group = new DroolsSubmittedGroup(tag);
+        group.setParent(parent);
+        return group;
+    }
 
-	@Override
-	public ISubmittedQuestion createQuestion(ISubmittedObject parent, String tag) {
-		ISubmittedQuestion question = new DroolsSubmittedQuestion(tag);
-		question.setParent(parent);
-		return question;
-	}
+    @Override
+    public ISubmittedQuestion createQuestion(ISubmittedObject parent, String tag) {
+        final ISubmittedQuestion question = new DroolsSubmittedQuestion(tag);
+        question.setParent(parent);
+        return question;
+    }
 }
