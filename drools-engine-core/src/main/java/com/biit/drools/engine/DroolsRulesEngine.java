@@ -8,7 +8,6 @@ import com.biit.drools.logger.DroolsRulesLogger;
 import com.biit.form.submitted.ISubmittedForm;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -28,6 +27,7 @@ public class DroolsRulesEngine {
         DroolsForm droolsForm = null;
         try {
             if (droolsRules != null && droolsRules.length() > 0) {
+                droolsRules = compatibility(droolsRules);
                 DroolsRulesLogger.debug(this.getClass().getName(), "Rules launched:\n" + droolsRules);
                 // Launch kie
                 final KieManager km = new KieManager();
@@ -49,6 +49,12 @@ public class DroolsRulesEngine {
         return droolsForm;
     }
 
+    private String compatibility(String drlFile) {
+        //Now "getAnswer('MULTI_TEXT')  contains" returns "Cannot use contains on class java.lang.Object in expression"
+        drlFile = drlFile.replace(" getAnswer('MULTI_TEXT') ", " getAnswer('MULTI_TEXT').toString() ");
+        return drlFile;
+    }
+
     /**
      * Loads the (Submitted) form as facts of the knowledge base of the drools
      * engine. <br>
@@ -60,7 +66,7 @@ public class DroolsRulesEngine {
      */
     private void runDroolsRules(ISubmittedForm form, KieManager kieManager) {
         if ((form != null) && (kieManager != null)) {
-            kieManager.setFacts(Arrays.asList(form));
+            kieManager.setFacts(List.of(form));
             kieManager.execute();
         }
     }
