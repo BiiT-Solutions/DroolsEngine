@@ -13,12 +13,13 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Locale;
 
 public class GenericVariableDataDeserializer<T extends IVariableData> extends StdDeserializer<T> {
     protected static final String TIMESTAMP_FORMAT = "dd-MM-yyyy HH:mm:ss";
     protected static final DateTimeFormatter TIMESTAMP_FORMATTER = DateTimeFormatter.ofPattern(TIMESTAMP_FORMAT);
     private static final String OLD_TIMESTAMP_FORMAT = "MMM d, yyyy h:mm:ss a";
-    private static final DateTimeFormatter OLD_TIMESTAMP_FORMATTER = DateTimeFormatter.ofPattern(OLD_TIMESTAMP_FORMAT);
+    public static final DateTimeFormatter OLD_TIMESTAMP_FORMATTER = DateTimeFormatter.ofPattern(OLD_TIMESTAMP_FORMAT, Locale.ENGLISH);
 
     private final Class<T> specificClass;
 

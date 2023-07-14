@@ -11,7 +11,7 @@ public class DroolsVariableDataNumberSerializer extends DroolsVariableDataSerial
     public void serialize(DroolsVariableDataNumber src, JsonGenerator jgen) throws IOException {
         super.serialize(src, jgen);
         if (src.getValue() != null) {
-            jgen.writeStringField("value", String.valueOf(src.getValue()));
+            jgen.writeNumberField("value", src.getValue());
         }
     }
 }

@@ -25,4 +25,12 @@ public final class DroolsGlobalVariablesFromJson {
             throw new RuntimeException(e);
         }
     }
+
+    public static String toJson(List<DroolsGlobalVariable> droolsGlobalVariables) {
+        try {
+            return ObjectMapperFactory.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(droolsGlobalVariables);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
