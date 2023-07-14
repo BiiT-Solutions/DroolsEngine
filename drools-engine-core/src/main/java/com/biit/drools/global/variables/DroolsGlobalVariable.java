@@ -78,9 +78,25 @@ public class DroolsGlobalVariable implements IGlobalVariable {
     @Override
     public List<IVariableData> getGenericVariableData() {
         if (droolsVariableData == null) {
-            droolsVariableData = new ArrayList<IVariableData>();
+            droolsVariableData = new ArrayList<>();
         }
         return droolsVariableData;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof DroolsGlobalVariable that)) {
+            return false;
+        }
+
+        return getName().equals(that.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return getName().hashCode();
+    }
 }
