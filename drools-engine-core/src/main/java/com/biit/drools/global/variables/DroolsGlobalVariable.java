@@ -2,18 +2,30 @@ package com.biit.drools.global.variables;
 
 import com.biit.drools.global.variables.interfaces.IGlobalVariable;
 import com.biit.drools.global.variables.interfaces.IVariableData;
+import com.biit.drools.global.variables.serialization.DroolsGlobalVariableDeserializer;
+import com.biit.drools.global.variables.serialization.DroolsGlobalVariableSerializer;
 import com.biit.drools.global.variables.type.DroolsGlobalVariableFormat;
+import com.biit.form.jackson.serialization.ObjectMapperFactory;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@JsonDeserialize(using = DroolsGlobalVariableDeserializer.class)
+@JsonSerialize(using = DroolsGlobalVariableSerializer.class)
 public class DroolsGlobalVariable implements IGlobalVariable {
 
     private String name;
     private DroolsGlobalVariableFormat format;
     private List<IVariableData> droolsVariableData;
+
+    public DroolsGlobalVariable() {
+        super();
+    }
 
     public DroolsGlobalVariable(String name) {
         this.name = name;
@@ -83,6 +95,10 @@ public class DroolsGlobalVariable implements IGlobalVariable {
         return droolsVariableData;
     }
 
+    public void setDroolsVariableData(List<IVariableData> droolsVariableData) {
+        this.droolsVariableData = droolsVariableData;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -98,5 +114,17 @@ public class DroolsGlobalVariable implements IGlobalVariable {
     @Override
     public int hashCode() {
         return getName().hashCode();
+    }
+
+    public String toJson() {
+        try {
+            return ObjectMapperFactory.getObjectMapper().writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static DroolsGlobalVariable fromJson(String jsonString) throws JsonProcessingException {
+        return ObjectMapperFactory.getObjectMapper().readValue(jsonString, DroolsGlobalVariable.class);
     }
 }

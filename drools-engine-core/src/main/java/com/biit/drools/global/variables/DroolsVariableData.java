@@ -2,9 +2,15 @@ package com.biit.drools.global.variables;
 
 import com.biit.drools.global.variables.exceptions.NotValidTypeInVariableData;
 import com.biit.drools.global.variables.interfaces.IVariableData;
+import com.biit.drools.global.variables.serialization.DroolsVariableDataDeserializer;
+import com.biit.drools.global.variables.serialization.DroolsVariableDataSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.sql.Timestamp;
 
+@JsonDeserialize(using = DroolsVariableDataDeserializer.class)
+@JsonSerialize(using = DroolsVariableDataSerializer.class)
 public abstract class DroolsVariableData implements IVariableData {
 
     private Timestamp validFrom;

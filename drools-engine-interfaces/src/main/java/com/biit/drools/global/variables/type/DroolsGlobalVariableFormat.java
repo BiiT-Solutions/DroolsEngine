@@ -11,4 +11,13 @@ public enum DroolsGlobalVariableFormat {
     POSTAL_CODE,
 
     MULTI_TEXT;
+
+    public static DroolsGlobalVariableFormat fromString(String tag) {
+        for (DroolsGlobalVariableFormat format : DroolsGlobalVariableFormat.values()) {
+            if (format.name().equalsIgnoreCase(tag)) {
+                return format;
+            }
+        }
+        return null;
+    }
 }

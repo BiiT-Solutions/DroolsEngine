@@ -4,7 +4,7 @@
 		<groups>
 			<run>
 				<include name="droolsEngineRules" />
-				<include name="gson" />
+				<include name="jackson" />
 				<include name="pluginsTest" />
 				<include name="liferayPluginsTest" />
 				<exclude name="performanceTest" />

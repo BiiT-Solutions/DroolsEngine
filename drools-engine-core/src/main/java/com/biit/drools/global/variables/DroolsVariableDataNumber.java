@@ -1,7 +1,13 @@
 package com.biit.drools.global.variables;
 
 import com.biit.drools.global.variables.exceptions.NotValidTypeInVariableData;
+import com.biit.drools.global.variables.serialization.DroolsVariableDataNumberDeserializer;
+import com.biit.drools.global.variables.serialization.DroolsVariableDataNumberSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+@JsonDeserialize(using = DroolsVariableDataNumberDeserializer.class)
+@JsonSerialize(using = DroolsVariableDataNumberSerializer.class)
 public class DroolsVariableDataNumber extends DroolsVariableData {
     private Double value;
 

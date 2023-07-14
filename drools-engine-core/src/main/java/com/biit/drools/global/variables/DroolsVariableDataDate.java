@@ -1,10 +1,16 @@
 package com.biit.drools.global.variables;
 
 import com.biit.drools.global.variables.exceptions.NotValidTypeInVariableData;
+import com.biit.drools.global.variables.serialization.DroolsVariableDataDateDeserializer;
+import com.biit.drools.global.variables.serialization.DroolsVariableDataDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.sql.Timestamp;
 import java.util.Date;
 
+@JsonDeserialize(using = DroolsVariableDataDateDeserializer.class)
+@JsonSerialize(using = DroolsVariableDataDateSerializer.class)
 public class DroolsVariableDataDate extends DroolsVariableData {
 
     private Timestamp value;
