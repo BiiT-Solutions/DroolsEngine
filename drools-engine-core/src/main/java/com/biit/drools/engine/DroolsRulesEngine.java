@@ -4,7 +4,7 @@ import com.biit.drools.engine.exceptions.DroolsRuleExecutionException;
 import com.biit.drools.form.DroolsForm;
 import com.biit.drools.global.variables.interfaces.IGlobalVariable;
 import com.biit.drools.logger.DroolsEngineLogger;
-import com.biit.drools.logger.DroolsRulesLogger;
+import com.biit.drools.logger.DroolsRulesLoaderLogger;
 import com.biit.form.submitted.ISubmittedForm;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +28,7 @@ public class DroolsRulesEngine {
         try {
             if (droolsRules != null && droolsRules.length() > 0) {
                 droolsRules = compatibility(droolsRules);
-                DroolsRulesLogger.debug(this.getClass().getName(), "Rules launched:\n" + droolsRules);
+                DroolsRulesLoaderLogger.debug(this.getClass().getName(), "Rules launched:\n" + droolsRules);
                 // Launch kie
                 final KieManager km = new KieManager();
                 // Load the rules in memory. Takes around the 60% of the
