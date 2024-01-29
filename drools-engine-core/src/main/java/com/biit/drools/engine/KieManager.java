@@ -1,8 +1,10 @@
 package com.biit.drools.engine;
 
 import com.biit.drools.global.variables.interfaces.IGlobalVariable;
-import com.biit.drools.logger.DroolRuleListenerLogger;
+import com.biit.drools.logger.DebugRuleListenerLogger;
+import com.biit.drools.logger.DroolAgendaListenerLogger;
 import com.biit.drools.logger.DroolsEngineLogger;
+import com.biit.drools.logger.DroolsProcessListenerLogger;
 import com.biit.form.submitted.ISubmittedForm;
 import com.biit.persistence.utils.IdGenerator;
 import org.kie.api.KieServices;
@@ -74,7 +76,9 @@ public class KieManager {
         final KieSession kieServicesession = kieContainer.newKieSession();
         setEngineGlobalVariables(kieServicesession, globalVars);
         insertFacts(kieServicesession, facts);
-        kieServicesession.addEventListener(new DroolRuleListenerLogger());
+        kieServicesession.addEventListener(new DroolAgendaListenerLogger());
+        kieServicesession.addEventListener(new DroolsProcessListenerLogger());
+        kieServicesession.addEventListener(new DebugRuleListenerLogger());
         KieRuntimeLogger kieLogger = null;
         try {
             if (DroolsEngineLogger.isDebugEnabled()) {
