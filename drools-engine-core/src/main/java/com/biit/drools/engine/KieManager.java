@@ -88,7 +88,8 @@ public class KieManager {
         } catch (IOException e) {
             DroolsEngineLogger.errorMessage(this.getClass().getName(), e);
         }
-        kieServicesession.fireAllRules();
+        final int rulesExecuted = kieServicesession.fireAllRules();
+        DroolsEngineLogger.info(this.getClass().getName(), "Rules executed: " + rulesExecuted);
         kieServicesession.dispose();
         if (kieLogger != null) {
             kieLogger.close();
