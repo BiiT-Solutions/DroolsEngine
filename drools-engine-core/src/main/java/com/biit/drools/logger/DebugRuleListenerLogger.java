@@ -7,6 +7,6 @@ public class DebugRuleListenerLogger extends DebugRuleRuntimeEventListener {
 
     @Override
     public void objectInserted(ObjectInsertedEvent event) {
-        DroolsRulesLogger.debug(this.getClass().getName(), "Rule '" + event.getRule().getName() + "' inserted.");
+        DroolsRulesLogger.debug(this.getClass().getName(), "Rule '{}' inserted.", event.getRule().getName());
     }
 }

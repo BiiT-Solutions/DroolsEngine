@@ -7,135 +7,90 @@ import org.slf4j.LoggerFactory;
 /**
  * Defines basic log behavior.
  */
-public final class DroolsRulesLogger {
+public final class DroolsRulesLogger extends BasicLogger {
     private static final Logger LOGGER = LoggerFactory.getLogger(DroolsRulesLogger.class);
 
-    private DroolsRulesLogger() {
-    }
-
     /**
      * Events that have business meaning (i.e. creating category, deleting form,
      * ...). To follow user actions.
      *
-     * @param message message to be shown.
+     * @param className       the name of the class to log.
+     * @param messageTemplate string with static text as template.
+     * @param arguments       parameters to fill up the template
      */
-    private static void info(String message) {
-        LOGGER.info(message);
+    public static void info(String className, String messageTemplate, Object... arguments) {
+        info(LOGGER, className, messageTemplate, arguments);
     }
 
-    /**
-     * Events that have business meaning (i.e. creating category, deleting form,
-     * ...). To follow user actions.
-     *
-     * @param className class to be logged.
-     * @param message   message to be shown.
-     */
-    public static void info(String className, String message) {
-        info(className + ": " + message);
+    public static void info(Class<?> clazz, String messageTemplate, Object... arguments) {
+        info(clazz.getName(), messageTemplate, arguments);
     }
 
     /**
      * Shows not critical errors. I.e. Email address not found, permissions not
      * allowed for this user, ...
      *
-     * @param message message to be shown.
+     * @param className       the name of the class to log.
+     * @param messageTemplate string with static text as template.
+     * @param arguments       parameters to fill up the template
      */
-    private static void warning(String message) {
-        LOGGER.warn(message);
+    public static void warning(String className, String messageTemplate, Object... arguments) {
+        warning(LOGGER, className, messageTemplate, arguments);
     }
 
-    /**
-     * Shows not critical errors. I.e. Email address not found, permissions not
-     * allowed for this user, ...
-     *
-     * @param className class to be logged.
-     * @param message   message to be shown.
-     */
-    public static void warning(String className, String message) {
-        warning(className + ": " + message);
+    public static void warning(Class<?> clazz, String messageTemplate, Object... arguments) {
+        warning(clazz.getName(), messageTemplate, arguments);
     }
 
     /**
      * For following the trace of the execution. I.e. Knowing if the application
      * access to a method, opening database connection, etc.
      *
-     * @param message message to be shown.
+     * @param className       the name of the class to log.
+     * @param messageTemplate string with static text as template.
+     * @param arguments       parameters to fill up the template
      */
-    private static void debug(String message) {
-        if (isDebugEnabled()) {
-            LOGGER.debug(message);
-        }
+    public static void debug(String className, String messageTemplate, Object... arguments) {
+        debug(LOGGER, className, messageTemplate, arguments);
+    }
+
+    public static void debug(Class<?> clazz, String messageTemplate, Object... arguments) {
+        debug(clazz.getName(), messageTemplate, arguments);
     }
 
     /**
-     * For following the trace of the execution. I.e. Knowing if the application
-     * access to a method, opening database connection, etc.
+     * To log any not expected error that can cause application malfunction.
      *
-     * @param className class to be logged.
-     * @param message   message logged.
+     * @param className       the name of the class to log.
+     * @param messageTemplate string with static text as template.
+     * @param arguments       parameters to fill up the template
      */
-    public static void debug(String className, String message) {
-        debug(className + ": " + message);
+    public static void severe(String className, String messageTemplate, Object... arguments) {
+        severe(LOGGER, className, messageTemplate, arguments);
+    }
+
+    public static void severe(Class<?> clazz, String messageTemplate, Object... arguments) {
+        severe(clazz.getName(), messageTemplate, arguments);
+    }
+
+    public static void errorMessage(Class<?> clazz, Throwable throwable) {
+        errorMessageNotification(LOGGER, clazz.getName(), throwable);
     }
 
     /**
-     * To log any not expected error that can cause application malfuncionality.
-     * I.e. couldn't open database connection, etc..
+     * To log java exceptions and log also the stack trace. If enabled, also can
+     * email the administrator to alert of the error.
      *
-     * @param message message to be shown.
+     * @param className       the name of the class to log.
+     * @param messageTemplate string with static text as template.
+     * @param arguments       parameters to fill up the template
      */
-    private static void severe(String message) {
-        LOGGER.error(message);
+    public static void errorMessage(String className, String messageTemplate, Object... arguments) {
+        errorMessageNotification(LOGGER, className, messageTemplate, arguments);
     }
 
-    /**
-     * To log any not expected error that can cause application malfuncionality.
-     *
-     * @param className class to be logged.
-     * @param message   message logged.
-     */
-    public static void severe(String className, String message) {
-        severe(className + ": " + message);
-    }
-
-    /**
-     * Used for debugging when accessing to a method.
-     *
-     * @param className class to be logged.
-     * @param method    method logged.
-     */
-    public static void entering(String className, String method) {
-        debug(className, "ENTRY (" + method + ")");
-    }
-
-    /**
-     * Used for debugging when exiting from a method.
-     *
-     * @param className class to be logged.
-     * @param method    method logged.
-     */
-    public static void exiting(String className, String method) {
-        debug(className, "RETURN (" + method + ")");
-    }
-
-    /**
-     * To log java exceptions and log also the stack trace.
-     *
-     * @param className class to be logged.
-     * @param throwable exception to be logged.
-     */
-    public static void errorMessage(String className, Throwable throwable) {
-        final String error = stackTraceToString(throwable);
-        severe(className, error);
-    }
-
-    public static String stackTraceToString(Throwable e) {
-        final StringBuilder sb = new StringBuilder();
-        for (StackTraceElement element : e.getStackTrace()) {
-            sb.append(element.toString());
-            sb.append("\n");
-        }
-        return sb.toString();
+    public static void errorMessage(Object object, Throwable throwable) {
+        errorMessageNotification(LOGGER, object.getClass().getName(), throwable);
     }
 
     public static boolean isDebugEnabled() {
