@@ -140,7 +140,7 @@ public class KieManager {
                 DroolsEngineLogger.severe(this.getClass().getName(),
                         "Global variable '" + droolsGlobalVariable.getName() + "' with value '"
                                 + droolsGlobalVariable.getValue() + "' failed!");
-                DroolsEngineLogger.errorMessage(this.getClass().getName(), e);
+                //DroolsEngineLogger.errorMessage(this.getClass().getName(), e);
             }
         }
     }
