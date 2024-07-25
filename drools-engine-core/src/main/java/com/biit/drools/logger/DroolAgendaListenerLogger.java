@@ -10,7 +10,7 @@ public class DroolAgendaListenerLogger extends DefaultAgendaEventListener {
 
     @Override
     public void afterMatchFired(AfterMatchFiredEvent event) {
-        DroolsRulesLogger.debug(this.getClass().getName(), "Rule '{}' fired with salience '{}'.",
+        DroolsRulesLogger.info(this.getClass().getName(), "Rule '{}' fired with salience '{}'.",
                 event.getMatch().getRule().getName(), event.getMatch().getSalience());
     }
 
