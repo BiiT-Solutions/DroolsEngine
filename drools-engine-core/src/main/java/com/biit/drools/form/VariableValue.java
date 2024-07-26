@@ -1,5 +1,6 @@
 package com.biit.drools.form;
 
+import com.biit.drools.logger.DroolsRulesLogger;
 import com.biit.drools.variables.FormVariableValue;
 import org.kie.api.definition.type.Modifies;
 
@@ -11,6 +12,8 @@ public class VariableValue extends FormVariableValue {
     @Modifies("value")
     @Override
     public void setValue(Object value) {
+        DroolsRulesLogger.info(this.getClass().getName(), "Changing form variable '{}'.'{}' from '{}' to '{}'.",
+                getReference(), getVariable(), String.valueOf(getValue()), String.valueOf(value));
         super.setValue(value);
     }
 
