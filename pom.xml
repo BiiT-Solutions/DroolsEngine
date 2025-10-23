@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.biit-solutions.drools</groupId>
     <artifactId>drools-engine</artifactId>
-    <version>1.2.193</version>
+    <version>1.2.194-SNAPSHOT</version>
     <name>BiiT Drools Engine</name>
     <packaging>pom</packaging>
 
@@ -49,7 +49,7 @@
         <connection>scm:git:ssh://git@github.com/BiiT-Solutions/DroolsEngine.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/BiiT-Solutions/DroolsEngine.git</developerConnection>
         <url>https://github.com/BiiT-Solutions/DroolsEngine.git</url>
-        <tag>drools-engine-1.2.193</tag>
+        <tag>drools-engine</tag>
     </scm>
 
     <dependencies>
