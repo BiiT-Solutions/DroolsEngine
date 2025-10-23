@@ -4,7 +4,7 @@
 	<name>Drools Engine Interfaces</name>
 
 	<parent>
-		<groupId>com.biit</groupId>
+		<groupId>com.biit-solutions.drools</groupId>
 		<artifactId>drools-engine</artifactId>
 		<version>1.2.193-SNAPSHOT</version>
 	</parent>
