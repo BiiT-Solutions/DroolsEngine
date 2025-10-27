@@ -118,6 +118,7 @@
                     <excludes>
                         <exclude>**/*.properties</exclude>
                         <exclude>**/*.xml</exclude>
+                        <exclude>**/*.xhtml</exclude>
                         <exclude>**/*.json</exclude>
                     </excludes>
                 </configuration>
