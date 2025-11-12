@@ -4,10 +4,14 @@
     <name>Drools Engine Core</name>
 
     <parent>
-        <groupId>com.biit</groupId>
+        <groupId>com.biit-solutions.drools</groupId>
         <artifactId>drools-engine</artifactId>
         <version>1.1.60-SNAPSHOT</version>
     </parent>
+
+    <properties>
+        <main.basedir>${basedir}/..</main.basedir>
+    </properties>
 
     <dependencies>
         <!-- Drools Engine Interfaces -->
@@ -35,22 +39,22 @@
         </dependency>
         <!-- Basic From Structure -->
         <dependency>
-            <groupId>com.biit</groupId>
+            <groupId>com.biit-solutions</groupId>
             <artifactId>form-structure</artifactId>
         </dependency>
         <!-- Submitted Form -->
         <dependency>
-            <groupId>com.biit</groupId>
+            <groupId>com.biit-solutions</groupId>
             <artifactId>form-structure-submitted</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.biit</groupId>
+            <groupId>com.biit-solutions</groupId>
             <artifactId>rest-generic-client</artifactId>
             <scope>test</scope>
         </dependency>
         <!-- Drools Form -->
         <dependency>
-            <groupId>com.biit</groupId>
+            <groupId>com.biit-solutions</groupId>
             <artifactId>form-structure-drools</artifactId>
         </dependency>
         <!-- Testing -->
@@ -71,12 +75,12 @@
         </dependency>
         <!-- Orbeon form -->
         <dependency>
-            <groupId>com.biit</groupId>
+            <groupId>com.biit-solutions</groupId>
             <artifactId>form-structure-orbeon</artifactId>
         </dependency>
         <!-- Plugin Manager -->
         <dependency>
-            <groupId>com.biit</groupId>
+            <groupId>com.biit-solutions.drools</groupId>
             <artifactId>plugin-manager-core</artifactId>
         </dependency>
         <!-- AspectJ -->
