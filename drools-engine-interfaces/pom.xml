@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.biit-solutions.drools</groupId>
 		<artifactId>drools-engine</artifactId>
-		<version>1.1.60</version>
+		<version>1.1.61-SNAPSHOT</version>
 	</parent>
 
 	<properties>
